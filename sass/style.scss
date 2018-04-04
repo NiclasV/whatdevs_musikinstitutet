@@ -1,0 +1,57 @@
+body {
+    margin: 0 auto;
+    background: #dedede;
+}
+
+/****************
+----- TYPO ------
+****************/
+
+h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.logotext {
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 900;
+    font-size: 1.8em;
+}
+
+
+/****************
+---- SECTIONS ---
+****************/
+
+.header-img {
+    background-image: url('../images/bg-mixer.jpg');
+    height: 50vh;
+    width: 100%;
+    background-size: 100%;
+    background-position: 50% 50%; 
+    background-repeat: no-repeat;
+}
+
+nav {
+    border: 1px solid purple;
+    margin: 0 auto;
+    height: 65px;
+    max-width: 960px;
+    background: #FFFFFF;
+    padding: 10px;
+}
+
+main {
+    border: 1px solid green;
+    margin: 0 auto;
+    max-width: 960px;
+    background: #FFFFFF;
+    padding: 20px;
+}
+
+section {
+    border: 1px solid red;
+    margin: 20px 0 20px 0;
+}
