@@ -6,7 +6,7 @@ function displayArtists(artistsData) {
     let aristisNameArray = artistsData;
     for (let artist of aristisNameArray) {
 
-        displayArtistsHTML = displayArtistsHTML + `<p>${artist.name}</p>`;
+        displayArtistsHTML = displayArtistsHTML + `<p>${artist.name}</p>` + `<p>${artist.coverImage}`;
     }
     artistsList.innerHTML = displayArtistsHTML;
     }
