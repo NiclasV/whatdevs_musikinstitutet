@@ -1,14 +1,81 @@
-<h1>Artists</h1>
-<div id="displayAllArtists"></div>
-<h1>Albums</h1>
-<div id="displayAllAlbums"></div>
-<h1>Tracks</h1>
-<div id="displayAllTracks"></div>
-<h1>Playlists</h1>
-<div id="displayAllPlaylists"></div>
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Whatdevs Musically</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+        <link href="https://fonts.googleapis.com/css?family=Titillium+Web:900" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Rajdhani:400,600" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <!-- HEADER & NAV -->
+        <header>
+            <div class="top-header">
+                <div class="logotext">Music n' Stuff</div>
+            </div>
+            <div class="border-sm"></div>
+
+            <div class="header-img">
+                <nav>
+
+                    <div id="search-field">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-lg" id="searchField" placeholder="search for artists, playlists or tracks">
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="text-or">or</div>
+
+                    <div id="submit-new">
+                        <button type="submit" class="btn btn-lg btn-success">Submit</button>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="border-sm"></div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main>
+            <section class="artists">
+                <h1>Artists</h1>
+                <div id="displayAllArtists"></div>
+            </section>
+
+            <section class="playlists">
+                <h1>Albums</h1>
+                <div id="displayAllPlaylists"></div>
+            </section>
+
+            <section class="tracks">
+                <h1>Tracks</h1>
+                <div id="displayAllTracks"></div>
+            </section>  
+
+            <section class="albums">
+                <h1>Albums</h1>
+                <div id="displayAllAlbums"></div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+
+        </footer>
+    </body>
+
+    <script src="js/model.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/view.js"></script>
+
+</html>
 
 
-
-<script src="js/model.js"></script>
-<script src="js/controller.js"></script>
-<script src="js/view.js"></script>
