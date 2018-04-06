@@ -3,6 +3,7 @@
 
 const artistsList = document.getElementById('displayAllArtists');
 
+
     var ArtistsURL = 'https://folksa.ga/api/artists?key=flat_eric';
     fetch(ArtistsURL)
         .then(function (response) {
