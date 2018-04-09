@@ -23,7 +23,6 @@
 
             <div class="header-img">
                 <nav>
-
                     <div id="search-field">
                         <form>
                             <div class="form-group">
@@ -31,11 +30,10 @@
                             </div>
                         </form>
                     </div>
-
                     <div id="text-or">or</div>
 
                     <div id="submit-new">
-                        <button type="submit" class="btn btn-lg btn-success">Submit</button>
+                        <button type="submit" class="btn btn-lg btn-success" id="btnSubmit">Submit</button>
                     </div>
                 </nav>
             </div>
@@ -45,13 +43,29 @@
 
         <!-- MAIN CONTENT -->
         <main>
+
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>What do you want to submit?</h2>
+                    <button class="btn btn-success" id="submitArtist">Artist</button>
+                    <button class="btn btn-success" id="submitSong">Song</button>
+                    <button class="btn btn-success" id="submitAlbum">Album</button>
+                    <button class="btn btn-success" id="submitPlaylist">Playlist</button>
+                </div>
+
+            </div>
+
             <section class="artists">
                 <h1>Artists</h1>
                 <div id="displayAllArtists"></div>
             </section>
 
             <section class="playlists">
-                <h1>Albums</h1>
+                <h1>Playlists</h1>
                 <div id="displayAllPlaylists"></div>
             </section>
 
