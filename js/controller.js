@@ -54,7 +54,7 @@ nameInput.addEventListener('input', getFactFetch);
         var name = nameInput.value;
         
         if(name != ''){
-          fetch('https://folksa.ga/api/artists?limit=1000&sort=desc&key=flat_eric')
+          fetch('https://folksa.ga/api/artists?limit=10000&sort=desc&key=flat_eric')
           .then( response => response.json() )
           .then( data => {
           	// vi får en rad data tillbaka, så nu måste vi filtrera
@@ -171,3 +171,9 @@ var submitAlbumForm = `
     </div>
 </center>
 `;
+
+      // när man skriver något i fältat vad händer då(försöker matcha data) = med data jag fått ut, samt matcha med apin.
+      function searchsite(artistData, albumData, tracksData, playlistsData) {
+        console.log(albumData);
+      }
+
