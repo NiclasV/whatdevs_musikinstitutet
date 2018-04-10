@@ -60,4 +60,3 @@ function displayPlaylists(playlistsData) {
     }
     playlistsList.innerHTML = displayPlaylistsHTML;
     }
-
