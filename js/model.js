@@ -11,8 +11,6 @@ const artistsList = document.getElementById('displayAllArtists');
         })
         .then(function (artistsData) {
             displayArtists(artistsData);
-            test(artistsData);
-
         })
         .catch(function (error) {
             console.log(error);
@@ -20,6 +18,7 @@ const artistsList = document.getElementById('displayAllArtists');
 
 
 /*Fetch all Albums Trough API*/
+
 
 const albumsList = document.getElementById('displayAllAlbums');
 
