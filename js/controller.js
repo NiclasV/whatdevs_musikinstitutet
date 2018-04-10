@@ -115,6 +115,7 @@ nameInput.addEventListener('input', getFactFetch);
           
           document.getElementById( 'factText' ).innerHTML = display;
       }
+
       // när man skriver något i fältat vad händer då(försöker matcha data) = med data jag fått ut, samt matcha med apin.
       function searchsite(artistData, albumData, tracksData, playlistsData) {
         console.log(albumData);
