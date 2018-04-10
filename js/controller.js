@@ -5,7 +5,7 @@ const btnSubmitSong = document.getElementById('btnSubmitSong');
 const btnSubmitAlbum = document.getElementById('btnSubmitAlbum');
 const submitPopUp = document.getElementById('myModal');
 var btnClose = document.getElementsByClassName("btnClose")[0];
-
+const mainDiv = document.getElementById('main');
 
 //CLICK EVENTS FOR VARIOUS BUTTONS:
 
@@ -20,7 +20,8 @@ btnClose.addEventListener('click', function(event) {
 });
 
 btnSubmitArtist.addEventListener('click', function(event) {
-  console.log('Submit Artist Clicked!')
+  console.log('Submit Artist Clicked!');
+  mainDiv.innerHTML = "Hej!";
 });
 
 btnSubmitPlaylist.addEventListener('click', function(event) {
