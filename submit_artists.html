@@ -23,7 +23,6 @@
 
         <br /><br />
 
-        <div id="test"></div>
 
     </div>
 
@@ -38,8 +37,6 @@
         let artistGenresInput = document.getElementById("artistGenresInput").value;
         let artistSpotifyURLInput = document.getElementById("artistSpotifyURLInput").value;
         let artistCoverImageInput = document.getElementById("artistCoverImageInput").value;
-
-
         let artist = {
             name: artistnNameInput,
             born: artistBornInput,
@@ -49,7 +46,6 @@
             coverImage: artistCoverImageInput
         }
         console.log(artist);
-
         		fetch('https://folksa.ga/api/artists?key=flat_eric',{
         			method: 'POST',
         			headers: {
@@ -63,5 +59,4 @@
         			console.log(artist);
         		  })	
     }
-
 </script>

@@ -6,10 +6,12 @@ function displayArtists(artistsData) {
     let aristisNameArray = artistsData;
     for (let artist of aristisNameArray) {
 
-        displayArtistsHTML = displayArtistsHTML + `<p>${artist.name}</p>` + `<p>${artist.coverImage}`;
+        displayArtistsHTML = displayArtistsHTML + `<p>${artist.name}</p>`;
     }
     artistsList.innerHTML = displayArtistsHTML;
     }
+
+
 
 /*Function that continues trough Albums Fetch and Loops out name of all Albums into a list*/
 
