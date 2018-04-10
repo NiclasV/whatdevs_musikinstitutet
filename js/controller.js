@@ -114,3 +114,5 @@ nameInput.addEventListener('input', getFactFetch);
           
           document.getElementById( 'factText' ).innerHTML = display;
       }
+
+      
