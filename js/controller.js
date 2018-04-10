@@ -1,15 +1,38 @@
 const btnSubmit = document.getElementById('btnSubmit');
-const modal = document.getElementById('myModal');
-var span = document.getElementsByClassName("close")[0];
+const btnSubmitArtist = document.getElementById('btnSubmitArtist');
+const btnSubmitPlaylist = document.getElementById('btnSubmitPlaylist');
+const btnSubmitSong = document.getElementById('btnSubmitSong');
+const btnSubmitAlbum = document.getElementById('btnSubmitAlbum');
+const submitPopUp = document.getElementById('myModal');
+var btnClose = document.getElementsByClassName("btnClose")[0];
+
+
+//CLICK EVENTS FOR VARIOUS BUTTONS:
 
 btnSubmit.addEventListener('click', function(event) {
     console.log('Submit Clicked!')
-    modal.style.display = "block";
+    submitPopUp.style.display = "block";
 });
 
-span.addEventListener('click', function(event) {
+btnClose.addEventListener('click', function(event) {
     console.log('Submit Clicked!')
-    modal.style.display = "none";
+    submitPopUp.style.display = "none";
+});
+
+btnSubmitArtist.addEventListener('click', function(event) {
+  console.log('Submit Artist Clicked!')
+});
+
+btnSubmitPlaylist.addEventListener('click', function(event) {
+  console.log('Submit Playlist Clicked!')
+});
+
+btnSubmitAlbum.addEventListener('click', function(event) {
+  console.log('Submit Album Clicked!')
+});
+
+btnSubmitSong.addEventListener('click', function(event) {
+  console.log('Submit Song Clicked!')
 });
 
 
@@ -76,7 +99,7 @@ nameInput.addEventListener('input', getFactFetch);
           
           artists.forEach( ( artist ) => {
             display += `
-            	<img src="${ artist.image }" alt="${ artist.name }" style="width: 250px; height: 250px;"/><br/>
+            	<img src="${artist.coverImage}" alt="${ artist.name }" style="width: 250px; height: 250px;"/><br/>
               <strong>Name: </strong>${ artist.name },<br/>
               <strong>Genres: </strong>${ artist.genres },<br/>
               <strong>Albums: </strong>${ artist.albums },<br/>
