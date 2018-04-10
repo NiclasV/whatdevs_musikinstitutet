@@ -6,7 +6,16 @@ function displayArtists(artistsData) {
     let aristisNameArray = artistsData;
     for (let artist of aristisNameArray) {
 
-        displayArtistsHTML = displayArtistsHTML + `<p>${artist.name}</p>` + `<p>${artist.coverImage}`;
+        displayArtistsHTML = displayArtistsHTML + `<p><a id="${artist._id}" onClick="moreArtistInfo(this.id)" href="#">${artist.name}</a></p>` + `
+        <img src="${artist.coverImage}" alt="${ artist.name }" style="width: 250px; height: 250px;"/><br/>
+            
+            <strong>Genres: </strong>${ artist.genres },<br/>
+            <strong>Albums: </strong>${ artist.albums },<br/>
+              
+
+            
+
+             <strong><a href="${ artist.spotifyURL }">Spotify URL</a></strong><br/><br/><hr/><br/>`;
     }
     artistsList.innerHTML = displayArtistsHTML;
     }
@@ -19,7 +28,7 @@ function displayAlbums(albumsData) {
     let albumsNameArray = albumsData;
     for (let album of albumsNameArray) {
 
-        displayAlbumsHTML = displayAlbumsHTML + `<p>${album.title}</p>`;
+        displayAlbumsHTML = displayAlbumsHTML + `<p><a id="${album._id}" onClick="moreAlbumInfo(this.id)">${album.title}</a></p>`;
     }
     albumsList.innerHTML = displayAlbumsHTML;
     }
