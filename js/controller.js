@@ -6,10 +6,14 @@ const btnSubmitAlbum = document.getElementById('btnSubmitAlbum');
 const submitPopUp = document.getElementById('myModal');
 var btnClose = document.getElementsByClassName("btnClose")[0];
 const mainDiv = document.getElementById('main');
+const artistDropdown = document.getElementById('artistDropdown');
+
 
 //CLICK EVENTS FOR VARIOUS BUTTONS:
 
 function submitForms(artistsData) {
+
+console.log(artistsData);
 
 btnSubmit.addEventListener('click', function(event) {
     console.log('Submit Clicked!')
@@ -28,6 +32,8 @@ btnSubmitArtist.addEventListener('click', function(event) {
 
 btnSubmitPlaylist.addEventListener('click', function(event) {
   console.log('Submit Playlist Clicked!')
+mainDiv.innerHTML = submitPlaylistForm;
+
 });
 
 btnSubmitAlbum.addEventListener('click', function(event) {
@@ -37,10 +43,9 @@ mainDiv.innerHTML = submitAlbumForm;
 
 btnSubmitSong.addEventListener('click', function(event) {
   console.log('Submit Song Clicked!')
+  mainDiv.innerHTML = submitSongForm;
+
 });
-
-
-
 
     
 /*Artist Form*/
@@ -77,12 +82,27 @@ var submitArtistForm = `
 </center>
 `;
 
+/*Song Form*/
+
+var submitSongForm = `
+<center>
+    <h1>Enter Song to submit: </h1>
+    <div class="col-md-12">
+        Song title: <br /> <input type="text" id="songTitleInput"> <br /> 
+        Artist: <br />
+        <select name="song" id="songArtistInput">
+	  <option value="">${artistsData.name}</option>            
+      </select><br /> 
+        Album: <br />  <input type="text" id="songAlbumInput"> <br /> 
+        Genres: <br /> <input type="text" id="songGenresInput"> <br /> 
+        <br> <br>
+        <button onclick="submitSong()">Submit</button>
+        <br /><br />
+    </div>
+</center>
+`;
+
 /*Album Form*/
-
-
-console.log(artistsData);
-
-
 
 var submitAlbumForm = `
 <center>
@@ -91,19 +111,41 @@ var submitAlbumForm = `
         Album title: <br /> <input type="text" id="albumNameInput"> <br /> 
         Artist: <br />
         <select name="artist" id="albumArtistInput">
-	  <option value="Pontus">Artister</option>            
+	  <option value="">${artistsData.name}</option>            
       </select><br /> 
-<div id="show"></div>
+<div id="demo"></div>
         Release Year: <br />  <input type="text" id="albumReleaseDateInput"> <br /> 
         Genres: <br /> <input type="text" id="albumGenresInput"> <br /> 
         Spotify URL: <br /> <input type="text" id="albumSpotifyURLInput"> <br /> 
         Coverimage URL: <br /> <input type="text" id="albumCoverImageInput"> <br />
         <br> <br>
-        <button onclick="submitArtist()">Submit</button>
+        <button onclick="submitAlbum()">Submit</button>
         <br /><br />
     </div>
 </center>
 `;
+    
+  /*Playlist Form*/
+
+var submitPlaylistForm = `
+<center>
+    <h1>Enter Playlist to submit: </h1>
+    <div class="col-md-12">
+        Playlist title: <br /> <input type="text" id="playlistNameInput"> <br /> 
+        Genres: <br /> <input type="text" id="playlistGenresInput"> <br /> 
+        Created By: <br />  <input type="text" id="playlistCreatorInput"> <br /> 
+        Tracks: <br />
+        <select name="tracks" id="playlistTracksInput">
+	  <option value="">${artistsData.name}</option>            
+      </select><br /> 
+        Coverimage URL: <br /> <input type="text" id="playlistCoverImageInput"> <br />
+        <br> <br>
+        <button onclick="submitPlaylist()">Submit</button>
+        <br /><br />
+    </div>
+</center>
+`;  
+    
 }
 
 
