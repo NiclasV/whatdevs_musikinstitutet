@@ -76,7 +76,7 @@ var submitArtistForm = `
 
         <br /><br />
 
-        <div id="test"></div>
+<div id="successArtistSubmited"></div>
 
     </div>
 </center>
@@ -98,6 +98,8 @@ var submitSongForm = `
         <br> <br>
         <button onclick="submitSong()">Submit</button>
         <br /><br />
+<div id="successSongSubmited"></div>
+
     </div>
 </center>
 `;
@@ -121,6 +123,7 @@ var submitAlbumForm = `
         <br> <br>
         <button onclick="submitAlbum()">Submit</button>
         <br /><br />
+<div id="successAlbumSubmited"></div>
     </div>
 </center>
 `;
@@ -142,6 +145,8 @@ var submitPlaylistForm = `
         <br> <br>
         <button onclick="submitPlaylist()">Submit</button>
         <br /><br />
+<div id="successPlaylistSubmited"></div>
+
     </div>
 </center>
 `;  
