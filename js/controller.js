@@ -84,14 +84,14 @@ var submitArtistForm = `
 
 /*Song Form*/
 
-var submitSongForm = `
-<center>
+
+    var submitSongForm = `<center>
     <h1>Enter Song to submit: </h1>
     <div class="col-md-12">
         Song title: <br /> <input type="text" id="songTitleInput"> <br /> 
         Artist: <br />
         <select name="song" id="songArtistInput">
-	  <option value="">${artistsData.name}</option>            
+	  <option id=""></option>            
       </select><br /> 
         Album: <br />  <input type="text" id="songAlbumInput"> <br /> 
         Genres: <br /> <input type="text" id="songGenresInput"> <br /> 
@@ -102,7 +102,10 @@ var submitSongForm = `
 
     </div>
 </center>
+
+
 `;
+
 
 /*Album Form*/
 
@@ -113,7 +116,7 @@ var submitAlbumForm = `
         Album title: <br /> <input type="text" id="albumNameInput"> <br /> 
         Artist: <br />
         <select name="artist" id="albumArtistInput">
-	  <option value="">${artistsData.name}</option>            
+	  <option value=""></option>            
       </select><br /> 
 <div id="demo"></div>
         Release Year: <br />  <input type="text" id="albumReleaseDateInput"> <br /> 
@@ -139,7 +142,7 @@ var submitPlaylistForm = `
         Created By: <br />  <input type="text" id="playlistCreatorInput"> <br /> 
         Tracks: <br />
         <select name="tracks" id="playlistTracksInput">
-	  <option value="">${artistsData.name}</option>            
+	  <option value=""></option>            
       </select><br /> 
         Coverimage URL: <br /> <input type="text" id="playlistCoverImageInput"> <br />
         <br> <br>
@@ -151,6 +154,13 @@ var submitPlaylistForm = `
 </center>
 `;  
     
+
+    let ArtistsArray = artistsData;
+    for (let artist of ArtistsArray) {
+
+        submitSongForm = submitSongForm + `<option value="${artist._id}">${artist.name}</option>`;
+    }
+    artistDropdown.innerHTML = submitSongForm;
 }
 
 

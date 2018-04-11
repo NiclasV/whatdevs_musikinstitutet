@@ -105,7 +105,11 @@ SUBMITS TO API
         		  .then((response) => response.json())
         		  .then((artist) => {
         			console.log(artist);
-        		  })	
+        		  });	
+
+    document.getElementById("successArtistSubmited").innerHTML = "The Artist has been Submited!";
+
+
     }
 
 /*Function that Submits Songs from Form */
@@ -135,7 +139,9 @@ let track = {
 	  .then((response) => response.json())
 	  .then((track) => {
 		console.log(track);
-	  });	
+	  });
+
+	    document.getElementById("successSongSubmited").innerHTML = "The Song has been Submited!";
     }
 
 
@@ -170,6 +176,7 @@ let track = {
             .then((album) => {
                 console.log(album);
             });
+    document.getElementById("successAlbumSubmited").innerHTML = "The Album has been Submited!";
     }
 
 /*Function that Submits Playlists from Form */
@@ -204,4 +211,5 @@ let playlist = {
 
         
       });
+            document.getElementById("successPlaylistSubmited").innerHTML = "The Playlist has been Submited!";
     }
