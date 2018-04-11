@@ -11,6 +11,7 @@ const artistsList = document.getElementById('displayAllArtists');
         })
         .then(function (artistsData) {
             displayArtists(artistsData);
+            submitForms(artistsData);
         })
         .catch(function (error) {
             console.log(error);

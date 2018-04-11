@@ -9,6 +9,8 @@ const mainDiv = document.getElementById('main');
 
 //CLICK EVENTS FOR VARIOUS BUTTONS:
 
+function submitForms(artistsData) {
+
 btnSubmit.addEventListener('click', function(event) {
     console.log('Submit Clicked!')
     submitPopUp.style.display = "block";
@@ -36,6 +38,78 @@ mainDiv.innerHTML = submitAlbumForm;
 btnSubmitSong.addEventListener('click', function(event) {
   console.log('Submit Song Clicked!')
 });
+
+
+
+
+    
+/*Artist Form*/
+
+var submitArtistForm = `
+<center>
+    <h1>Enter Artist to submit: </h1>
+
+    <div class="col-md-12">
+
+        Artist name: <br /> <input type="text" id="artistNameInput"> <br /> 
+        Born: <br /> <input type="text" id="artistBornInput"> <br />
+        
+        Gender: <br />
+        <select name="gender" id="artistGenderInput">
+		  <option value='male'>Male</option>
+		  <option value='female'>Female</option>
+		  <option value='other'>Other</option>
+            
+      </select><br /> 
+        Genres: <br /> <input type="text" id="artistGenresInput"> <br /> 
+        Spotify URL: <br /> <input type="text" id="artistSpotifyURLInput"> <br /> 
+        Coverimage URL: <br /> <input type="text" id="artistCoverImageInput"> <br />
+
+
+        <br> <br>
+        <button onclick="submitArtist()">Submit</button>
+
+        <br /><br />
+
+        <div id="test"></div>
+
+    </div>
+</center>
+`;
+
+/*Album Form*/
+
+
+console.log(artistsData);
+
+
+
+var submitAlbumForm = `
+<center>
+    <h1>Enter Album to submit: </h1>
+    <div class="col-md-12">
+        Album title: <br /> <input type="text" id="albumNameInput"> <br /> 
+        Artist: <br />
+        <select name="artist" id="albumArtistInput">
+	  <option value="Pontus">Artister</option>            
+      </select><br /> 
+<div id="show"></div>
+        Release Year: <br />  <input type="text" id="albumReleaseDateInput"> <br /> 
+        Genres: <br /> <input type="text" id="albumGenresInput"> <br /> 
+        Spotify URL: <br /> <input type="text" id="albumSpotifyURLInput"> <br /> 
+        Coverimage URL: <br /> <input type="text" id="albumCoverImageInput"> <br />
+        <br> <br>
+        <button onclick="submitArtist()">Submit</button>
+        <br /><br />
+    </div>
+</center>
+`;
+}
+
+
+
+
+
 
 
 
@@ -116,61 +190,6 @@ nameInput.addEventListener('input', getFactFetch);
           document.getElementById( 'factText' ).innerHTML = display;
       }
 
-/*Artist Form*/
-
-var submitArtistForm = `
-<center>
-    <h1>Enter Artist to submit: </h1>
-
-    <div class="col-md-12">
-
-        Artist name: <br /> <input type="text" id="artistNameInput"> <br /> 
-        Born: <br /> <input type="text" id="artistBornInput"> <br />
-        
-        Gender: <br />
-        <select name="gender" id="artistGenderInput">
-		  <option value='male'>Male</option>
-		  <option value='female'>Female</option>
-		  <option value='other'>Other</option>
-            
-      </select><br /> 
-        Genres: <br /> <input type="text" id="artistGenresInput"> <br /> 
-        Spotify URL: <br /> <input type="text" id="artistSpotifyURLInput"> <br /> 
-        Coverimage URL: <br /> <input type="text" id="artistCoverImageInput"> <br />
-
-
-        <br> <br>
-        <button onclick="submitArtist()">Submit</button>
-
-        <br /><br />
-
-        <div id="test"></div>
-
-    </div>
-</center>
-`;
-
-/*Album Form*/
-
-var submitAlbumForm = `
-<center>
-    <h1>Enter Album to submit: </h1>
-    <div class="col-md-12">
-        Album title: <br /> <input type="text" id="albumNameInput"> <br /> 
-        Artist: <br />
-        <select name="artist" id="albumArtistInput">
-	  <option value="Pontus">Artister</option>            
-      </select><br /> 
-        Release Year: <br />  <input type="text" id="albumReleaseDateInput"> <br /> 
-        Genres: <br /> <input type="text" id="albumGenresInput"> <br /> 
-        Spotify URL: <br /> <input type="text" id="albumSpotifyURLInput"> <br /> 
-        Coverimage URL: <br /> <input type="text" id="albumCoverImageInput"> <br />
-        <br> <br>
-        <button onclick="submitArtist()">Submit</button>
-        <br /><br />
-    </div>
-</center>
-`;
 
       // när man skriver något i fältat vad händer då(försöker matcha data) = med data jag fått ut, samt matcha med apin.
       function searchsite(artistData, albumData, tracksData, playlistsData) {
