@@ -4,7 +4,8 @@ const btnSubmitPlaylist = document.getElementById('btnSubmitPlaylist');
 const btnSubmitSong = document.getElementById('btnSubmitSong');
 const btnSubmitAlbum = document.getElementById('btnSubmitAlbum');
 const submitPopUp = document.getElementById('myModal');
-var btnClose = document.getElementsByClassName("btnClose")[0];
+const btnClose = document.getElementsByClassName("btnClose")[0];
+const btnArtist = document.getElementsByClassName("btnArtist");
 const mainDiv = document.getElementById('main');
 
 //CLICK EVENTS FOR VARIOUS BUTTONS:
@@ -37,7 +38,12 @@ btnSubmitSong.addEventListener('click', function(event) {
   console.log('Submit Song Clicked!')
 });
 
-
+for (var i = 0 ; i < btnArtist.length; i++) {
+  btnArtist[i].addEventListener('click', function(event) {
+    event.preventDefault();
+    console.log('artist link clicked')
+  })
+};
 
 let tracks = []
 let albums = []
@@ -177,3 +183,18 @@ var submitAlbumForm = `
         console.log(albumData);
       }
 
+      var theArray = [2, 3, 4, 5, 6, 7];
+
+      //Function for counting out the rating
+      function theRating(){
+          var quantity = theArray.length; 
+          var ratingTotal = 0; 
+          
+          for (var i = 0; i < quantity; i++) {
+              ratingTotal += theArray[i];
+          } 
+          theRating = ratingTotal / quantity;
+          return theRating;
+      }
+      console.log(theArray);
+      console.log("The Rating of this playlist is: " + theRating());

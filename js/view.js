@@ -1,3 +1,5 @@
+console.log(btnArtist);
+console.log(btnArtist[0]);
 /*Function that continues trough Artist Fetch and Loops out name of all Artists into a list*/
 
 function displayArtists(artistsData) {
@@ -6,19 +8,20 @@ function displayArtists(artistsData) {
     let aristisNameArray = artistsData;
     for (let artist of aristisNameArray) {
 
-        displayArtistsHTML = displayArtistsHTML + `<p><a id="${artist._id}" onClick="moreArtistInfo(this.id)" href="#">${artist.name}</a></p>` + `
-        <img src="${artist.coverImage}" alt="${ artist.name }" style="width: 250px; height: 250px;"/><br/>
-            
-            <strong>Genres: </strong>${ artist.genres },<br/>
-            <strong>Albums: </strong>${ artist.albums },<br/>
-              
+        displayArtistsHTML = displayArtistsHTML + `
+        <div class="artistCard">
+            <div class="img-container">    
+                <img src="${artist.coverImage}" alt="${ artist.name }" class="img-fluid"/>
+            </div>
+            <button type="submit" class="btnArtist">${artist.name}</button></p>            
+            Genres: ${ artist.genres }<br>
+                
+            <strong><a href="${ artist.spotifyURL }">Spotify URL</a></strong><br/><br/>
+        </div>`;
 
-            
-
-             <strong><a href="${ artist.spotifyURL }">Spotify URL</a></strong><br/><br/><hr/><br/>`;
-    }
+    }    
     artistsList.innerHTML = displayArtistsHTML;
-    }
+}
 
 /*Function that continues trough Albums Fetch and Loops out name of all Albums into a list*/
 
@@ -51,12 +54,16 @@ function displayTracks(tracksData) {
 /*Function that continues trough Playlists Fetch and Loops out name of all Playlists into a list*/
 
 function displayPlaylists(playlistsData) {
-
+    
     let displayPlaylistsHTML = '';
     let playlistsNameArray = playlistsData;
     for (let playlist of playlistsNameArray) {
 
-        displayPlaylistsHTML = displayPlaylistsHTML + `<p>${playlist.title}</p>`;
+        displayPlaylistsHTML = displayPlaylistsHTML + `<p>${playlist.title}</p><p>Rating: ${playlist.ratings}</p>`;
+        
     }
     playlistsList.innerHTML = displayPlaylistsHTML;
-    }
+}
+
+
+
