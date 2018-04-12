@@ -162,12 +162,6 @@ var submitAlbumForm = `
 `;
 
 
-              <strong><a href="${ artist.spotifyURL }">Spotify URL</a></strong><br/><br/><hr/><br/>
-            `
-          } );
-          
-          document.getElementById( 'factText' ).innerHTML = display;
-      }
 
 /*Artist Form*/
 
