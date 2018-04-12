@@ -4,7 +4,8 @@ const btnSubmitPlaylist = document.getElementById('btnSubmitPlaylist');
 const btnSubmitSong = document.getElementById('btnSubmitSong');
 const btnSubmitAlbum = document.getElementById('btnSubmitAlbum');
 const submitPopUp = document.getElementById('myModal');
-var btnClose = document.getElementsByClassName("btnClose")[0];
+const btnClose = document.getElementsByClassName("btnClose")[0];
+const btnArtist = document.getElementsByClassName("btnArtist");
 const mainDiv = document.getElementById('main');
 
 //CLICK EVENTS FOR VARIOUS BUTTONS:
@@ -38,12 +39,17 @@ btnSubmitSong.addEventListener('click', function(event) {
 });
 
 
+for (var i = 0 ; i < btnArtist.length; i++) {
+  btnArtist[i].addEventListener('click', function(event) {
+    event.preventDefault();
+    console.log('artist link clicked')
+  })
+};
+
 var factText = document.querySelector('#factText');
 var nameInput = document.querySelector('#name');
 
 nameInput.addEventListener('input', getFactFetch);
-
-
 
     // RÅ DATA Api
     function getFactFetch(){
@@ -104,7 +110,6 @@ nameInput.addEventListener('input', getFactFetch);
         
       }
          
-
 /*Artist Form*/
 
 var submitArtistForm = `
@@ -161,61 +166,19 @@ var submitAlbumForm = `
 </center>
 `;
 
+      var theArray = [2, 3, 4, 5, 6, 7];
 
-
-/*Artist Form*/
-
-var submitArtistForm = `
-<center>
-    <h1>Enter Artist to submit: </h1>
-
-    <div class="col-md-12">
-
-        Artist name: <br /> <input type="text" id="artistNameInput"> <br /> 
-        Born: <br /> <input type="text" id="artistBornInput"> <br />
-        
-        Gender: <br />
-        <select name="gender" id="artistGenderInput">
-		  <option value='male'>Male</option>
-		  <option value='female'>Female</option>
-		  <option value='other'>Other</option>
-            
-      </select><br /> 
-        Genres: <br /> <input type="text" id="artistGenresInput"> <br /> 
-        Spotify URL: <br /> <input type="text" id="artistSpotifyURLInput"> <br /> 
-        Coverimage URL: <br /> <input type="text" id="artistCoverImageInput"> <br />
-
-
-        <br> <br>
-        <button onclick="submitArtist()">Submit</button>
-
-        <br /><br />
-
-        <div id="test"></div>
-
-    </div>
-</center>
-`;
-
-/*Album Form*/
-
-var submitAlbumForm = `
-<center>
-    <h1>Enter Album to submit: </h1>
-    <div class="col-md-12">
-        Album title: <br /> <input type="text" id="albumNameInput"> <br /> 
-        Artist: <br />
-        <select name="artist" id="albumArtistInput">
-	  <option value="Pontus">Artister</option>            
-      </select><br /> 
-        Release Year: <br />  <input type="text" id="albumReleaseDateInput"> <br /> 
-        Genres: <br /> <input type="text" id="albumGenresInput"> <br /> 
-        Spotify URL: <br /> <input type="text" id="albumSpotifyURLInput"> <br /> 
-        Coverimage URL: <br /> <input type="text" id="albumCoverImageInput"> <br />
-        <br> <br>
-        <button onclick="submitArtist()">Submit</button>
-        <br /><br />
-    </div>
-</center>
-`;
+      //Function for counting out the rating
+      function theRating(){
+          var quantity = theArray.length; 
+          var ratingTotal = 0; 
+          
+          for (var i = 0; i < quantity; i++) {
+              ratingTotal += theArray[i];
+          } 
+          theRating = ratingTotal / quantity;
+          return theRating;
+      }
+      console.log(theArray);
+      console.log("The Rating of this playlist is: " + theRating());
 

@@ -1,6 +1,4 @@
-
 /*Fetch all Artists Trough API*/
-
 const artistsList = document.getElementById('displayAllArtists');
 
 
@@ -18,7 +16,6 @@ const artistsList = document.getElementById('displayAllArtists');
 
 
 /*Fetch all Albums Trough API*/
-
 const albumsList = document.getElementById('displayAllAlbums');
 
     var AlbumsURL = 'https://folksa.ga/api/albums?key=flat_eric';
