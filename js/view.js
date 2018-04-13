@@ -6,18 +6,28 @@ function displayArtists(artistsData) {
 
     let displayArtistsHTML = '';
     let aristisNameArray = artistsData;
-    for (let artist of aristisNameArray) {
-
+    for (let artist of aristisNameArray) 
+    {
+        // sets image from api if the string is none empty and not null, if no image default image. male and female
+        let imgsrc = '';
+        if(artist.coverImage)
+            imgsrc = artist.coverImage;
+        else if(artist.gender === "female") 
+            imgsrc = "../whatdevs_musikinstitutet/images/female.jpg"
+            // if u want u can put the gender "other" aswell.
+        else
+            imgsrc = "../whatdevs_musikinstitutet/images/male.png"
         displayArtistsHTML = displayArtistsHTML + `
         <div class="artistCard">
             <div class="img-container">    
-                <img src="${artist.coverImage}" alt="${ artist.name }" class="img-fluid"/>
+             <img src= "${imgsrc}" alt="${ artist.name }" class="img-fluid"/>
             </div>
             <button type="submit" class="btnArtist">${artist.name}</button></p>            
             Genres: ${ artist.genres }<br>
                 
             <strong><a href="${ artist.spotifyURL }">Spotify URL</a></strong><br/><br/>
         </div>`;
+
 
     }    
     artistsList.innerHTML = displayArtistsHTML;
