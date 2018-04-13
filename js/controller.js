@@ -93,6 +93,7 @@ var submitArtistForm = `
         <select name="song" id="songArtistInput">
 	  <option id=""></option>            
       </select><br /> 
+<div id="artistDropdown"></div>
         Album: <br />  <input type="text" id="songAlbumInput"> <br /> 
         Genres: <br /> <input type="text" id="songGenresInput"> <br /> 
         <br> <br>
@@ -155,12 +156,13 @@ var submitPlaylistForm = `
 `;  
     
 
-    let ArtistsArray = artistsData;
-    for (let artist of ArtistsArray) {
-
-        submitSongForm = submitSongForm + `<option value="${artist._id}">${artist.name}</option>`;
-    }
-    artistDropdown.innerHTML = submitSongForm;
+//    let ArtistsArray = artistsData;
+//    for (let artist of ArtistsArray) {
+//
+//        submitSongForm = `<option value="${artist._id}">${artist.name}</option>`;
+//    }
+//
+//document.getElementById("artistDropdown").innerHTML = submitSongForm;
 }
 
 
