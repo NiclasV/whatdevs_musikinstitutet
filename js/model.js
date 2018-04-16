@@ -46,6 +46,7 @@ const tracksList = document.getElementById('displayAllTracks');
         })
         .then(function (tracksData) {
             displayTracks(tracksData);
+songs(tracksData);
         })
         .catch(function (error) {
             console.log(error);
@@ -63,6 +64,7 @@ const playlistsList = document.getElementById('displayAllPlaylists');
         })
         .then(function (playlistsData) {
             displayPlaylists(playlistsData);
+
         })
         .catch(function (error) {
             console.log(error);
