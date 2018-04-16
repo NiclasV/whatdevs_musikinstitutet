@@ -1,9 +1,8 @@
-/*Fetch all Artists Trough API*/
 const artistsList = document.getElementById('displayAllArtists');
 
-
-    var ArtistsURL = 'https://folksa.ga/api/artists?key=flat_eric';
-    fetch(ArtistsURL)
+function getDataFrom(what, many) {
+    var url = 'https://folksa.ga/api/' + what + '?limit=' + many + '&key=flat_eric';
+    fetch(url)
         .then(function (response) {
             return response.json();
         })
@@ -13,6 +12,36 @@ const artistsList = document.getElementById('displayAllArtists');
         .catch(function (error) {
             console.log(error);
         })
+}
+
+function getSpecific(id) {
+    var url = 'https://folksa.ga/api/artists/' + id + '?key=flat_eric';
+    fetch(url)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            displaySpecific(data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+}
+
+getDataFrom("artists", 10);
+
+// /*Fetch all Artists Trough API*/
+
+
+//     var ArtistsURL = 'https://folksa.ga/api/artists?key=flat_eric';
+//     fetch(ArtistsURL)
+//         .then(function (response) {
+//             return response.json();
+//         })
+//         .then(function (artistsData) {
+//             displayArtists(artistsData);
+//         })
+      
 
 
 /*Fetch all Albums Trough API*/
