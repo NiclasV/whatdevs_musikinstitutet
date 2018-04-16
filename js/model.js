@@ -105,7 +105,8 @@ SUBMITS TO API
 
     function submitArtist() {
         let artistnNameInput = document.getElementById("artistNameInput").value;
-        let artistBornInput = document.getElementById("artistBornInput").value;
+        let artistBirthYearInput = document.getElementById("artistBirthYearInput").value;
+        let artistBirthplaceInput = document.getElementById("artistBirthplaceInput").value;
         let artistGenderInput = document.getElementById("artistGenderInput").value;
         let artistGenresInput = document.getElementById("artistGenresInput").value;
         let artistSpotifyURLInput = document.getElementById("artistSpotifyURLInput").value;
@@ -114,9 +115,10 @@ SUBMITS TO API
 
         let artist = {
             name: artistnNameInput,
-            born: artistBornInput,
+            born: artistBirthYearInput,
             gender: artistGenderInput,
             genres: artistGenresInput,
+            countryBorn: artistBirthplaceInput,
             spotifyURL: artistSpotifyURLInput,
             coverImage: artistCoverImageInput
         }

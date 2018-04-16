@@ -54,9 +54,10 @@ var submitArtistForm = `
 
         <span class="form-label"> Artist name: </span>
         <br /> <input type="text" id="artistNameInput" class="form-control"> <br /> 
-        <span class="form-label">Born: </span> 
-        <br /> <input type="text" id="artistBornInput" class="form-control"> <br />
-        
+        <span class="form-label">Birth year: </span> 
+        <br /> <input type="text" id="artistBirthYearInput" class="form-control"> <br />
+        <span class="form-label">Birthplace: </span> 
+        <br /> <input type="text" id="artistBirthplaceInput" class="form-control"> <br />
         <span class="form-label">Gender: </span> <br />
         <select name="gender" id="artistGenderInput" class="form-control">
 		  <option value='male'>Male</option>
