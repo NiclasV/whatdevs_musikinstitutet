@@ -5,7 +5,6 @@ const btnSubmitSong = document.getElementById('btnSubmitSong');
 const btnSubmitAlbum = document.getElementById('btnSubmitAlbum');
 const submitPopUp = document.getElementById('myModal');
 const btnClose = document.getElementsByClassName("btnClose")[0];
-const btnArtist = document.getElementsByClassName("btnArtist");
 const mainDiv = document.getElementById('main');
 
 //CLICK EVENTS FOR VARIOUS BUTTONS:
@@ -31,7 +30,7 @@ btnSubmitPlaylist.addEventListener('click', function(event) {
 
 btnSubmitAlbum.addEventListener('click', function(event){
   console.log('Submit Album Clicked!')
-mainDiv.innerHTML = submitAlbumForm;
+  mainDiv.innerHTML = submitAlbumForm;
 });
 
 btnSubmitSong.addEventListener('click', function(event) {
@@ -39,12 +38,6 @@ btnSubmitSong.addEventListener('click', function(event) {
 });
 
 
-for (var i = 0 ; i < btnArtist.length; i++) {
-  btnArtist[i].addEventListener('click', function(event) {
-    event.preventDefault();
-    console.log('artist link clicked')
-  })
-};
 
 var factText = document.querySelector('#factText');
 var nameInput = document.querySelector('#name');
@@ -72,7 +65,7 @@ nameInput.addEventListener('input', getFactFetch);
           .catch(err => console.log(err)); 
         }
         if(name != ''){ //2
-        fetch('https://folksa.ga/api/albums?key=flat_eric')
+        fetch('https://folksa.ga/api/albums?limit=1000&key=flat_eric')
         .then(response => response.json())
         .then( data => {
           data = data.filter( ( element ) => {
@@ -84,7 +77,7 @@ nameInput.addEventListener('input', getFactFetch);
           .catch(err => console.log(err)); 
         }
         if(name != ''){ //3
-          fetch('https://folksa.ga/api/tracks?key=flat_eric')
+          fetch('https://folksa.ga/api/tracks?limit=1000&key=flat_eric')
           .then(response => response.json())
           .then( data => {
           	data = data.filter( ( element ) => {
@@ -96,7 +89,7 @@ nameInput.addEventListener('input', getFactFetch);
           .catch(err => console.log(err)); 
         }
          if(name != ''){ //4
-          fetch('https://folksa.ga/api/playlists?key=flat_eric')
+          fetch('https://folksa.ga/api/playlists?limit=1000&key=flat_eric')
           .then(response => response.json())
           .then( data => {
           	data = data.filter( ( element ) => {
@@ -166,19 +159,34 @@ var submitAlbumForm = `
 </center>
 `;
 
-      var theArray = [2, 3, 4, 5, 6, 7];
+//Function for counting out the rating
+  function countRating(rating) {
+    var quantity = rating.length; 
+    var ratingTotal = 0; 
+    
+    for (var i = 0; i < quantity; i++) {
+      ratingTotal += rating[i];
+    }
+      theRating = ratingTotal / quantity;
+      if (isNaN(theRating)) {
+        return "Not Rated Yet!"
+      } else {
+      return theRating; 
+    }
+  }
 
-      //Function for counting out the rating
-      function theRating(){
-          var quantity = theArray.length; 
-          var ratingTotal = 0; 
-          
-          for (var i = 0; i < quantity; i++) {
-              ratingTotal += theArray[i];
-          } 
-          theRating = ratingTotal / quantity;
-          return theRating;
-      }
-      console.log(theArray);
-      console.log("The Rating of this playlist is: " + theRating());
+//Function for showing standard-image
+  function handleImage(theImage) {
+    if (theImage == null) {
+      return "../whatdevs_musikinstitutet/images/male.png"
+    } else {
+      return theImage;
+    }
+  }  
+
+  function moreArtistInfo(id) {
+    getSpecific(id);
+    console.log(id)
+  }
+
 
