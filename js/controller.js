@@ -26,8 +26,9 @@ btnClose.addEventListener('click', function(event) {
 });
 
 btnSubmitArtist.addEventListener('click', function(event) {
-  console.log('Submit Artist Clicked!');
+    console.log('Submit Artist Clicked!');
   mainDiv.innerHTML = submitArtistForm;
+
 });
 
 
@@ -41,8 +42,6 @@ btnSubmitSong.addEventListener('click', function(event) {
   mainDiv.innerHTML = submitSongForm;
 
 });
-
-    
 /*Artist Form*/
 
 
@@ -53,9 +52,9 @@ var submitArtistForm = `
     <div class="col-md-8">
 
         <span class="form-label"> Artist name: </span>
-        <br /> <input type="text" id="artistNameInput" class="form-control"> <br /> 
+        <br /> <input type="text" id="artistNameInput" class="form-control"> <br />
         <span class="form-label">Born: </span> 
-        <br /> <input type="text" id="artistBornInput" class="form-control"> <br />
+        <br /> <input type="date" id="artistBornInput" class="form-control"> <br />
         
         <span class="form-label">Gender: </span> <br />
         <select name="gender" id="artistGenderInput" class="form-control">
