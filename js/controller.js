@@ -85,16 +85,26 @@ var submitArtistForm = `
 
 
 /*Song Form*/
-
+    var artists = artistsData;
+    var artistOption = "";
+    //console.log(artists[0].name);
+    for (let i = 0; i < artists.length; i++) {
+        artistOption += `
+        <option value="${artists[i]._id}">${artists[i].name}</option>
+        `
+        console.log("hej:" + artistOption);
+    }
+    
     var submitSongForm = `
-
+    
 <center>
     <h1>Enter Song to submit: </h1>
     <div class="col-md-12">
         Song title: <br /> <input type="text" id="songTitleInput"> <br /> 
-        Artist: <br />
-        <select id="songArtistInput">
-      </select><br />
+        Artist: <br /> 
+<select id="songArtistInput">
+${artistOption}
+ </select><br />
         Album: <br />  <input type="text" id="songAlbumInput"> <br /> 
         Genres: <br /> <input type="text" id="songGenresInput"> <br /> 
         <br> <br>
@@ -105,42 +115,8 @@ var submitArtistForm = `
     </div>
 </center>
 
-`
-;
+`;
 
-
-
-///*Song Form*/
-//
-//
-//let ArtistsArray = artistsData;
-//    for (let artist of ArtistsArray) {
-//
-//    var submitSongForm = `
-//
-//<center>
-//    <h1>Enter Song to submit: </h1>
-//    <div class="col-md-12">
-//        Song title: <br /> <input type="text" id="songTitleInput"> <br /> 
-//        Artist: <br />
-//        <select id="songArtistInput">
-//<option value="${artist._id}">${artist.name}</option>
-//      </select><br />
-//        Album: <br />  <input type="text" id="songAlbumInput"> <br /> 
-//        Genres: <br /> <input type="text" id="songGenresInput"> <br /> 
-//        <br> <br>
-//        <button onclick="submitSong()">Submit</button>
-//        <br /><br />
-//<div id="successSongSubmited"></div>
-//
-//    </div>
-//</center>
-//
-//
-//`
-//}
-//
-//;
 
 /*Album Form*/
 
@@ -149,11 +125,10 @@ var submitAlbumForm = `
     <h1>Enter Album to submit: </h1>
     <div class="col-md-12">
         Album title: <br /> <input type="text" id="albumNameInput"> <br /> 
-        Artist: <br />
-        <select name="artist" id="albumArtistInput">
-	  <option value=""></option>            
-      </select><br /> 
-<div id="demo"></div>
+        Artist: <br /> 
+<select id="albumArtistInput">
+${artistOption}
+ </select><br />
         Release Year: <br />  <input type="text" id="albumReleaseDateInput"> <br /> 
         Genres: <br /> <input type="text" id="albumGenresInput"> <br /> 
         Spotify URL: <br /> <input type="text" id="albumSpotifyURLInput"> <br /> 
@@ -174,11 +149,7 @@ var submitPlaylistForm = `
     <div class="col-md-12">
         Playlist title: <br /> <input type="text" id="playlistNameInput"> <br /> 
         Genres: <br /> <input type="text" id="playlistGenresInput"> <br /> 
-        Created By: <br />  <input type="text" id="playlistCreatorInput"> <br /> 
-        Tracks: <br />
-        <select name="tracks" id="playlistTracksInput">
-	  <option value=""></option>            
-      </select><br /> 
+        Created By: <br />  <input type="text" id="playlistCreatorInput"> <br />  
         Coverimage URL: <br /> <input type="text" id="playlistCoverImageInput"> <br />
         <br> <br>
         <button onclick="submitPlaylist()">Submit</button>
@@ -188,12 +159,33 @@ var submitPlaylistForm = `
     </div>
 </center>
 `;  
-    
-
-
 }
 
 
+
+//  /*Playlist Form*/
+//
+//var submitPlaylistForm = `
+//<center>
+//    <h1>Enter Playlist to submit: </h1>
+//    <div class="col-md-12">
+//        Playlist title: <br /> <input type="text" id="playlistNameInput"> <br /> 
+//        Genres: <br /> <input type="text" id="playlistGenresInput"> <br /> 
+//        Created By: <br />  <input type="text" id="playlistCreatorInput"> <br /> 
+//        Tracks: <br />
+//        <select name="tracks" id="playlistTracksInput">
+//	  <option value=""></option>            
+//      </select><br /> 
+//        Coverimage URL: <br /> <input type="text" id="playlistCoverImageInput"> <br />
+//        <br> <br>
+//        <button onclick="submitPlaylist()">Submit</button>
+//        <br /><br />
+//<div id="successPlaylistSubmited"></div>
+//
+//    </div>
+//</center>
+//`;  
+//}
 
 
 
