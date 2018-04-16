@@ -8,6 +8,7 @@ function getDataFrom(what, many) {
         })
         .then(function (artistsData) {
             displayArtists(artistsData);
+            submitForms(artistsData);
         })
         .catch(function (error) {
             console.log(error);
@@ -71,6 +72,7 @@ const tracksList = document.getElementById('displayAllTracks');
         })
         .then(function (tracksData) {
             displayTracks(tracksData);
+songs(tracksData);
         })
         .catch(function (error) {
             console.log(error);
@@ -88,6 +90,7 @@ const playlistsList = document.getElementById('displayAllPlaylists');
         })
         .then(function (playlistsData) {
             displayPlaylists(playlistsData);
+
         })
         .catch(function (error) {
             console.log(error);
@@ -130,13 +133,50 @@ SUBMITS TO API
         		  .then((response) => response.json())
         		  .then((artist) => {
         			console.log(artist);
-        		  })	
+        		  });	
+
+    document.getElementById("successArtistSubmited").innerHTML = "The Artist has been Submited!";
+
+
     }
+
+/*Function that Submits Songs from Form */
+
+    function submitSong() {
+        let songTitleInput = document.getElementById("songTitleInput").value;
+        let songArtistInput = document.getElementById("songArtistInput").value;
+        let songAlbumInput = document.getElementById("songAlbumInput").value;
+        let songGenresInput = document.getElementById("songGenresInput").value;
+
+let track = {
+    title: songTitleInput,
+    artists: songArtistInput,
+    album: songAlbumInput,
+    genres: songGenresInput
+}
+
+        console.log(track);
+	fetch('https://folksa.ga/api/tracks?key=flat_eric',{
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(track)
+	  })
+	  .then((response) => response.json())
+	  .then((track) => {
+		console.log(track);
+	  });
+
+	    document.getElementById("successSongSubmited").innerHTML = "The Song has been Submited!";
+    }
+
 
 
 /*Function that Submits Albums from Form */
 
-    function submitArtist() {
+    function submitAlbum() {
         let albumNameInput = document.getElementById("albumNameInput").value;
         let albumArtistInput = document.getElementById("albumArtistInput").value;
         let albumReleaseDateInput = document.getElementById("albumReleaseDateInput").value;
@@ -164,4 +204,40 @@ SUBMITS TO API
             .then((album) => {
                 console.log(album);
             });
+    document.getElementById("successAlbumSubmited").innerHTML = "The Album has been Submited!";
+    }
+
+/*Function that Submits Playlists from Form */
+
+    function submitPlaylist() {
+        let playlistNameInput = document.getElementById("playlistNameInput").value;
+        let playlistGenresInput = document.getElementById("playlistGenresInput").value;
+        let playlistCreatorInput = document.getElementById("playlistCreatorInput").value;
+        let playlistTracksInput = document.getElementById("playlistTracksInput").value;
+        let playlistCoverImageInput = document.getElementById("playlistCoverImageInput").value;
+
+        
+let playlist = {
+    title: playlistNameInput,
+    genres: playlistGenresInput,
+    createdBy: playlistCreatorInput,
+    tracks: playlistTracksInput,
+    coverImage: playlistCoverImageInput
+}
+        console.log(playlist);
+    fetch('https://folksa.ga/api/playlists?key=flat_eric',{
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(playlist)
+      })
+      .then((response) => response.json())
+      .then((playlist) => {
+        console.log(playlist);
+
+        
+      });
+            document.getElementById("successPlaylistSubmited").innerHTML = "The Playlist has been Submited!";
     }
