@@ -194,11 +194,27 @@ var submitPlaylistForm = `
         <br />  <input type="text" id="playlistCreatorInput" class="form-control"> <br />  
         <span class="form-label">Tracks: </span> 
         <br />
+<div class="playlistSong-container">
+
+<div class="playlistSelectSong-scroll">
         <select name="tracks" id="playlistTracksInput" class="form-control">
         ${songsOption}
-        </select><br /> 
+        </select>
+</div>
+
+<div class="playlistSelectSong-Button">
+
+        <button class="btn btn-secondary" onclick="addClickedSongToPlaylist()">Add Song to Playlist</button>
+</div>
+</div>
+
+
+<br /> 
         <span class="form-label">Coverimage URL: </span> 
         <br /> <input type="text" id="playlistCoverImageInput" class="form-control"> <br />
+<div id="DisplayAddedSongsHeadText"></div>
+<div id="DisplayAddedSongsToPlaylist"></div>
+<div id="test"></div>
         <br> <br>
         <button class="btn-block btn-success" onclick="submitPlaylist()">Submit</button>
         <br /><br />
@@ -206,14 +222,8 @@ var submitPlaylistForm = `
 
     </div>
 </center>
+
 `;  
-
-
-function addClickedSongToPlaylist(clicked_id) {
-
-console.log(addClickedSongToPlaylist)
-
-}
 
 }
 
@@ -285,62 +295,6 @@ nameInput.addEventListener('input', getFactFetch);
         }
         
       }
-
-/*Artist Form*/
-
-var submitArtistForm = `
-<center>
-    <h1>Enter Artist to submit: </h1>
-
-    <div class="col-md-12">
-
-        Artist name: <br /> <input type="text" id="artistNameInput"> <br /> 
-        Born: <br /> <input type="text" id="artistBornInput"> <br />
-        
-        Gender: <br />
-        <select name="gender" id="artistGenderInput">
-		  <option value='male'>Male</option>
-		  <option value='female'>Female</option>
-		  <option value='other'>Other</option>
-            
-      </select><br /> 
-        Genres: <br /> <input type="text" id="artistGenresInput"> <br /> 
-        Spotify URL: <br /> <input type="text" id="artistSpotifyURLInput"> <br /> 
-        Coverimage URL: <br /> <input type="text" id="artistCoverImageInput"> <br />
-
-
-        <br> <br>
-        <button onclick="submitArtist()">Submit</button>
-
-        <br /><br />
-
-        <div id="test"></div>
-
-    </div>
-</center>
-`;
-
-/*Album Form*/
-
-var submitAlbumForm = `
-<center>
-    <h1>Enter Album to submit: </h1>
-    <div class="col-md-12">
-        Album title: <br /> <input type="text" id="albumNameInput"> <br /> 
-        Artist: <br />
-        <select name="artist" id="albumArtistInput">
-	  <option value="Pontus">Artister</option>            
-      </select><br /> 
-        Release Year: <br />  <input type="text" id="albumReleaseDateInput"> <br /> 
-        Genres: <br /> <input type="text" id="albumGenresInput"> <br /> 
-        Spotify URL: <br /> <input type="text" id="albumSpotifyURLInput"> <br /> 
-        Coverimage URL: <br /> <input type="text" id="albumCoverImageInput"> <br />
-        <br> <br>
-        <button onclick="submitArtist()">Submit</button>
-        <br /><br />
-    </div>
-</center>
-`;
 
 
 //Function for counting out the rating

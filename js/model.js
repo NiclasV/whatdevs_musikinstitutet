@@ -243,3 +243,54 @@ let playlist = {
       });
             document.getElementById("successPlaylistSubmited").innerHTML = "The Playlist has been Submited!";
     }
+
+
+/*Function that Adds Clicked Songs into an Array*/
+
+
+function addClickedSongToPlaylist() {
+
+
+document.getElementById("DisplayAddedSongsHeadText").innerHTML = `
+<center>
+<h2>Playlist Songs: </h2>
+</center>
+`
+
+/*Creates Text Nodes of Clicked Songs and Displays it in a List*/
+
+    var sel = document.getElementById("playlistTracksInput");
+    var text = sel.options[sel.selectedIndex].text;
+
+    var textnode = document.createTextNode(text);
+    var node = document.createElement("li");
+    node.appendChild(textnode);
+    document.getElementById("DisplayAddedSongsToPlaylist").appendChild(node);
+
+/*Creates an Array of the Selected Tracks Values*/
+
+var selectedSongsArray = [];
+var selectedSongsValue = document.getElementById("playlistTracksInput").value;
+
+for (var i = 0; i < selectedSongsValue+1; i++) {
+
+            selectedSongsArray.push(selectedSongsValue[i]);
+}
+
+document.getElementById("test").innerHTML = selectedSongsArray;
+
+console.log(selectedSongsValue);
+
+}
+
+//       var text = document.getElementById("playlistTracksInput").value;
+
+    
+
+//document.getElementById("DisplayAddedSongsToPlaylist").innerHTML = `
+//<center>
+//<h2>Playlist Songs: </h2>
+//
+//${playlistTracksInput}
+//</center>
+//`

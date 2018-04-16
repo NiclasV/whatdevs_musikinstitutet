@@ -22,6 +22,12 @@ h2 {
     font-size: 1.8em;
 }
 
+li {
+
+list-style-type: none;
+
+}
+
 .logotext {
     font-family: 'Titillium Web', sans-serif;
     font-weight: 900;
@@ -229,4 +235,21 @@ section {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* Playlist Song Dropdown */
+
+.playlistSong-container {
+  display: flex;
+}
+
+.playlistSelectSong-scroll {
+  display: flex;
+  width: 70%;
+}
+
+.playlistSelectSong-Button {
+  display: flex;
+  width: 25%;
+margin-left: 5px;
 }
