@@ -50,7 +50,7 @@ var submitArtistForm = `
 <center>
     <h1>Enter Artist to submit: </h1>
 
-    <div class="col-md-12">
+    <div class="col-md-8">
 
         <span class="form-label"> Artist name: </span>
         <br /> <input type="text" id="artistNameInput" class="form-control"> <br /> 
@@ -104,7 +104,7 @@ var submitArtistForm = `
     
 <center>
     <h1>Enter Song to submit: </h1>
-    <div class="col-md-12">
+    <div class="col-md-8">
         <span class="form-label">Song title:  </span> 
         <br /> <input type="text" id="songTitleInput" class="form-control"> <br /> 
         <span class="form-label"> Artist: </span> 
@@ -132,7 +132,7 @@ ${artistOption}
 var submitAlbumForm = `
 <center>
     <h1>Enter Album to submit: </h1>
-    <div class="col-md-12">
+    <div class="col-md-8">
         <span class="form-label">Album title: </span> 
         <br /> <input type="text" id="albumNameInput" class="form-control"> <br /> 
         <span class="form-label">Artist: </span> 
@@ -184,7 +184,7 @@ mainDiv.innerHTML = submitPlaylistForm;
 var submitPlaylistForm = `
 <center>
     <h1>Enter Playlist to submit: </h1>
-    <div class="col-md-12">
+    <div class="col-md-8">
         <span class="form-label">Playlist title: </span> 
         <br /> <input type="text" id="playlistNameInput" class="form-control"> <br /> 
         <span class="form-label">Genres: </span> 
