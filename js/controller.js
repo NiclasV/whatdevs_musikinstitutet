@@ -4,7 +4,7 @@ const btnSubmitPlaylist = document.getElementById('btnSubmitPlaylist');
 const btnSubmitSong = document.getElementById('btnSubmitSong');
 const btnSubmitAlbum = document.getElementById('btnSubmitAlbum');
 const submitPopUp = document.getElementById('myModal');
-var btnClose = document.getElementsByClassName("btnClose")[0];
+const btnClose = document.getElementsByClassName("btnClose")[0];
 const mainDiv = document.getElementById('main');
 const artistDropdown = document.getElementById('artistDropdown');
 
@@ -31,9 +31,9 @@ btnSubmitArtist.addEventListener('click', function(event) {
 });
 
 
-btnSubmitAlbum.addEventListener('click', function(event) {
+btnSubmitAlbum.addEventListener('click', function(event){
   console.log('Submit Album Clicked!')
-mainDiv.innerHTML = submitAlbumForm;
+  mainDiv.innerHTML = submitAlbumForm;
 });
 
 btnSubmitSong.addEventListener('click', function(event) {
@@ -221,86 +221,155 @@ console.log(addClickedSongToPlaylist)
 
 
 
-let tracks = []
-let albums = []
-let playlists = []
 var factText = document.querySelector('#factText');
 var nameInput = document.querySelector('#name');
 
 nameInput.addEventListener('input', getFactFetch);
 
-
-
     // RÅ DATA Api
     function getFactFetch(){
         var name = nameInput.value;
         
-        if(name != ''){
-          fetch('https://folksa.ga/api/artists?limit=10000&sort=desc&key=flat_eric')
+        if(name != ''){ //1
+          fetch('https://folksa.ga/api/artists?limit=1000&sort=desc&key=flat_eric')
           .then( response => response.json() )
           .then( data => {
           	// vi får en rad data tillbaka, så nu måste vi filtrera
             // för att bara skicka in uppgifterna om artisten vi letar efter
           	data = data.filter( ( element ) => {
             		// Begränsa arrayen till att bara innehålla den artist vi letar efter
-							return new RegExp( name, 'ig' ).test( element.name );
+              return new RegExp( name, 'ig' ).test( element.genres) ||
+              new RegExp( name, 'ig' ).test( element.name)
+
             } );
             displayArtists( data );
           })
           .catch(err => console.log(err)); 
         }
-      //datan finns på de resterande 3 api men att få ut dom har jag inte gjort.
-        if(name != ''){
-          fetch('https://folksa.ga/api/albums?key=flat_eric')
-          .then(response => response.text())
-          .then(data => {
-            albums = data
+        if(name != ''){ //2
+        fetch('https://folksa.ga/api/albums?limit=1000&key=flat_eric')
+        .then(response => response.json())
+        .then( data => {
+          data = data.filter( ( element ) => {
+            return new RegExp( name, 'ig' ).test( element.title)
+
+          } );
+          displayAlbums( data );
           })
           .catch(err => console.log(err)); 
         }
-        if(name != ''){
-          fetch('https://folksa.ga/api/tracks?key=flat_eric')
-          .then(response => response.text())
-          .then(data => {
-            tracks = data
+        if(name != ''){ //3
+          fetch('https://folksa.ga/api/tracks?limit=1000&key=flat_eric')
+          .then(response => response.json())
+          .then( data => {
+          	data = data.filter( ( element ) => {
+              return new RegExp( name, 'ig' ).test( element.title)
+
+            } );
+            displayTracks( data );
           })
           .catch(err => console.log(err)); 
         }
-        if(name != ''){
-          fetch('https://folksa.ga/api/playlists?key=flat_eric')
-          .then(response => response.text())
-          .then(data => {
-            playlists = data
+         if(name != ''){ //4
+          fetch('https://folksa.ga/api/playlists?limit=1000&key=flat_eric')
+          .then(response => response.json())
+          .then( data => {
+          	data = data.filter( ( element ) => {
+              return new RegExp( name, 'ig' ).test( element.title)
+
+            } );
+            displayPlaylists( data );
           })
           .catch(err => console.log(err)); 
         }
         
       }
 
-// $ omvandlar varabeln istället för + CLEAN CODE MAN
-      function displayArtists( artists ){
-          let display = '';
-          
-          artists.forEach( ( artist ) => {
-            display += `
-            	<img src="${artist.coverImage}" alt="${ artist.name }" style="width: 250px; height: 250px;"/><br/>
-              <strong>Name: </strong>${ artist.name },<br/>
-              <strong>Genres: </strong>${ artist.genres },<br/>
-              <strong>Albums: </strong>${ artist.albums },<br/>
-              
+/*Artist Form*/
 
+var submitArtistForm = `
+<center>
+    <h1>Enter Artist to submit: </h1>
+
+    <div class="col-md-12">
+
+        Artist name: <br /> <input type="text" id="artistNameInput"> <br /> 
+        Born: <br /> <input type="text" id="artistBornInput"> <br />
+        
+        Gender: <br />
+        <select name="gender" id="artistGenderInput">
+		  <option value='male'>Male</option>
+		  <option value='female'>Female</option>
+		  <option value='other'>Other</option>
             
-
-              <strong><a href="${ artist.spotifyURL }">Spotify URL</a></strong><br/><br/><hr/><br/>
-            `
-          } );
-          
-          document.getElementById( 'factText' ).innerHTML = display;
-      }
+      </select><br /> 
+        Genres: <br /> <input type="text" id="artistGenresInput"> <br /> 
+        Spotify URL: <br /> <input type="text" id="artistSpotifyURLInput"> <br /> 
+        Coverimage URL: <br /> <input type="text" id="artistCoverImageInput"> <br />
 
 
-      // när man skriver något i fältat vad händer då(försöker matcha data) = med data jag fått ut, samt matcha med apin.
-      function searchsite(artistData, albumData, tracksData, playlistsData) {
-        console.log(albumData);
-      }
+        <br> <br>
+        <button onclick="submitArtist()">Submit</button>
+
+        <br /><br />
+
+        <div id="test"></div>
+
+    </div>
+</center>
+`;
+
+/*Album Form*/
+
+var submitAlbumForm = `
+<center>
+    <h1>Enter Album to submit: </h1>
+    <div class="col-md-12">
+        Album title: <br /> <input type="text" id="albumNameInput"> <br /> 
+        Artist: <br />
+        <select name="artist" id="albumArtistInput">
+	  <option value="Pontus">Artister</option>            
+      </select><br /> 
+        Release Year: <br />  <input type="text" id="albumReleaseDateInput"> <br /> 
+        Genres: <br /> <input type="text" id="albumGenresInput"> <br /> 
+        Spotify URL: <br /> <input type="text" id="albumSpotifyURLInput"> <br /> 
+        Coverimage URL: <br /> <input type="text" id="albumCoverImageInput"> <br />
+        <br> <br>
+        <button onclick="submitArtist()">Submit</button>
+        <br /><br />
+    </div>
+</center>
+`;
+
+
+//Function for counting out the rating
+  function countRating(rating) {
+    var quantity = rating.length; 
+    var ratingTotal = 0; 
+    
+    for (var i = 0; i < quantity; i++) {
+      ratingTotal += rating[i];
+    }
+      theRating = ratingTotal / quantity;
+      if (isNaN(theRating)) {
+        return "Not Rated Yet!"
+      } else {
+      return theRating; 
+    }
+  }
+
+//Function for showing standard-image
+  function handleImage(theImage) {
+    if (theImage == null) {
+      return "../whatdevs_musikinstitutet/images/male.png"
+    } else {
+      return theImage;
+    }
+  }  
+
+  function moreArtistInfo(id) {
+    getSpecific(id);
+    console.log(id)
+  }
+
 
