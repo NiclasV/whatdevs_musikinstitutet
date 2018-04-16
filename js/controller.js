@@ -50,6 +50,7 @@ btnSubmitSong.addEventListener('click', function(event) {
     
 /*Artist Form*/
 
+
 var submitArtistForm = `
 <center>
     <h1>Enter Artist to submit: </h1>
@@ -82,18 +83,18 @@ var submitArtistForm = `
 </center>
 `;
 
+
 /*Song Form*/
 
+    var submitSongForm = `
 
-    var submitSongForm = `<center>
+<center>
     <h1>Enter Song to submit: </h1>
     <div class="col-md-12">
         Song title: <br /> <input type="text" id="songTitleInput"> <br /> 
         Artist: <br />
-        <select name="song" id="songArtistInput">
-	  <option id=""></option>            
-      </select><br /> 
-<div id="artistDropdown"></div>
+        <select id="songArtistInput">
+      </select><br />
         Album: <br />  <input type="text" id="songAlbumInput"> <br /> 
         Genres: <br /> <input type="text" id="songGenresInput"> <br /> 
         <br> <br>
@@ -104,9 +105,42 @@ var submitArtistForm = `
     </div>
 </center>
 
+`
+;
 
-`;
 
+
+///*Song Form*/
+//
+//
+//let ArtistsArray = artistsData;
+//    for (let artist of ArtistsArray) {
+//
+//    var submitSongForm = `
+//
+//<center>
+//    <h1>Enter Song to submit: </h1>
+//    <div class="col-md-12">
+//        Song title: <br /> <input type="text" id="songTitleInput"> <br /> 
+//        Artist: <br />
+//        <select id="songArtistInput">
+//<option value="${artist._id}">${artist.name}</option>
+//      </select><br />
+//        Album: <br />  <input type="text" id="songAlbumInput"> <br /> 
+//        Genres: <br /> <input type="text" id="songGenresInput"> <br /> 
+//        <br> <br>
+//        <button onclick="submitSong()">Submit</button>
+//        <br /><br />
+//<div id="successSongSubmited"></div>
+//
+//    </div>
+//</center>
+//
+//
+//`
+//}
+//
+//;
 
 /*Album Form*/
 
@@ -156,13 +190,7 @@ var submitPlaylistForm = `
 `;  
     
 
-//    let ArtistsArray = artistsData;
-//    for (let artist of ArtistsArray) {
-//
-//        submitSongForm = `<option value="${artist._id}">${artist.name}</option>`;
-//    }
-//
-//document.getElementById("artistDropdown").innerHTML = submitSongForm;
+
 }
 
 
