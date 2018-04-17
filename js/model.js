@@ -272,14 +272,16 @@ document.getElementById("DisplayAddedSongsHeadText").innerHTML = `
 var selectedSongsArray = [];
 var selectedSongsValue = document.getElementById("playlistTracksInput").value;
 
-for (var i = 0; i < selectedSongsValue+1; i++) {
 
-            selectedSongsArray.push(selectedSongsValue[i]);
-}
+            selectedSongsArray.push(selectedSongsValue);
+    
+//    for (var i = 0; i < selectedSongsValue+1; i++) {
+//
+//}
+//
+//document.getElementById("test").innerHTML = selectedSongsArray;
 
-document.getElementById("test").innerHTML = selectedSongsArray;
-
-console.log(selectedSongsValue);
+console.log(selectedSongsArray);
 
 }
 
