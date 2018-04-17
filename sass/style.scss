@@ -18,8 +18,17 @@ h2 {
     font-family: 'Rajdhani', sans-serif;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 1.8em;
+    letter-spacing: 0.05em;
+    font-size: 1.6em;
+    line-height: 0.9em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+li {
+
+list-style-type: none;
+
 }
 
 .logotext {
@@ -70,6 +79,23 @@ h2 {
     font-size: 1.2em;
 }
 
+.footer-txt {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    color: #FFFFFF;
+}
+
+a:hover{
+    color: #FFFFFF;
+    text-decoration: none; 
+}
+
+.fa-2x {
+    margin-right: 10px;
+}
+
 /****************
 ---- SECTIONS ---
 ****************/
@@ -116,6 +142,13 @@ section {
     margin: 0 0 40px 0;
 }
 
+.artistinfo {
+    margin: auto;
+    text-align: center;
+} .img {
+    margin-left: auto;
+    margin-right: auto;
+}
 .top-header {
     text-align: center;
     height: 65px;
@@ -144,23 +177,57 @@ section {
     flex-wrap: wrap;
 }
 
-.artistCard {
-    border: 1px solid green;
-    width: 22%;
-    margin: 10px;
+.infosection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.spotify {
+    margin-top: 20px;
+    background: #1db954;
+    width: 100%;
+}
+
+#spotifyLogo {
+    fill: white;
+}
+
+.spotifyLogoContainer {
+    padding: 10px;
+    width: 60%;
+    margin: 0 auto;
+    padding-top: 15px;
+}
+
+footer {
+    background: #44494f;
+    height: 150px;
+    padding: 30px;
+}
+
+.footer-content {
+    color: #FFFFFF;
     text-align: center;
+    max-width: 960px;
+    margin: 0 auto;
 }
 
 /****************
 -- COMPONENTS --
 ****************/
 
+.artistCard {
+    width: 22%;
+    margin: 10px;
+    text-align: center;
+}
+
 .border-sm {
     width: 100%;
     height: 5px;
     background: #30353b;
 }
-
 
 .border-sm {
     width: 100%;
@@ -184,8 +251,17 @@ section {
 
 .img-container-specific {
     width: 50%;
-    height: 250px;
     overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.img-fluid {
+    width: 100%;
+}
+
+.info {
+    width: 60%;
+    text-align: center;
 }
 
 /****************
@@ -229,4 +305,21 @@ section {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* Playlist Song Dropdown */
+
+.playlistSong-container {
+  display: flex;
+}
+
+.playlistSelectSong-scroll {
+  display: flex;
+  width: 70%;
+}
+
+.playlistSelectSong-Button {
+  display: flex;
+  width: 25%;
+margin-left: 5px;
 }

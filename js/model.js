@@ -1,7 +1,11 @@
 const artistsList = document.getElementById('displayAllArtists');
+const albumsList = document.getElementById('displayAllAlbums');
+const tracksList = document.getElementById('displayAllTracks');
+const playlistsList = document.getElementById('displayAllPlaylists');
 
-function getDataFrom(what, many) {
-    var url = 'https://folksa.ga/api/' + what + '?limit=' + many + '&key=flat_eric';
+/*Fetch Artist Trough API, choose how many*/
+function getArtistData(what, many) {
+    var url = 'https://folksa.ga/api/' + what + '?limit=' + many + '&sort=desc&key=flat_eric';
     fetch(url)
         .then(function (response) {
             return response.json();
@@ -15,41 +19,10 @@ function getDataFrom(what, many) {
         })
 }
 
-function getSpecific(id) {
-    var url = 'https://folksa.ga/api/artists/' + id + '?key=flat_eric';
+/*Fetch Album Trough API, choose how many*/
+function getAlbumData(what, many){
+    var url = 'https://folksa.ga/api/' + what + '?limit=' + many + '&sort=desc&key=flat_eric';
     fetch(url)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            displaySpecific(data);
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-}
-
-getDataFrom("artists", 10);
-
-// /*Fetch all Artists Trough API*/
-
-
-//     var ArtistsURL = 'https://folksa.ga/api/artists?key=flat_eric';
-//     fetch(ArtistsURL)
-//         .then(function (response) {
-//             return response.json();
-//         })
-//         .then(function (artistsData) {
-//             displayArtists(artistsData);
-//         })
-      
-
-
-/*Fetch all Albums Trough API*/
-const albumsList = document.getElementById('displayAllAlbums');
-
-    var AlbumsURL = 'https://folksa.ga/api/albums?key=flat_eric';
-    fetch(AlbumsURL)
         .then(function (response) {
             return response.json();
         })
@@ -59,42 +32,87 @@ const albumsList = document.getElementById('displayAllAlbums');
         .catch(function (error) {
             console.log(error);
         })
+}
 
-
-/*Fetch all Tracks Trough API*/
-
-const tracksList = document.getElementById('displayAllTracks');
-
-    var TracksURL = 'https://folksa.ga/api/tracks?key=flat_eric';
-    fetch(TracksURL)
+/*Fetch Tracks Trough API, choose how many*/
+function getTracksData(what, many){
+    var url = 'https://folksa.ga/api/' + what + '?limit=' + many + '&sort=desc&key=flat_eric';
+    fetch(url)
         .then(function (response) {
             return response.json();
         })
         .then(function (tracksData) {
             displayTracks(tracksData);
-songs(tracksData);
+            songs(tracksData);
         })
         .catch(function (error) {
             console.log(error);
         })
+}
 
-
-/*Fetch all Playlists Trough API*/
-
-const playlistsList = document.getElementById('displayAllPlaylists');
-
-    var PlaylistsURL = 'https://folksa.ga/api/playlists?key=flat_eric';
-    fetch(PlaylistsURL)
+/*Fetch Playlists Trough API, choose how many*/
+function getPlaylistData(what, many){
+    var url = 'https://folksa.ga/api/' + what + '?limit=' + many + '&sort=asc&key=flat_eric';
+    fetch(url)
         .then(function (response) {
             return response.json();
         })
         .then(function (playlistsData) {
             displayPlaylists(playlistsData);
-
         })
         .catch(function (error) {
             console.log(error);
         })
+}
+
+/* Fetch Specific Artist ID Trough API */
+function getSpecificArtist(id) {
+    var url = 'https://folksa.ga/api/artists/' + id + '?key=flat_eric';
+    fetch(url)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            displaySpecific(data, id);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+}
+
+
+/* Fetch Specific Playlist ID Trough API */
+function getSpecificPlaylist(id) {
+    var url = 'https://folksa.ga/api/playlists/' + id + '?key=flat_eric';
+    fetch(url)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            displaySpecificPlaylist(data, id);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+}
+
+/* Fetch Specific Playlist ID Trough API */
+
+function getPlaylistComments(id) {
+    let url = 'https://folksa.ga/api/playlists/' + id + '/comments';
+    fetch(url)
+    .then((response) => response.json())
+    .then((comments) => {
+        displayComments(comments);
+        console.log(comments);
+    });
+}
+
+getArtistData("artists", 10);
+getAlbumData("albums", 10);
+getTracksData("tracks", 10);
+getPlaylistData("playlists", 10);
+
 
 /**************
 SUBMITS TO API 
@@ -213,6 +231,7 @@ function isEmptyOrSpaces(str){
         {
             alert("Failed to submit data");
         }
+
         else
         {
             let album = {
@@ -239,6 +258,7 @@ function isEmptyOrSpaces(str){
         document.getElementById("successAlbumSubmited").innerHTML = "The Album has been Submited!";
         }
         
+
     }
 
 /*Function that Submits Playlists from Form */
@@ -247,7 +267,7 @@ function isEmptyOrSpaces(str){
         let playlistNameInput = document.getElementById("playlistNameInput").value;
         let playlistGenresInput = document.getElementById("playlistGenresInput").value;
         let playlistCreatorInput = document.getElementById("playlistCreatorInput").value;
-        let playlistTracksInput = document.getElementById("playlistTracksInput").value;
+//        let playlistTracksInput = document.getElementById("playlistTracksInput").value;
         let playlistCoverImageInput = document.getElementById("playlistCoverImageInput").value;
 
         
@@ -255,10 +275,10 @@ let playlist = {
     title: playlistNameInput,
     genres: playlistGenresInput,
     createdBy: playlistCreatorInput,
-    tracks: playlistTracksInput,
+//    tracks: playlistTracksInput,
     coverImage: playlistCoverImageInput
 }
-        console.log(playlist);
+
     fetch('https://folksa.ga/api/playlists?key=flat_eric',{
         method: 'POST',
         headers: {
@@ -269,9 +289,64 @@ let playlist = {
       })
       .then((response) => response.json())
       .then((playlist) => {
-        console.log(playlist);
 
         
       });
             document.getElementById("successPlaylistSubmited").innerHTML = "The Playlist has been Submited!";
     }
+
+
+///*Function that Adds Clicked Songs into an Array*/
+//
+//
+//function addClickedSongToPlaylist() {
+//
+//
+//document.getElementById("DisplayAddedSongsHeadText").innerHTML = `
+//<center>
+//<h2>Playlist Songs: </h2>
+//</center>
+//`
+//
+///*Creates Text Nodes of Clicked Songs and Displays it in a List*/
+//
+//    var sel = document.getElementById("playlistTracksInput");
+//    var text = sel.options[sel.selectedIndex].text;
+//
+//    var textnode = document.createTextNode(text);
+//    var node = document.createElement("li");
+//    node.appendChild(textnode);
+//    document.getElementById("DisplayAddedSongsToPlaylist").appendChild(node);
+//
+///*Creates an Array of the Selected Tracks Values*/
+//
+//var selectedSongsValue = document.getElementById("playlistTracksInput").value;
+//
+//    var selected = '';
+//    
+//  selected += selectedSongsValue + ",";
+//
+//
+//
+//
+//console.log(selected);
+//
+//}
+/**************
+DELETE FROM API 
+**************/
+
+function deleteFrom(id){
+fetch('https://folksa.ga/api/artists/' + id + '?key=flat_eric', {
+    method: 'DELETE',
+    headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+  .then((response) => response.json())
+  .then((artist) => {
+    console.log(artist);
+  })
+}
+

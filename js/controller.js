@@ -212,6 +212,7 @@ var submitPlaylistForm = `
 <div id="successPlaylistSubmited"></div>
     </div>
 </center>
+
 `;  
 
   /*Submit Song Form*/
@@ -222,10 +223,12 @@ var submitSongsPlaylistForm = `
     <h1>Add Song to Playlist: </h1>
     <div class="col-md-8">
         <span class="form-label">Song To Add: </span> 
+
         <select name="tracks" id="playlistTracksInput" class="form-control">
         ${songsOption}
         </select> <br />
         <span class="form-label">Into This Playlist: </span> 
+
         <select name="tracks" id="playlistTracksInput" class="form-control">
         ${songsOption}
         </select>
@@ -236,9 +239,12 @@ var submitSongsPlaylistForm = `
         <button class="btn-block btn-success" onclick="submitPlaylist()">Submit</button>
         <br /><br />
 <div id="successPlaylistSubmited"></div>
+
     </div>
 </center>
+
 `;
+
 
 
     }
@@ -321,6 +327,7 @@ function countRating(rating) {
   
   for (var i = 0; i < quantity; i++) {
     ratingTotal += rating[i];
+
   }
     theRating = ratingTotal / quantity;
     if (isNaN(theRating)) {
@@ -341,11 +348,11 @@ function countRating(rating) {
   }  
 
   function moreArtistInfo(id) {
-    getSpecificArtist(id);
-  }
+    getSpecificArtist(id); }
 
   function morePlaylistInfo(id) {
     getSpecificPlaylist(id);
   }
+
 
 
