@@ -115,7 +115,8 @@ function isEmptyOrSpaces(str){
         let artistSpotifyURLInput = document.getElementById("artistSpotifyURLInput");
         let artistCoverImageInput = document.getElementById("artistCoverImageInput");
 
-        if( isEmptyOrSpaces(artistBirthYearInput.value) || isEmptyOrSpaces(artistnNameInput.value) || isEmptyOrSpaces(artistGenresInput.value)){
+        if( isEmptyOrSpaces(artistBirthYearInput.value) || isEmptyOrSpaces(artistnNameInput.value) || isEmptyOrSpaces(artistGenresInput.value))
+        {
             alert("Failed to submit data");
 
 
@@ -159,68 +160,85 @@ function isEmptyOrSpaces(str){
 /*Function that Submits Songs from Form */
 
     function submitSong() {
-        let songTitleInput = document.getElementById("songTitleInput").value;
-        let songArtistInput = document.getElementById("songArtistInput").value;
-        let songAlbumInput = document.getElementById("songAlbumInput").value;
-        let songGenresInput = document.getElementById("songGenresInput").value;
+        let songTitleInput = document.getElementById("songTitleInput");
+        let songArtistInput = document.getElementById("songArtistInput");
+        let songAlbumInput = document.getElementById("songAlbumInput");
+        let songGenresInput = document.getElementById("songGenresInput");
 
-let track = {
-    title: songTitleInput,
-    artists: songArtistInput,
-    album: songAlbumInput,
-    genres: songGenresInput
-}
+        if( isEmptyOrSpaces(songTitleInput.value) || isEmptyOrSpaces(songArtistInput.value) || isEmptyOrSpaces(songAlbumInput.value) || isEmptyOrSpaces(songGenresInput.value))
+        {
+            alert("Failed to submit data");
+        }
+        else
+        {
+            let track = {
+                title: songTitleInput.value,
+                artists: songArtistInput.value,
+                album: songAlbumInput.value,
+                genres: songGenresInput.value
+            }
+            
+                    console.log(track);
+                fetch('https://folksa.ga/api/tracks?key=flat_eric',{
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(track)
+                  })
+                  .then((response) => response.json())
+                  .then((track) => {
+                    console.log(track);
+                  });
+            
+                    document.getElementById("successSongSubmited").innerHTML = "The Song has been Submited!";
+                }
+        }
 
-        console.log(track);
-	fetch('https://folksa.ga/api/tracks?key=flat_eric',{
-		method: 'POST',
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(track)
-	  })
-	  .then((response) => response.json())
-	  .then((track) => {
-		console.log(track);
-	  });
-
-	    document.getElementById("successSongSubmited").innerHTML = "The Song has been Submited!";
-    }
 
 
 
 /*Function that Submits Albums from Form */
 
     function submitAlbum() {
-        let albumNameInput = document.getElementById("albumNameInput").value;
-        let albumArtistInput = document.getElementById("albumArtistInput").value;
-        let albumReleaseDateInput = document.getElementById("albumReleaseDateInput").value;
-        let albumGenresInput = document.getElementById("albumGenresInput").value;
-        let albumSpotifyURLInput = document.getElementById("albumSpotifyURLInput").value;
-        let albumCoverImageInput = document.getElementById("albumCoverImageInput").value;
-        let album = {
-            title: albumNameInput,
-            artists: albumArtistInput,
-            releaseDate: albumReleaseDateInput,
-            genres: albumGenresInput,
-            spotifyURL: albumSpotifyURLInput,
-            coverImage: albumCoverImageInput
+        let albumNameInput = document.getElementById("albumNameInput");
+        let albumArtistInput = document.getElementById("albumArtistInput");
+        let albumReleaseDateInput = document.getElementById("albumReleaseDateInput");
+        let albumGenresInput = document.getElementById("albumGenresInput");
+        let albumSpotifyURLInput = document.getElementById("albumSpotifyURLInput");
+        let albumCoverImageInput = document.getElementById("albumCoverImageInput");
+
+        if( isEmptyOrSpaces(albumNameInput.value) || isEmptyOrSpaces(albumArtistInput.value) || isEmptyOrSpaces(albumReleaseDateInput.value) || isEmptyOrSpaces(albumGenresInput.value))
+        {
+            alert("Failed to submit data");
         }
-        console.log(album);
-        fetch('https://folksa.ga/api/albums?key=flat_eric', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(album)
-            })
-            .then((response) => response.json())
-            .then((album) => {
-                console.log(album);
-            });
-    document.getElementById("successAlbumSubmited").innerHTML = "The Album has been Submited!";
+        else
+        {
+            let album = {
+                title: albumNameInput.value,
+                artists: albumArtistInput.value,
+                releaseDate: albumReleaseDateInput.value,
+                genres: albumGenresInput.value,
+                spotifyURL: albumSpotifyURLInput.value,
+                coverImage: albumCoverImageInput.value
+         }
+            console.log(album);
+            fetch('https://folksa.ga/api/albums?key=flat_eric', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(album)
+                })
+                .then((response) => response.json())
+                .then((album) => {
+                    console.log(album);
+                });
+        document.getElementById("successAlbumSubmited").innerHTML = "The Album has been Submited!";
+        }
+        
     }
 
 /*Function that Submits Playlists from Form */
