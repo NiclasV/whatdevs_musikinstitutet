@@ -166,6 +166,13 @@ console.log('Submit Playlist Clicked!')
 mainDiv.innerHTML = submitPlaylistForm;
 
 });
+        
+btnSubmitSongsToPlaylist.addEventListener('click', function(event) {
+console.log('Submit Song to Playlist Clicked!')
+mainDiv.innerHTML = submitSongsPlaylistForm;
+
+});      
+        
 
   /*Playlist Form*/
 
@@ -179,7 +186,15 @@ mainDiv.innerHTML = submitPlaylistForm;
         <option value="songs[i]._id">${songs[i].title}</option>
         `
     }
-    
+
+//    var playlist = playlistsData;
+//    var playlistOption = "";
+//    //console.log(artists[0].name);
+//    for (let i = 0; i < playlist.length; i++) {
+//        songsOption += `
+//        <option value="playlist[i]._id">${playlist[i].title}</option>
+//        `
+//    }
 /*For loop ends*/
 
 var submitPlaylistForm = `
@@ -192,24 +207,6 @@ var submitPlaylistForm = `
         <br /> <input type="text" id="playlistGenresInput" class="form-control"> <br /> 
         <span class="form-label">Created By: </span> 
         <br />  <input type="text" id="playlistCreatorInput" class="form-control"> <br />  
-        <span class="form-label">Tracks: </span> 
-        <br />
-<div class="playlistSong-container">
-
-<div class="playlistSelectSong-scroll">
-        <select name="tracks" id="playlistTracksInput" class="form-control">
-        ${songsOption}
-        </select>
-</div>
-
-<div class="playlistSelectSong-Button">
-
-        <button class="btn btn-secondary" onclick="addClickedSongToPlaylist()">Add Song to Playlist</button>
-</div>
-</div>
-
-
-<br /> 
         <span class="form-label">Coverimage URL: </span> 
         <br /> <input type="text" id="playlistCoverImageInput" class="form-control"> <br />
 <div id="DisplayAddedSongsHeadText"></div>
@@ -225,7 +222,39 @@ var submitPlaylistForm = `
 
 `;  
 
-}
+  /*Submit Song Form*/
+
+        
+var submitSongsPlaylistForm = `
+<center>
+    <h1>Add Song to Playlist: </h1>
+    <div class="col-md-8">
+        <span class="form-label">Song To Add: </span> 
+
+        <select name="tracks" id="playlistTracksInput" class="form-control">
+        ${songsOption}
+        </select> <br />
+        <span class="form-label">Into This Playlist: </span> 
+
+        <select name="tracks" id="playlistTracksInput" class="form-control">
+        ${songsOption}
+        </select>
+<div id="DisplayAddedSongsHeadText"></div>
+<div id="DisplayAddedSongsToPlaylist"></div>
+<div id="test"></div>
+        <br> <br>
+        <button class="btn-block btn-success" onclick="submitPlaylist()">Submit</button>
+        <br /><br />
+<div id="successPlaylistSubmited"></div>
+
+    </div>
+</center>
+
+`;
+
+
+    }
+
 
 
 

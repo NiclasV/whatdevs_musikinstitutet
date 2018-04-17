@@ -91,6 +91,7 @@ const playlistsList = document.getElementById('displayAllPlaylists');
         .then(function (playlistsData) {
             displayPlaylists(playlistsData);
 
+
         })
         .catch(function (error) {
             console.log(error);
@@ -215,7 +216,7 @@ let track = {
         let playlistNameInput = document.getElementById("playlistNameInput").value;
         let playlistGenresInput = document.getElementById("playlistGenresInput").value;
         let playlistCreatorInput = document.getElementById("playlistCreatorInput").value;
-        let playlistTracksInput = document.getElementById("playlistTracksInput").value;
+//        let playlistTracksInput = document.getElementById("playlistTracksInput").value;
         let playlistCoverImageInput = document.getElementById("playlistCoverImageInput").value;
 
         
@@ -223,7 +224,7 @@ let playlist = {
     title: playlistNameInput,
     genres: playlistGenresInput,
     createdBy: playlistCreatorInput,
-    tracks: playlistTracksInput,
+//    tracks: playlistTracksInput,
     coverImage: playlistCoverImageInput
 }
         console.log(playlist);
@@ -245,40 +246,40 @@ let playlist = {
     }
 
 
-/*Function that Adds Clicked Songs into an Array*/
-
-
-function addClickedSongToPlaylist() {
-
-
-document.getElementById("DisplayAddedSongsHeadText").innerHTML = `
-<center>
-<h2>Playlist Songs: </h2>
-</center>
-`
-
-/*Creates Text Nodes of Clicked Songs and Displays it in a List*/
-
-    var sel = document.getElementById("playlistTracksInput");
-    var text = sel.options[sel.selectedIndex].text;
-
-    var textnode = document.createTextNode(text);
-    var node = document.createElement("li");
-    node.appendChild(textnode);
-    document.getElementById("DisplayAddedSongsToPlaylist").appendChild(node);
-
-/*Creates an Array of the Selected Tracks Values*/
-
-var selectedSongsValue = document.getElementById("playlistTracksInput").value;
-
-    var selected = '';
-    
-    selected += selectedSongsValue + ",";
-
-
-
-
-console.log(selected);
-
-}
+///*Function that Adds Clicked Songs into an Array*/
+//
+//
+//function addClickedSongToPlaylist() {
+//
+//
+//document.getElementById("DisplayAddedSongsHeadText").innerHTML = `
+//<center>
+//<h2>Playlist Songs: </h2>
+//</center>
+//`
+//
+///*Creates Text Nodes of Clicked Songs and Displays it in a List*/
+//
+//    var sel = document.getElementById("playlistTracksInput");
+//    var text = sel.options[sel.selectedIndex].text;
+//
+//    var textnode = document.createTextNode(text);
+//    var node = document.createElement("li");
+//    node.appendChild(textnode);
+//    document.getElementById("DisplayAddedSongsToPlaylist").appendChild(node);
+//
+///*Creates an Array of the Selected Tracks Values*/
+//
+//var selectedSongsValue = document.getElementById("playlistTracksInput").value;
+//
+//    var selected = '';
+//    
+//  selected += selectedSongsValue + ",";
+//
+//
+//
+//
+//console.log(selected);
+//
+//}
 
