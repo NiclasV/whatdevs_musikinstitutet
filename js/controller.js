@@ -53,17 +53,13 @@ btnSubmitSong.addEventListener('click', function(event) {
 var submitArtistForm = `
 <center>
     <h1>Enter Artist to submit: </h1>
-
     <div class="col-md-8">
-
         <span class="form-label"> Artist name: </span>
-
         <br /> <input type="text" id="artistNameInput" class="form-control"> <br />
         <span class="form-label">Birth year: </span> 
         <br /> <input type="date" id="artistBirthYearInput" class="form-control"> <br />
         <span class="form-label">Birthplace: </span> 
         <br /> <input type="text" id="artistBirthplaceInput" class="form-control"> <br />
-
         <span class="form-label">Gender: </span> <br />
         <select name="gender" id="artistGenderInput" class="form-control">
 		  <option value='male'>Male</option>
@@ -77,15 +73,10 @@ var submitArtistForm = `
         <br /> <input type="text" id="artistSpotifyURLInput" class="form-control"> <br /> 
         <span class="form-label">Coverimage URL: </span> 
         <br /> <input type="text" id="artistCoverImageInput" class="form-control"> <br />
-
-
         <br> <br>
         <button class="btn-block btn-success" onclick="submitArtist()">Submit</button>
-
         <br /><br />
-
 <div id="successArtistSubmited"></div>
-
     </div>
 </center>
 `;
@@ -126,10 +117,8 @@ ${artistOption}
         <button class="btn-block btn-success" onclick="submitSong()">Submit</button>
         <br /><br />
 <div id="successSongSubmited"></div>
-
     </div>
 </center>
-
 `;
 
 
@@ -221,7 +210,6 @@ var submitPlaylistForm = `
         <button class="btn-block btn-success" onclick="submitPlaylist()">Submit</button>
         <br /><br />
 <div id="successPlaylistSubmited"></div>
-
     </div>
 </center>
 
@@ -256,6 +244,7 @@ var submitSongsPlaylistForm = `
 </center>
 
 `;
+
 
 
     }
@@ -338,6 +327,7 @@ function countRating(rating) {
   
   for (var i = 0; i < quantity; i++) {
     ratingTotal += rating[i];
+
   }
     theRating = ratingTotal / quantity;
     if (isNaN(theRating)) {
@@ -358,8 +348,7 @@ function countRating(rating) {
   }  
 
   function moreArtistInfo(id) {
-    getSpecificArtist(id);
-  }
+    getSpecificArtist(id); }
 
   function morePlaylistInfo(id) {
     getSpecificPlaylist(id);
