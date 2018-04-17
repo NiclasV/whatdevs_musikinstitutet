@@ -96,9 +96,11 @@ function displayPlaylists(playlistsData) {
     for (let playlist of playlistsNameArray) {
         let playlistRating = playlist.ratings
 
-        displayPlaylistsHTML = displayPlaylistsHTML + `<h4>${playlist.title}</h2><p><strong>Rating:</strong> ${countRating(playlistRating)}</p>`;
-        
-        
+        displayPlaylistsHTML = displayPlaylistsHTML + `
+        <a id="${playlist._id}" href="javascript://artistInfo" onClick="morePlaylistInfo(this.id)"><h4>${playlist.title}</h2></a>
+        <p><strong>Rating:</strong> ${countRating(playlistRating)}</p>
+        `;
+                
     }
     playlistsList.innerHTML = displayPlaylistsHTML;
 }
@@ -111,7 +113,7 @@ function displaySpecific(data, id) {
     var content = ``; 
 
     var content =  `
-    <section class="artistinfo">
+    <section class="infosection">
     <div class="img-container-specific">    
         <img src= "${handleImage(artist.coverImage)}" alt="${artist.name}" class="img-fluid"/>
         
@@ -126,6 +128,30 @@ function displaySpecific(data, id) {
     </div>
     `
     console.log(artistId)
+    mainDiv.innerHTML = content;
+    
+}
+
+
+function displaySpecificPlaylist(data, id) {
+    var playlist = data;
+    var playlistId = id;
+    var content = ``; 
+
+    var content =  `
+    <section class="infosection">
+    <div class="img-container-specific">    
+        <img src= "${handleImage(playlist.coverImage)}" alt="${playlist.title}" class="img-fluid"/>
+        
+    </div>
+    <div class="info">
+    <h1>${playlist.title}</h1>
+    <p><strong>Rating:</strong> ${countRating(playlist.ratings)}</p>
+    <p> ${playlist.genres}</p>
+    <p> ${playlist.createdBy}</p>
+    </div>
+    `
+
     mainDiv.innerHTML = content;
     
 }

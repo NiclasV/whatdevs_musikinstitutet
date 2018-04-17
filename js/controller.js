@@ -347,22 +347,22 @@ var submitAlbumForm = `
 </center>
 `;
 
-
 //Function for counting out the rating
-  function countRating(rating) {
-    var quantity = rating.length; 
-    var ratingTotal = 0; 
-    
-    for (var i = 0; i < quantity; i++) {
-      ratingTotal += rating[i];
-    }
-      theRating = ratingTotal / quantity;
-      if (isNaN(theRating)) {
-        return "Not Rated Yet!"
-      } else {
-      return theRating; 
-    }
+function countRating(rating) {
+  var quantity = rating.length; 
+  var ratingTotal = 0; 
+  
+  for (var i = 0; i < quantity; i++) {
+    ratingTotal += rating[i];
   }
+    theRating = ratingTotal / quantity;
+    if (isNaN(theRating)) {
+      return "Not Rated Yet!"
+    } else {
+    var theRatingRounded = Math.round( theRating * 10) / 10;
+    return theRatingRounded; 
+  }
+}
 
 //Function for showing standard-image
   function handleImage(theImage) {
@@ -376,5 +376,10 @@ var submitAlbumForm = `
   function moreArtistInfo(id) {
     getSpecificArtist(id);
   }
+
+  function morePlaylistInfo(id) {
+    getSpecificPlaylist(id);
+  }
+
 
 
