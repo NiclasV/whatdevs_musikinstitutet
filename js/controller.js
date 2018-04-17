@@ -8,12 +8,9 @@ const btnClose = document.getElementsByClassName("btnClose")[0];
 const mainDiv = document.getElementById('main');
 const artistDropdown = document.getElementById('artistDropdown');
 
-
 //CLICK EVENTS FOR VARIOUS BUTTONS:
 
 function submitForms(artistsData) {
-
-console.log(artistsData);
 
 btnSubmit.addEventListener('click', function(event) {
     console.log('Submit Clicked!')
@@ -26,10 +23,20 @@ btnClose.addEventListener('click', function(event) {
 });
 
 btnSubmitArtist.addEventListener('click', function(event) {
-  console.log('Submit Artist Clicked!');
+    console.log('Submit Artist Clicked!');
   mainDiv.innerHTML = submitArtistForm;
+
 });
 
+const spotify = document.getElementsByClassName("spotify");
+//Create an click-event the deleteBtn, since the ByClassName gets a HTMLcolletion array with all the buttons i gotta looop it!
+for (var i = 0 ; i < spotify.length; i++) {
+  spotify[i].addEventListener('click', function(event) {
+    //Preventing defaultevent with refreshing site at click
+    event.preventDefault()
+    console.log("hej");
+  })
+};
 
 btnSubmitAlbum.addEventListener('click', function(event){
   console.log('Submit Album Clicked!')
@@ -39,12 +46,9 @@ btnSubmitAlbum.addEventListener('click', function(event){
 btnSubmitSong.addEventListener('click', function(event) {
   console.log('Submit Song Clicked!')
   mainDiv.innerHTML = submitSongForm;
-
 });
 
-    
 /*Artist Form*/
-
 
 var submitArtistForm = `
 <center>
@@ -53,11 +57,13 @@ var submitArtistForm = `
     <div class="col-md-8">
 
         <span class="form-label"> Artist name: </span>
-        <br /> <input type="text" id="artistNameInput" class="form-control"> <br /> 
+
+        <br /> <input type="text" id="artistNameInput" class="form-control"> <br />
         <span class="form-label">Birth year: </span> 
-        <br /> <input type="text" id="artistBirthYearInput" class="form-control"> <br />
+        <br /> <input type="date" id="artistBirthYearInput" class="form-control"> <br />
         <span class="form-label">Birthplace: </span> 
         <br /> <input type="text" id="artistBirthplaceInput" class="form-control"> <br />
+
         <span class="form-label">Gender: </span> <br />
         <select name="gender" id="artistGenderInput" class="form-control">
 		  <option value='male'>Male</option>
@@ -100,8 +106,7 @@ var submitArtistForm = `
     
 /*For loop ends*/
 
-
-    var submitSongForm = `
+  var submitSongForm = `
     
 <center>
     <h1>Enter Song to submit: </h1>
@@ -325,26 +330,82 @@ nameInput.addEventListener('input', getFactFetch);
         
       }
 
+/*Artist Form*/
+
+var submitArtistForm = `
+<center>
+    <h1>Enter Artist to submit: </h1>
+
+    <div class="col-md-12">
+
+        Artist name: <br /> <input type="text" id="artistNameInput"> <br /> 
+        Born: <br /> <input type="text" id="artistBornInput"> <br />
+        
+        Gender: <br />
+        <select name="gender" id="artistGenderInput">
+		  <option value='male'>Male</option>
+		  <option value='female'>Female</option>
+		  <option value='other'>Other</option>
+            
+      </select><br /> 
+        Genres: <br /> <input type="text" id="artistGenresInput"> <br /> 
+        Spotify URL: <br /> <input type="text" id="artistSpotifyURLInput"> <br /> 
+        Coverimage URL: <br /> <input type="text" id="artistCoverImageInput"> <br />
+
+
+        <br> <br>
+        <button onclick="submitArtist()">Submit</button>
+
+        <br /><br />
+
+        <div id="test"></div>
+
+    </div>
+</center>
+`;
+
+/*Album Form*/
+
+var submitAlbumForm = `
+<center>
+    <h1>Enter Album to submit: </h1>
+    <div class="col-md-12">
+        Album title: <br /> <input type="text" id="albumNameInput"> <br /> 
+        Artist: <br />
+        <select name="artist" id="albumArtistInput">
+	  <option value="Pontus">Artister</option>            
+      </select><br /> 
+        Release Year: <br />  <input type="text" id="albumReleaseDateInput"> <br /> 
+        Genres: <br /> <input type="text" id="albumGenresInput"> <br /> 
+        Spotify URL: <br /> <input type="text" id="albumSpotifyURLInput"> <br /> 
+        Coverimage URL: <br /> <input type="text" id="albumCoverImageInput"> <br />
+        <br> <br>
+        <button onclick="submitArtist()">Submit</button>
+        <br /><br />
+    </div>
+</center>
+`;
 
 //Function for counting out the rating
-  function countRating(rating) {
-    var quantity = rating.length; 
-    var ratingTotal = 0; 
-    
-    for (var i = 0; i < quantity; i++) {
-      ratingTotal += rating[i];
-    }
-      theRating = ratingTotal / quantity;
-      if (isNaN(theRating)) {
-        return "Not Rated Yet!"
-      } else {
-      return theRating; 
-    }
+function countRating(rating) {
+  var quantity = rating.length; 
+  var ratingTotal = 0; 
+  
+  for (var i = 0; i < quantity; i++) {
+    ratingTotal += rating[i];
   }
+    theRating = ratingTotal / quantity;
+    if (isNaN(theRating)) {
+      return "Not Rated Yet!"
+    } else {
+    var theRatingRounded = Math.round( theRating * 10) / 10;
+    return theRatingRounded; 
+  }
+}
 
 //Function for showing standard-image
   function handleImage(theImage) {
-    if (theImage == null) {
+    if (theImage == "") {
       return "../whatdevs_musikinstitutet/images/male.png"
     } else {
       return theImage;
@@ -352,8 +413,12 @@ nameInput.addEventListener('input', getFactFetch);
   }  
 
   function moreArtistInfo(id) {
-    getSpecific(id);
-    console.log(id)
+    getSpecificArtist(id);
   }
+
+  function morePlaylistInfo(id) {
+    getSpecificPlaylist(id);
+  }
+
 
 
