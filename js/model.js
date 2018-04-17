@@ -108,14 +108,16 @@ function isEmptyOrSpaces(str){
 
     function submitArtist() {
         let artistnNameInput = document.getElementById("artistNameInput");
-        let artistBornInput = document.getElementById("artistBornInput");
+        let artistBirthYearInput = document.getElementById("artistBirthYearInput");
+        let artistBirthplaceInput = document.getElementById("artistBirthplaceInput");
         let artistGenderInput = document.getElementById("artistGenderInput");
         let artistGenresInput = document.getElementById("artistGenresInput");
         let artistSpotifyURLInput = document.getElementById("artistSpotifyURLInput");
         let artistCoverImageInput = document.getElementById("artistCoverImageInput");
 
-        if( isEmptyOrSpaces(artistBornInput.value) || isEmptyOrSpaces(artistnNameInput.value) || isEmptyOrSpaces(artistGenresInput.value)){
+        if( isEmptyOrSpaces(artistBirthYearInput.value) || isEmptyOrSpaces(artistnNameInput.value) || isEmptyOrSpaces(artistGenresInput.value)){
             alert("Failed to submit data");
+
 
         }
 
@@ -123,9 +125,10 @@ function isEmptyOrSpaces(str){
         {
             let artist = {
                 name: artistnNameInput.value,
-                born: artistBornInput.value,
+                born: artistBirthYearInput.value,
                 gender: artistGenderInput.value,
                 genres: artistGenresInput.value,
+                countryBorn: artistBirthplaceInput.value,
                 spotifyURL: artistSpotifyURLInput.value,
                 coverImage: artistCoverImageInput.value
             }
