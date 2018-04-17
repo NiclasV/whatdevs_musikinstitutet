@@ -171,9 +171,10 @@ section {
     flex-wrap: wrap;
 }
 
-.artistinfo {
+.infosection {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .spotify {
@@ -211,7 +212,6 @@ footer {
 ****************/
 
 .artistCard {
-    border: 1px solid black;
     width: 22%;
     margin: 10px;
     text-align: center;
@@ -222,7 +222,6 @@ footer {
     height: 5px;
     background: #30353b;
 }
-
 
 .border-sm {
     width: 100%;
@@ -245,13 +244,18 @@ footer {
 }
 
 .img-container-specific {
-    width: 65%;
-    height: 4   50px;
+    width: 50%;
     overflow: hidden;
+    margin-bottom: 20px;
 }
 
 .img-fluid {
     width: 100%;
+}
+
+.info {
+    width: 60%;
+    text-align: center;
 }
 
 /****************
