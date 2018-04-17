@@ -269,30 +269,16 @@ document.getElementById("DisplayAddedSongsHeadText").innerHTML = `
 
 /*Creates an Array of the Selected Tracks Values*/
 
-var selectedSongsArray = [];
 var selectedSongsValue = document.getElementById("playlistTracksInput").value;
 
-
-            selectedSongsArray.push(selectedSongsValue);
+    var selected = '';
     
-//    for (var i = 0; i < selectedSongsValue+1; i++) {
-//
-//}
-//
-//document.getElementById("test").innerHTML = selectedSongsArray;
+    selected += selectedSongsValue + ",";
 
-console.log(selectedSongsArray);
+
+
+
+console.log(selected);
 
 }
 
-//       var text = document.getElementById("playlistTracksInput").value;
-
-    
-
-//document.getElementById("DisplayAddedSongsToPlaylist").innerHTML = `
-//<center>
-//<h2>Playlist Songs: </h2>
-//
-//${playlistTracksInput}
-//</center>
-//`
