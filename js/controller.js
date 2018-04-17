@@ -374,7 +374,7 @@ var submitAlbumForm = `
   }  
 
   function moreArtistInfo(id) {
-    getSpecific(id);
+    getSpecificArtist(id);
   }
 
 
