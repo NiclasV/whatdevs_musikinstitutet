@@ -23,8 +23,9 @@ btnClose.addEventListener('click', function(event) {
 });
 
 btnSubmitArtist.addEventListener('click', function(event) {
-  console.log('Submit Artist Clicked!');
+    console.log('Submit Artist Clicked!');
   mainDiv.innerHTML = submitArtistForm;
+
 });
 
 const spotify = document.getElementsByClassName("spotify");
@@ -47,10 +48,7 @@ btnSubmitSong.addEventListener('click', function(event) {
   mainDiv.innerHTML = submitSongForm;
 });
 
-
-    
 /*Artist Form*/
-
 
 var submitArtistForm = `
 <center>
@@ -59,11 +57,13 @@ var submitArtistForm = `
     <div class="col-md-8">
 
         <span class="form-label"> Artist name: </span>
-        <br /> <input type="text" id="artistNameInput" class="form-control"> <br /> 
+
+        <br /> <input type="text" id="artistNameInput" class="form-control"> <br />
         <span class="form-label">Birth year: </span> 
-        <br /> <input type="text" id="artistBirthYearInput" class="form-control"> <br />
+        <br /> <input type="date" id="artistBirthYearInput" class="form-control"> <br />
         <span class="form-label">Birthplace: </span> 
         <br /> <input type="text" id="artistBirthplaceInput" class="form-control"> <br />
+
         <span class="form-label">Gender: </span> <br />
         <select name="gender" id="artistGenderInput" class="form-control">
 		  <option value='male'>Male</option>
@@ -106,8 +106,7 @@ var submitArtistForm = `
     
 /*For loop ends*/
 
-
-    var submitSongForm = `
+  var submitSongForm = `
     
 <center>
     <h1>Enter Song to submit: </h1>

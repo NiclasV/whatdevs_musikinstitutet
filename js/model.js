@@ -102,42 +102,56 @@ SUBMITS TO API
 
 
 /*Function that Submits Artists from Form */
+function isEmptyOrSpaces(str){
+    return str === null || str.match(/^ *$/) !== null;
+  }
 
     function submitArtist() {
-        let artistnNameInput = document.getElementById("artistNameInput").value;
-        let artistBirthYearInput = document.getElementById("artistBirthYearInput").value;
-        let artistBirthplaceInput = document.getElementById("artistBirthplaceInput").value;
-        let artistGenderInput = document.getElementById("artistGenderInput").value;
-        let artistGenresInput = document.getElementById("artistGenresInput").value;
-        let artistSpotifyURLInput = document.getElementById("artistSpotifyURLInput").value;
-        let artistCoverImageInput = document.getElementById("artistCoverImageInput").value;
+        let artistnNameInput = document.getElementById("artistNameInput");
+        let artistBirthYearInput = document.getElementById("artistBirthYearInput");
+        let artistBirthplaceInput = document.getElementById("artistBirthplaceInput");
+        let artistGenderInput = document.getElementById("artistGenderInput");
+        let artistGenresInput = document.getElementById("artistGenresInput");
+        let artistSpotifyURLInput = document.getElementById("artistSpotifyURLInput");
+        let artistCoverImageInput = document.getElementById("artistCoverImageInput");
+
+        if( isEmptyOrSpaces(artistBirthYearInput.value) || isEmptyOrSpaces(artistnNameInput.value) || isEmptyOrSpaces(artistGenresInput.value)){
+            alert("Failed to submit data");
 
 
-        let artist = {
-            name: artistnNameInput,
-            born: artistBirthYearInput,
-            gender: artistGenderInput,
-            genres: artistGenresInput,
-            countryBorn: artistBirthplaceInput,
-            spotifyURL: artistSpotifyURLInput,
-            coverImage: artistCoverImageInput
         }
-        console.log(artist);
 
-        		fetch('https://folksa.ga/api/artists?key=flat_eric',{
-        			method: 'POST',
-        			headers: {
-        				'Accept': 'application/json',
-        				'Content-Type': 'application/json'
-        			},
-        			body: JSON.stringify(artist)
-        		  })
-        		  .then((response) => response.json())
-        		  .then((artist) => {
-        			console.log(artist);
-        		  });	
+        else
+        {
+            let artist = {
+                name: artistnNameInput.value,
+                born: artistBirthYearInput.value,
+                gender: artistGenderInput.value,
+                genres: artistGenresInput.value,
+                countryBorn: artistBirthplaceInput.value,
+                spotifyURL: artistSpotifyURLInput.value,
+                coverImage: artistCoverImageInput.value
+            }
+            console.log(artist);
+    
+                    fetch('https://folksa.ga/api/artists?key=flat_eric',
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(artist)
+                      })
+                      .then((response) => response.json())
+                      .then((artist) => {
+                        console.log(artist);
+                      });	
+    
+                document.getElementById("successArtistSubmited").innerHTML = "The Artist has been Submited!";
 
-    document.getElementById("successArtistSubmited").innerHTML = "The Artist has been Submited!";
+         }
+         
 
 
     }
