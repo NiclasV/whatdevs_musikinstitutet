@@ -8,12 +8,9 @@ const btnClose = document.getElementsByClassName("btnClose")[0];
 const mainDiv = document.getElementById('main');
 const artistDropdown = document.getElementById('artistDropdown');
 
-
 //CLICK EVENTS FOR VARIOUS BUTTONS:
 
 function submitForms(artistsData) {
-
-console.log(artistsData);
 
 btnSubmit.addEventListener('click', function(event) {
     console.log('Submit Clicked!')
@@ -31,6 +28,15 @@ btnSubmitArtist.addEventListener('click', function(event) {
 
 });
 
+const spotify = document.getElementsByClassName("spotify");
+//Create an click-event the deleteBtn, since the ByClassName gets a HTMLcolletion array with all the buttons i gotta looop it!
+for (var i = 0 ; i < spotify.length; i++) {
+  spotify[i].addEventListener('click', function(event) {
+    //Preventing defaultevent with refreshing site at click
+    event.preventDefault()
+    console.log("hej");
+  })
+};
 
 btnSubmitAlbum.addEventListener('click', function(event){
   console.log('Submit Album Clicked!')
@@ -40,10 +46,9 @@ btnSubmitAlbum.addEventListener('click', function(event){
 btnSubmitSong.addEventListener('click', function(event) {
   console.log('Submit Song Clicked!')
   mainDiv.innerHTML = submitSongForm;
-
 });
-/*Artist Form*/
 
+/*Artist Form*/
 
 var submitArtistForm = `
 <center>
@@ -101,8 +106,7 @@ var submitArtistForm = `
     
 /*For loop ends*/
 
-
-    var submitSongForm = `
+  var submitSongForm = `
     
 <center>
     <h1>Enter Song to submit: </h1>
@@ -362,7 +366,7 @@ var submitAlbumForm = `
 
 //Function for showing standard-image
   function handleImage(theImage) {
-    if (theImage == null) {
+    if (theImage == "") {
       return "../whatdevs_musikinstitutet/images/male.png"
     } else {
       return theImage;
@@ -371,7 +375,6 @@ var submitAlbumForm = `
 
   function moreArtistInfo(id) {
     getSpecific(id);
-    console.log(id)
   }
 
 

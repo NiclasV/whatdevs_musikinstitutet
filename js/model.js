@@ -1,7 +1,7 @@
 const artistsList = document.getElementById('displayAllArtists');
 
 function getDataFrom(what, many) {
-    var url = 'https://folksa.ga/api/' + what + '?limit=' + many + '&key=flat_eric';
+    var url = 'https://folksa.ga/api/' + what + '?limit=' + many + '&sort=desc&key=flat_eric';
     fetch(url)
         .then(function (response) {
             return response.json();
@@ -22,7 +22,7 @@ function getSpecific(id) {
             return response.json();
         })
         .then(function (data) {
-            displaySpecific(data);
+            displaySpecific(data, id);
         })
         .catch(function (error) {
             console.log(error);
@@ -257,3 +257,24 @@ let playlist = {
       });
             document.getElementById("successPlaylistSubmited").innerHTML = "The Playlist has been Submited!";
     }
+
+
+/**************
+DELETE FROM API 
+**************/
+
+function deleteFrom(id){
+console.log("hej");
+fetch('https://folksa.ga/api/artists/' + id + '?key=flat_eric', {
+    method: 'DELETE',
+    headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+  .then((response) => response.json())
+  .then((artist) => {
+    console.log(artist);
+  })
+}
+
