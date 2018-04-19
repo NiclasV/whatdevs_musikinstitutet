@@ -11,7 +11,7 @@ function getArtistData(what, many) {
         })
         .then(function (artistsData) {
             displayArtists(artistsData);
-            submitForms(artistsData);
+            displaySongForm(artistsData); 
         })
         .catch(function (error) {
             console.log(error);
@@ -42,7 +42,6 @@ function getTracksData(what, many){
         })
         .then(function (tracksData) {
             displayTracks(tracksData);
-            songs(tracksData);
         })
         .catch(function (error) {
             console.log(error);
@@ -58,7 +57,7 @@ function getPlaylistData(what, many){
         })
         .then(function (playlistsData) {
             displayPlaylists(playlistsData);
-        playlistOptions(playlistsData);
+            playlistOptions(playlistsData);
 
         })
         .catch(function (error) {
@@ -349,6 +348,7 @@ fetch(`https://folksa.ga/api/playlists/${commentPlaylistIdInput}/comments?key=fl
             document.getElementById("successCommentSubmited").innerHTML = "The Comment has been Submited!";
     }
 
+
 /**************
 DELETE FROM API 
 **************/
@@ -371,4 +371,10 @@ function deleteFrom(what, id){
     }
     
 }
+
+
+getArtistData("artists", 10);
+getAlbumData("albums", 10);
+getTracksData("tracks", 10);
+getPlaylistData("playlists", 10);
 
