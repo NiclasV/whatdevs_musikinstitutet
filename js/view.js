@@ -1,3 +1,8 @@
+getArtistData("artists", 10);
+getAlbumData("albums", 10);
+getPlaylistData("playlists", 10);
+getTracksData("tracks", 10);
+
 const artistsList = document.getElementById('displayAllArtists');
 const albumsList = document.getElementById('displayAllAlbums');
 const tracksList = document.getElementById('displayAllTracks');
@@ -321,6 +326,7 @@ function displayCommentsForm(playlistId) {
     document.getElementById('main').insertAdjacentHTML('beforeend', content)
        
 }
+
 /*************************
 ---- DISPLAYS FORMS  -----
 *************************/

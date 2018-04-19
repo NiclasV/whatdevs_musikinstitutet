@@ -33,21 +33,6 @@ function getAlbumData(what, many){
         })
 }
 
-/*Fetch Tracks Trough API, choose how many*/
-function getTracksData(what, many){
-    var url = 'https://folksa.ga/api/' + what + '?limit=' + many + '&sort=desc&key=flat_eric';
-    fetch(url)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (tracksData) {
-            displayTracks(tracksData);
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-}
-
 /*Fetch Playlists Trough API, choose how many*/
 function getPlaylistData(what, many){
     var url = 'https://folksa.ga/api/' + what + '?limit=' + many + '&sort=asc&key=flat_eric';
@@ -59,6 +44,21 @@ function getPlaylistData(what, many){
             displayPlaylists(playlistsData);
             playlistOptions(playlistsData);
 
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+}
+
+/*Fetch Tracks Trough API, choose how many*/
+function getTracksData(what, many){
+    var url = 'https://folksa.ga/api/' + what + '?limit=' + many + '&sort=desc&key=flat_eric';
+    fetch(url)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (tracksData) {
+            displayTracks(tracksData);
         })
         .catch(function (error) {
             console.log(error);
@@ -131,7 +131,6 @@ function getPlaylistComments(id) {
 /**************
 SUBMITS TO API 
 **************/
-
 
 /*Function that Submits Artists from Form */
 function isEmptyOrSpaces(str){
@@ -371,10 +370,4 @@ function deleteFrom(what, id){
     }
     
 }
-
-
-getArtistData("artists", 10);
-getAlbumData("albums", 10);
-getTracksData("tracks", 10);
-getPlaylistData("playlists", 10);
 

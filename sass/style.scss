@@ -27,19 +27,22 @@ h2 {
 }
 
 li {
-list-style-type: none;
+    list-style-type: none;
 }
 
 p {
     margin-bottom: 10px;
 }
+
 .logotext {
-    font-family: 'Titillium Web', sans-serif;
+    font-family: 'Euphoria Script', cursive;
     font-weight: 900;
-    font-size: 1.8em;
+    font-size: 2.8em;
     color: #ebebeb;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 0px;
+    padding-top: 15px;
+    
 }
 
 #text-or {
@@ -106,15 +109,21 @@ header {
 }
 
 .header-img {
-    height: 55vh;
+    height: 45vh;
     width: 100%;
     background-image: url('../images/bg-mixer.png');
-    opacity: 0.7;
+    opacity: 0.8;
     background-position: top center;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
+    transition: height 0.5s ease-out;
+}
+
+.header-img-animate {
+    
+    height: 28vh;
 }
 
 nav {       
@@ -124,7 +133,7 @@ nav {
     padding: 10px;
     display: flex;
     justify-content: space-between;
-    padding-top: 210px;
+    padding-top: 40px;
 }
 
 main {
@@ -145,12 +154,6 @@ section {
 } .img {
     margin-left: auto;
     margin-right: auto;
-}
-
-.top-header {
-    text-align: center;
-    height: 65px;
-    padding: 10px;
 }
 
 #search-field {
@@ -199,6 +202,8 @@ footer {
 #albumtracks {
     width: 100%;
 }
+
+
 /****************
 -- COMPONENTS --
 ****************/
@@ -213,14 +218,8 @@ footer {
 
 .border-sm {
     width: 100%;
-    height: 5px;
-    background: #30353b;
-}
-
-.border-sm {
-    width: 100%;
-    height: 5px;
-    background: #30353b;
+    height: 9px;
+    background: #1f252b;
 }
 
 .btn {
@@ -277,8 +276,12 @@ footer {
 }
 
 .hide {
-    display: none;
+    //display: none;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    transition: opacity .2s;
 }
+
 
 /****************
 - POP-UP WINDOW -
@@ -326,16 +329,16 @@ footer {
 /* Playlist Song Dropdown */
 
 .playlistSong-container {
-  display: flex;
+    display: flex;
 }
 
 .playlistSelectSong-scroll {
-  display: flex;
-  width: 70%;
+    display: flex;
+    width: 70%;
 }
 
 .playlistSelectSong-Button {
-  display: flex;
-  width: 25%;
-margin-left: 5px;
+    display: flex;
+    width: 25%;
+    margin-left: 5px;
 }
