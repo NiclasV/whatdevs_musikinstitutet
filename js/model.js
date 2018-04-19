@@ -44,6 +44,7 @@ function getTracksData(what, many){
         .then(function (tracksData) {
             displayTracks(tracksData);
             songs(tracksData);
+        
         })
         .catch(function (error) {
             console.log(error);
@@ -59,6 +60,8 @@ function getPlaylistData(what, many){
         })
         .then(function (playlistsData) {
             displayPlaylists(playlistsData);
+//            playlists(playlistsData);
+
         })
         .catch(function (error) {
             console.log(error);
