@@ -155,6 +155,7 @@ function displaySpecificPlaylist(data, id) {
     mainDiv.innerHTML = content;
     
     getPlaylistComments(playlistId);
+    displayCommentsForm(playlistId);
 }
 
 function displayComments(comments) {
@@ -170,4 +171,37 @@ function displayComments(comments) {
     mainDiv.insertAdjacentHTML('beforeend', content)
     
 }
+
+function displayCommentsForm(playlistId) {
+    
+ var commentPlaylistIdInput = playlistId;
+console.log(commentPlaylistIdInput);
+
+    var content = "<h2>Write comment:</h2>";
+    
+    content += `
+    
+    <div class="col-md-8">
+<div class="form-group">
+
+        <span class="form-label"> Your Name: </span>
+        <br /> <input type="text" id="commentNameInput" class="form-control"> <br />
+
+        <span class="form-label"> Comment: </span>
+        <textarea class="form-control" rows="5" id="commentInput"></textarea>
+        <input type="hidden" id="commentPlaylistIdInput" value="${commentPlaylistIdInput}"></input>
+
+        <br> <br>
+        <button type="submit" class="btn-block btn-success" onclick="submitCommentToPlaylist()">Submit</button>
+        <br /><br />
+<div id="successCommentSubmited"></div>
+</div>
+
+    </div>
+    `
+    document.getElementById('main').insertAdjacentHTML('beforeend', content)
+    
+    }
+    
+  
   

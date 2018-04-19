@@ -164,9 +164,7 @@ mainDiv.innerHTML = submitPlaylistForm;
 btnSubmitSongsToPlaylist.addEventListener('click', function(event) {
 console.log('Submit Song to Playlist Clicked!')
 mainDiv.innerHTML = submitSongsPlaylistForm;
-
 });      
-        
 
   /*Playlist Form*/
 
@@ -181,14 +179,6 @@ mainDiv.innerHTML = submitSongsPlaylistForm;
         `
     }
 
-//    var playlist = playlistsData;
-//    var playlistOption = "";
-//    //console.log(artists[0].name);
-//    for (let i = 0; i < playlist.length; i++) {
-//        songsOption += `
-//        <option value="playlist[i]._id">${playlist[i].title}</option>
-//        `
-//    }
 /*For loop ends*/
 
 var submitPlaylistForm = `
@@ -217,8 +207,9 @@ var submitPlaylistForm = `
 
   /*Submit Song Form*/
 
-        
-var submitSongsPlaylistForm = `
+        var submitSongsPlaylistForm = '';
+
+submitSongsPlaylistForm += `
 <center>
     <h1>Add Song to Playlist: </h1>
     <div class="col-md-8">
@@ -227,26 +218,52 @@ var submitSongsPlaylistForm = `
         <select name="tracks" id="playlistTracksInput" class="form-control">
         ${songsOption}
         </select> <br />
-        <span class="form-label">Into This Playlist: </span> 
-
-        <select name="tracks" id="playlistTracksInput" class="form-control">
-        ${songsOption}
-        </select>
-<div id="DisplayAddedSongsHeadText"></div>
-<div id="DisplayAddedSongsToPlaylist"></div>
-<div id="test"></div>
-        <br> <br>
-        <button class="btn-block btn-success" onclick="submitPlaylist()">Submit</button>
-        <br /><br />
-<div id="successPlaylistSubmited"></div>
-
-    </div>
 </center>
-
 `;
-
+        playlistOptions();  
     }
 
+function playlistOptions(playlistsData) {
+    var playlist = playlistsData;
+    var playlistOption = "";
+    console.log(playlist);
+    //console.log(artists[0].name);
+    for (let i = 0; i < playlistData.length; i++) {
+        playlistOption += `
+        <option value="playlist[i]._id">${playlist[i].title}</option>
+        `
+    }
+    return playlistOption;
+    console.log(playlistOption)
+}
+
+
+
+//var submitSongsPlaylistForm = '';
+//    
+//submitSongsPlaylistForm += `
+//
+//        <span class="form-label">Into This Playlist: </span> 
+//
+//        <select name="tracks" id="playlistTracksInput" class="form-control">
+//        ${playlistOption}
+//        </select>
+//<div id="DisplayAddedSongsHeadText"></div>
+//<div id="DisplayAddedSongsToPlaylist"></div>
+//<div id="test"></div>
+//        <br> <br>
+//        <button class="btn-block btn-success" onclick="submitPlaylist()">Submit</button>
+//        <br /><br />
+//<div id="successPlaylistSubmited"></div>
+//
+//    </div>
+//</center>
+//
+//`;
+//
+//    document.getElementById('main').insertAdjacentHTML('beforeend', submitSongsPlaylistForm);
+//
+//}
 
 var factText = document.querySelector('#factText');
 var nameInput = document.querySelector('#name');
