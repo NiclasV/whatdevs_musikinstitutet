@@ -58,6 +58,8 @@ function getPlaylistData(what, many){
         })
         .then(function (playlistsData) {
             displayPlaylists(playlistsData);
+        playlistOptions(playlistsData);
+
         })
         .catch(function (error) {
             console.log(error);
@@ -277,10 +279,10 @@ function isEmptyOrSpaces(str){
 /*Function that Submits Playlists from Form */
 
     function submitPlaylist() {
+
         let playlistNameInput = document.getElementById("playlistNameInput");
         let playlistGenresInput = document.getElementById("playlistGenresInput");
         let playlistCreatorInput = document.getElementById("playlistCreatorInput");
-//        let playlistTracksInput = document.getElementById("playlistTracksInput");
         let playlistCoverImageInput = document.getElementById("playlistCoverImageInput");
 
         if( isEmptyOrSpaces(playlistNameInput.value) || isEmptyOrSpaces(playlistGenresInput.value) || isEmptyOrSpaces(playlistCreatorInput.value))
@@ -293,7 +295,6 @@ function isEmptyOrSpaces(str){
                 title: playlistNameInput.value,
                 genres: playlistGenresInput.value,
                 createdBy: playlistCreatorInput.value,
-            //    tracks: playlistTracksInput,
                 coverImage: playlistCoverImageInput.value
             }
             
@@ -316,42 +317,38 @@ function isEmptyOrSpaces(str){
              }
 
 
-///*Function that Adds Clicked Songs into an Array*/
-//
-//
-//function addClickedSongToPlaylist() {
-//
-//
-//document.getElementById("DisplayAddedSongsHeadText").innerHTML = `
-//<center>
-//<h2>Playlist Songs: </h2>
-//</center>
-//`
-//
-///*Creates Text Nodes of Clicked Songs and Displays it in a List*/
-//
-//    var sel = document.getElementById("playlistTracksInput");
-//    var text = sel.options[sel.selectedIndex].text;
-//
-//    var textnode = document.createTextNode(text);
-//    var node = document.createElement("li");
-//    node.appendChild(textnode);
-//    document.getElementById("DisplayAddedSongsToPlaylist").appendChild(node);
-//
-///*Creates an Array of the Selected Tracks Values*/
-//
-//var selectedSongsValue = document.getElementById("playlistTracksInput").value;
-//
-//    var selected = '';
-//    
-//  selected += selectedSongsValue + ",";
-//
-//
-//
-//
-//console.log(selected);
-//
-//}
+/*Function that Submits Comments To Playlists */
+
+    function submitCommentToPlaylist() {
+        let commentPlaylistIdInput = document.getElementById("commentPlaylistIdInput").value;
+        let commentNameInput = document.getElementById("commentNameInput").value;
+        let commentInput = document.getElementById("commentInput").value;
+        
+
+
+        
+let comment = {
+    playlist: commentPlaylistIdInput,
+    body: commentInput,
+    username: commentNameInput
+}
+	console.log(comment);
+
+
+fetch(`https://folksa.ga/api/playlists/${commentPlaylistIdInput}/comments?key=flat_eric`,{
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(comment)
+    })
+            .then((response) => response.json())
+    .then((playlist) => {
+  });
+            document.getElementById("successCommentSubmited").innerHTML = "The Comment has been Submited!";
+    }
+
 /**************
 DELETE FROM API 
 **************/
