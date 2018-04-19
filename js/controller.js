@@ -7,7 +7,6 @@ const submitPopUp = document.getElementById('myModal');
 const btnClose = document.getElementsByClassName("btnClose")[0];
 const mainDiv = document.getElementById('main');
 const artistDropdown = document.getElementById('artistDropdown');
-
 //CLICK EVENTS FOR VARIOUS BUTTONS:
 
 function submitForms(artistsData) {
@@ -27,16 +26,6 @@ btnSubmitArtist.addEventListener('click', function(event) {
   mainDiv.innerHTML = submitArtistForm;
 
 });
-
-const spotify = document.getElementsByClassName("spotify");
-//Create an click-event the deleteBtn, since the ByClassName gets a HTMLcolletion array with all the buttons i gotta looop it!
-for (var i = 0 ; i < spotify.length; i++) {
-  spotify[i].addEventListener('click', function(event) {
-    //Preventing defaultevent with refreshing site at click
-    event.preventDefault()
-    console.log("hej");
-  })
-};
 
 btnSubmitAlbum.addEventListener('click', function(event){
   console.log('Submit Album Clicked!')
@@ -205,10 +194,9 @@ var submitPlaylistForm = `
 
 `;  
 
-  /*Submit Song Form*/
+/*Submit Song Form*/
 
-        var submitSongsPlaylistForm = '';
-
+var submitSongsPlaylistForm = '';
 submitSongsPlaylistForm += `
 <center>
     <h1>Add Song to Playlist: </h1>
@@ -357,12 +345,23 @@ function countRating(rating) {
     }
   }  
 
+  function moreAlbumInfo(what, id) {
+    toggleHeader();
+    getSpecificAlbum(what, id);
+  }
+
   function moreArtistInfo(id) {
-    getSpecificArtist(id); }
+    toggleHeader();
+    getSpecificArtist(id); 
+  }
 
   function morePlaylistInfo(id) {
+    toggleHeader();
     getSpecificPlaylist(id);
   }
 
 
-
+  function toggleHeader() {
+    const header = document.getElementById('theHeader');
+    header.classList.toggle('hide');
+  }
