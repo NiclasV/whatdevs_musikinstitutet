@@ -245,14 +245,7 @@ var submitSongsPlaylistForm = `
 
 `;
 
-
-
     }
-
-
-
-
-
 
 
 var factText = document.querySelector('#factText');

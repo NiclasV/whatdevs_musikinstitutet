@@ -154,7 +154,20 @@ function displaySpecificPlaylist(data, id) {
 
     mainDiv.innerHTML = content;
     
+    getPlaylistComments(playlistId);
 }
 
+function displayComments(comments) {
+    console.log(comments);
+    var content = '<h2>Comments</h2>';
 
+    for (let i = 0; i < comments.length; i++) {
+        content += `
+        <p><strong>${comments[i].username} skrev: </strong></p>
+        <p>${comments[i].body}</p>
+        `;
+    }
+    mainDiv.insertAdjacentHTML('beforeend', content)
+    
+}
   

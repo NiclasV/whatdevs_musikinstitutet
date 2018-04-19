@@ -99,7 +99,7 @@ function getSpecificPlaylist(id) {
 /* Fetch Specific Playlist ID Trough API */
 
 function getPlaylistComments(id) {
-    let url = 'https://folksa.ga/api/playlists/' + id + '/comments';
+    let url = 'https://folksa.ga/api/playlists/' + id + '/comments?key=flat_eric';
     fetch(url)
     .then((response) => response.json())
     .then((comments) => {
@@ -337,16 +337,20 @@ DELETE FROM API
 **************/
 
 function deleteFrom(id){
-fetch('https://folksa.ga/api/artists/' + id + '?key=flat_eric', {
-    method: 'DELETE',
-    headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    })
-  .then((response) => response.json())
-  .then((artist) => {
-    console.log(artist);
-  })
+    const confirmation = confirm("Are you sure you want to delete this?");
+    if (confirmation) {
+        fetch('https://folksa.ga/api/artists/' + id + '?key=flat_eric', {
+        method: 'DELETE',
+        headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response) => response.json())
+            .then((artist) => {
+            console.log(artist);
+        })
+    }
+    
 }
 
