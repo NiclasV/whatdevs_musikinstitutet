@@ -264,36 +264,43 @@ function isEmptyOrSpaces(str){
 /*Function that Submits Playlists from Form */
 
     function submitPlaylist() {
-        let playlistNameInput = document.getElementById("playlistNameInput").value;
-        let playlistGenresInput = document.getElementById("playlistGenresInput").value;
-        let playlistCreatorInput = document.getElementById("playlistCreatorInput").value;
-//        let playlistTracksInput = document.getElementById("playlistTracksInput").value;
-        let playlistCoverImageInput = document.getElementById("playlistCoverImageInput").value;
+        let playlistNameInput = document.getElementById("playlistNameInput");
+        let playlistGenresInput = document.getElementById("playlistGenresInput");
+        let playlistCreatorInput = document.getElementById("playlistCreatorInput");
+//        let playlistTracksInput = document.getElementById("playlistTracksInput");
+        let playlistCoverImageInput = document.getElementById("playlistCoverImageInput");
 
+        if( isEmptyOrSpaces(playlistNameInput.value) || isEmptyOrSpaces(playlistGenresInput.value) || isEmptyOrSpaces(playlistCreatorInput.value))
+        {
+            alert("Failed to submit data");
+        }
+
+        else{
+            let playlist = {
+                title: playlistNameInput.value,
+                genres: playlistGenresInput.value,
+                createdBy: playlistCreatorInput.value,
+            //    tracks: playlistTracksInput,
+                coverImage: playlistCoverImageInput.value
+            }
+            
+                fetch('https://folksa.ga/api/playlists?key=flat_eric',{
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(playlist)
+                  })
+                  .then((response) => response.json())
+                  .then((playlist) => {
+            
+                    
+                  });
+                        document.getElementById("successPlaylistSubmited").innerHTML = "The Playlist has been Submited!";
+                     }
         
-let playlist = {
-    title: playlistNameInput,
-    genres: playlistGenresInput,
-    createdBy: playlistCreatorInput,
-//    tracks: playlistTracksInput,
-    coverImage: playlistCoverImageInput
-}
-
-    fetch('https://folksa.ga/api/playlists?key=flat_eric',{
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(playlist)
-      })
-      .then((response) => response.json())
-      .then((playlist) => {
-
-        
-      });
-            document.getElementById("successPlaylistSubmited").innerHTML = "The Playlist has been Submited!";
-    }
+             }
 
 
 ///*Function that Adds Clicked Songs into an Array*/
