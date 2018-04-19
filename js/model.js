@@ -1,7 +1,6 @@
-const artistsList = document.getElementById('displayAllArtists');
-const albumsList = document.getElementById('displayAllAlbums');
-const tracksList = document.getElementById('displayAllTracks');
-const playlistsList = document.getElementById('displayAllPlaylists');
+/**************
+--- FETCHES ---
+**************/
 
 /*Fetch Artist Trough API, choose how many*/
 function getArtistData(what, many) {
@@ -65,6 +64,25 @@ function getPlaylistData(what, many){
         })
 }
 
+/**************
+-- SPECIFICS --
+**************/
+
+/* Fetch Specific Artist ID Trough API */
+function getSpecificAlbum(id) {
+    var url = 'https://folksa.ga/api/albums/' + id + '?key=flat_eric';
+    fetch(url)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            displaySpecificAlbum(data, id);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+}
+
 /* Fetch Specific Artist ID Trough API */
 function getSpecificArtist(id) {
     var url = 'https://folksa.ga/api/artists/' + id + '?key=flat_eric';
@@ -73,7 +91,7 @@ function getSpecificArtist(id) {
             return response.json();
         })
         .then(function (data) {
-            displaySpecific(data, id);
+            displaySpecificArtist(data, id);
         })
         .catch(function (error) {
             console.log(error);
@@ -107,11 +125,6 @@ function getPlaylistComments(id) {
         console.log(comments);
     });
 }
-
-getArtistData("artists", 10);
-getAlbumData("albums", 10);
-getTracksData("tracks", 10);
-getPlaylistData("playlists", 10);
 
 
 /**************
@@ -343,10 +356,10 @@ function isEmptyOrSpaces(str){
 DELETE FROM API 
 **************/
 
-function deleteFrom(id){
+function deleteFrom(what, id){
     const confirmation = confirm("Are you sure you want to delete this?");
     if (confirmation) {
-        fetch('https://folksa.ga/api/artists/' + id + '?key=flat_eric', {
+        fetch('https://folksa.ga/api/' + what + '/' + id + '?key=flat_eric', {
         method: 'DELETE',
         headers: {
                 'Accept': 'application/json',
@@ -356,6 +369,7 @@ function deleteFrom(id){
             .then((response) => response.json())
             .then((artist) => {
             console.log(artist);
+            window.location.reload()
         })
     }
     
