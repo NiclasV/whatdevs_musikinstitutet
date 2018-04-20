@@ -13,7 +13,8 @@ h1 {
     text-transform: uppercase;
     letter-spacing: 0.1em;
     line-height: 0.9em;
-}
+    font-size: 3.1em;
+    margin-bottom: 20px;
 
 h2 {
     font-family: 'Rajdhani', sans-serif;
@@ -41,8 +42,7 @@ p {
     color: #ebebeb;
     text-align: center;
     margin-bottom: 0px;
-    padding-top: 15px;
-    
+    padding-top: 10px;
 }
 
 #text-or {
@@ -133,7 +133,7 @@ nav {
     padding: 10px;
     display: flex;
     justify-content: space-between;
-    padding-top: 40px;
+    padding-top: 20px;
 }
 
 main {
@@ -141,11 +141,11 @@ main {
     max-width: 960px;
     background: #FFFFFF;
     padding: 30px;
-    min-height: 700px;
+    min-height: 600px;
 }
 
 section {
-    margin: 0 0 40px 0;
+    margin: 0 0 80px 0;
 }
 
 .artistinfo {
@@ -174,7 +174,7 @@ section {
     width: 20%;
 }
 
-#displayAllArtists, #displayAllAlbums {
+#displayAllArtists, #displayAllAlbums, #displayAllPlaylists {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
@@ -210,8 +210,8 @@ footer {
 
 .infoCard {
     border: 1px solid black;
-    width: 22%;
-    margin: 10px;
+    width: calc((100% / 4) - 18px);
+    margin: 8px;
     text-align: center;
     min-height: 220px;
 }
@@ -234,6 +234,7 @@ footer {
     width: 100%;
     max-height: 120px;
     overflow: hidden;
+    margin-bottom: 10px;
 }
 
 .img-container-specific {
