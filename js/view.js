@@ -119,8 +119,13 @@ function displayPlaylists(playlistsData) {
         let playlistRating = playlist.ratings
 
         displayPlaylistsHTML = displayPlaylistsHTML + `
+        <div class="infoCard">
+        <div class="img-container">    
+        <img src= "${handleImage(playlist.coverImage)}" alt="${playlist.title}" class="img-fluid"/>
+        </div>
         <a id="${playlist._id}" href="javascript://artistInfo" onClick="morePlaylistInfo(this.id)"><h4>${playlist.title}</h2></a>
         <p><strong>Rating:</strong> ${countRating(playlistRating)}</p>
+        </div>
         `;
                 
     }
