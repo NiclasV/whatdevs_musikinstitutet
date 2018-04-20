@@ -33,7 +33,7 @@ btnSubmitAlbum.addEventListener('click', function(event){
 });
 
 btnSubmitSong.addEventListener('click', function(event) {
-  var submitSongForm = displaySongForm(artistsData);
+  var submitSongForm = displaySongForm();
   mainDiv.innerHTML = submitSongForm;
 });
 

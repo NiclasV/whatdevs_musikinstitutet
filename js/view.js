@@ -370,8 +370,7 @@ function displaySongForm(artistsData) {
         <option value="${artists[i]._id}">${artists[i].name}</option>
         `
     }
-
-    var submitSongForm = `   
+    var submitSongForm += `   
     <center>
     <h1>Enter Song to submit: </h1>
     <div class="col-md-8">
