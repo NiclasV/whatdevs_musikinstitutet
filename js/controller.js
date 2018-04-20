@@ -7,7 +7,9 @@ const submitPopUp = document.getElementById('myModal');
 const btnClose = document.getElementsByClassName("btnClose")[0];
 const mainDiv = document.getElementById('main');
 const artistDropdown = document.getElementById('artistDropdown');
-
+const siteLogo = document.getElementById('siteLogo')
+const header = document.getElementById('theHeader');
+const nav = document.getElementById('nav');
 
 //CLICK EVENTS FOR VARIOUS BUTTONS:
 
@@ -16,9 +18,14 @@ btnSubmit.addEventListener('click', function(event) {
     submitPopUp.style.display = "block";
 });
 
+siteLogo.addEventListener('click', function(event) {
+  //event.preventDefault();
+  //toggleHeader();
+});
+
 btnClose.addEventListener('click', function(event) {
-    console.log('Submit Clicked!')
-    submitPopUp.style.display = "none";
+  console.log('Submit Clicked!')
+  submitPopUp.style.display = "none";
 });
 
 btnSubmitArtist.addEventListener('click', function(event) {
@@ -33,7 +40,7 @@ btnSubmitAlbum.addEventListener('click', function(event){
 });
 
 btnSubmitSong.addEventListener('click', function(event) {
-  var submitSongForm = displaySongForm();
+  var submitSongForm = displaySongForm(artistsData);
   mainDiv.innerHTML = submitSongForm;
 });
 
@@ -155,6 +162,6 @@ function countRating(rating) {
   }
 
   function toggleHeader() {
-    const header = document.getElementById('theHeader');
-    header.classList.toggle('hide');
+    header.classList.toggle('header-img-animate');
+    nav.classList.toggle('hide');
   }

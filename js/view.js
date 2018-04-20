@@ -1,3 +1,8 @@
+getArtistData("artists", 10);
+getAlbumData("albums", 10);
+getPlaylistData("playlists", 10);
+getTracksData("tracks", 10);
+
 const artistsList = document.getElementById('displayAllArtists');
 const albumsList = document.getElementById('displayAllAlbums');
 const tracksList = document.getElementById('displayAllTracks');
@@ -114,8 +119,13 @@ function displayPlaylists(playlistsData) {
         let playlistRating = playlist.ratings
 
         displayPlaylistsHTML = displayPlaylistsHTML + `
+        <div class="infoCard">
+        <div class="img-container">    
+        <img src= "${handleImage(playlist.coverImage)}" alt="${playlist.title}" class="img-fluid"/>
+        </div>
         <a id="${playlist._id}" href="javascript://artistInfo" onClick="morePlaylistInfo(this.id)"><h4>${playlist.title}</h2></a>
         <p><strong>Rating:</strong> ${countRating(playlistRating)}</p>
+        </div>
         `;
                 
     }
@@ -306,11 +316,9 @@ function displayCommentsForm(playlistId) {
         <div class="form-group">
             <span class="form-label"> Your Name: </span>
             <br /> <input type="text" id="commentNameInput" class="form-control"> <br />
-
             <span class="form-label"> Comment: </span>
             <textarea class="form-control" rows="5" id="commentInput"></textarea>
             <input type="hidden" id="commentPlaylistIdInput" value="${commentPlaylistIdInput}"></input>
-
             <br> <br>
             <button type="submit" class="btn-block btn-success" onclick="submitCommentToPlaylist()">Submit</button>
             <br /><br />
@@ -321,6 +329,7 @@ function displayCommentsForm(playlistId) {
     document.getElementById('main').insertAdjacentHTML('beforeend', content)
        
 }
+
 /*************************
 ---- DISPLAYS FORMS  -----
 *************************/
@@ -370,7 +379,8 @@ function displaySongForm(artistsData) {
         <option value="${artists[i]._id}">${artists[i].name}</option>
         `
     }
-    var submitSongForm += `   
+
+    var submitSongForm = `   
     <center>
     <h1>Enter Song to submit: </h1>
     <div class="col-md-8">
@@ -417,7 +427,6 @@ function displayAlbumForm() {
             <input type="text" id="albumSpotifyURLInput" class="form-control"> 
             <span class="form-label">Coverimage URL: </span> 
             <input type="text" id="albumCoverImageInput" class="form-control"> 
-
             <button class="btn-block btn-success" onclick="submitAlbum()">Submit</button>
             <div id="successAlbumSubmited"></div>
         </div>
@@ -449,7 +458,6 @@ var submitPlaylistForm = `
 <div id="successPlaylistSubmited"></div>
   </div>
 </center>
-
 `;  
 }
 
@@ -471,7 +479,6 @@ function displayAddSongToPlaylist() {
       <h1>Add Song to Playlist: </h1>
       <div class="col-md-8">
           <span class="form-label">Song To Add: </span> 
-
           <select name="tracks" id="playlistTracksInput" class="form-control">
           ${songsOption}
           </select> <br />
