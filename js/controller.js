@@ -12,47 +12,54 @@ const header = document.getElementById('theHeader');
 const nav = document.getElementById('nav');
 
 //CLICK EVENTS FOR VARIOUS BUTTONS:
-
-btnSubmit.addEventListener('click', function(event) {
+btnSubmit.addEventListener('click', function (event) {
     console.log('Submit Clicked!')
     submitPopUp.style.display = "block";
 });
 
-siteLogo.addEventListener('click', function(event) {
-  //event.preventDefault();
-  //toggleHeader();
+siteLogo.addEventListener('click', function (event) {
+    //event.preventDefault();
+    //toggleHeader();
 });
 
-btnClose.addEventListener('click', function(event) {
-  console.log('Submit Clicked!')
-  submitPopUp.style.display = "none";
+btnClose.addEventListener('click', function (event) {
+    console.log('Submit Clicked!')
+    submitPopUp.style.display = "none";
 });
 
-btnSubmitArtist.addEventListener('click', function(event) {
-  var submitArtistForm = displayArtistForm();
-  mainDiv.innerHTML = submitArtistForm;
+btnSubmitArtist.addEventListener('click', function (event) {
+    var submitArtistForm = displayArtistForm();
+    mainDiv.innerHTML = submitArtistForm;
 
 });
 
-btnSubmitAlbum.addEventListener('click', function(event){
-  console.log('Submit Album Clicked!')
-  mainDiv.innerHTML = submitAlbumForm;
+function displayArtistsOnSongForm(artistsData) {
+    btnSubmitSong.addEventListener('click', function (event) {
+        console.log('Submit SONG Clicked!')
+        displaySongForm(artistsData);
+
+    });
+}
+
+function displayArtistsOnAlbumForm(artistsData) {
+    btnSubmitAlbum.addEventListener('click', function (event) {
+        console.log('Submit Album Clicked!')
+        displayAlbumForm(artistsData);
+    });
+}
+
+btnSubmitPlaylist.addEventListener('click', function (event) {
+    console.log('Submit Playlist Clicked!')
+    displayPlaylistForm();
 });
 
-btnSubmitSong.addEventListener('click', function(event) {
-  var submitSongForm = displaySongForm(artistsData);
-  mainDiv.innerHTML = submitSongForm;
+function displaySongsOnPlaylistForm(tracksData) {
+btnSubmitSongsToPlaylist.addEventListener('click', function (event) {
+    console.log('Submit Song to Playlist Clicked!')
+displayAddSongToPlaylist(tracksData);
 });
+    }
 
-btnSubmitPlaylist.addEventListener('click', function(event) {
-  console.log('Submit Playlist Clicked!')
-  mainDiv.innerHTML = submitPlaylistForm;
-});
-          
-btnSubmitSongsToPlaylist.addEventListener('click', function(event) {
-  console.log('Submit Song to Playlist Clicked!')
-  mainDiv.innerHTML = submitSongsPlaylistForm;
-});     
 
 var factText = document.querySelector('#factText');
 var nameInput = document.querySelector('#name');

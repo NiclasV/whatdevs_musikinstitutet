@@ -11,7 +11,8 @@ function getArtistData(what, many) {
         })
         .then(function (artistsData) {
             displayArtists(artistsData);
-            displaySongForm(artistsData); 
+displayArtistsOnSongForm(artistsData);
+displayArtistsOnAlbumForm(artistsData)
         })
         .catch(function (error) {
             console.log(error);
@@ -42,7 +43,7 @@ function getPlaylistData(what, many){
         })
         .then(function (playlistsData) {
             displayPlaylists(playlistsData);
-            playlistOptions(playlistsData);
+
 
         })
         .catch(function (error) {
@@ -59,6 +60,7 @@ function getTracksData(what, many){
         })
         .then(function (tracksData) {
             displayTracks(tracksData);
+displaySongsOnPlaylistForm(tracksData);
         })
         .catch(function (error) {
             console.log(error);

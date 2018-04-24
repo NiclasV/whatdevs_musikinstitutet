@@ -370,7 +370,7 @@ function displayArtistForm() {
 }
 
 function displaySongForm(artistsData) {
-    console.log("Artistdata =" + artistsData);
+
     var artists = artistsData;
     var artistOption = "";
 
@@ -402,10 +402,19 @@ function displaySongForm(artistsData) {
     </div>
     </center>
     `;
-    return submitSongForm;
+  mainDiv.innerHTML = submitSongForm;
 }
 
-function displayAlbumForm() {
+function displayAlbumForm(artistsData) {
+    
+        var artists = artistsData;
+    var artistOption = "";
+
+    for (let i = 0; i < artists.length; i++) {
+        artistOption += `
+        <option value="${artists[i]._id}">${artists[i].name}</option>
+        `
+    }
     /*Album Form*/
 
     var submitAlbumForm = `
@@ -432,6 +441,8 @@ function displayAlbumForm() {
         </div>
     </center>
     `;
+      mainDiv.innerHTML = submitAlbumForm;
+
 }
 
 function displayPlaylistForm() {
@@ -459,9 +470,11 @@ var submitPlaylistForm = `
   </div>
 </center>
 `;  
+      mainDiv.innerHTML = submitPlaylistForm;
+
 }
 
-function displayAddSongToPlaylist() {
+function displayAddSongToPlaylist(tracksData) {
   /*Submit Song Form*/
   /*For Loop that loops out all Songs */
 
@@ -484,22 +497,21 @@ function displayAddSongToPlaylist() {
           </select> <br />
   </center>
   `;
-          playlistOptions();  
+      mainDiv.innerHTML = submitSongsPlaylistForm;
+
 }
 
-function playlistOptions(playlistsData) {
-    var playlist = playlistsData;
-    var playlistOption = "";
-    //console.log(artists[0].name);
-    for (let i = 0; i < playlistsData.length; i++) {
-        playlistOption += `
-        <option value="playlist[i]._id">${playlist[i].title}</option>
-        `
-    }
-    return playlistOption;
-}
-
-
+//function playlistOptions(playlistsData) {
+//    var playlist = playlistsData;
+//    var playlistOption = "";
+//    //console.log(artists[0].name);
+//    for (let i = 0; i < playlistsData.length; i++) {
+//        playlistOption += `
+//        <option value="playlist[i]._id">${playlist[i].title}</option>
+//        `
+//    }
+//    return playlistOption;
+//}
 
 
 
