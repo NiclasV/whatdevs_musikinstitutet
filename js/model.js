@@ -221,7 +221,7 @@ function isEmptyOrSpaces(str){
     .then((playlist) => {
         console.log(playlist);
     });
-
+    document.getElementById("SuccessvoteSubmitted").innerHTML = "the vote has been Submited!";
 
 
     }
@@ -242,7 +242,28 @@ function isEmptyOrSpaces(str){
     .then((album) => {
         console.log(album);
     });
+    document.getElementById("SuccessvoteSubmitted").innerHTML = "the vote has been Submited!";
 
+
+    }
+    function rateTracks() {
+        let rateNameInput = document.getElementById('rateNameInput').value;
+        let trackId = document.getElementById("trackId").value;
+    
+
+        fetch(`https://folksa.ga/api/tracks/${trackId}/vote?key=flat_eric`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ rating: rateNameInput })
+    })
+    .then((response) => response.json())
+    .then((track) => {
+        console.log(track);
+    });
+    document.getElementById("SuccessvoteSubmitted").innerHTML = "the vote has been Submited!";
 
 
     }
