@@ -23,42 +23,29 @@ siteLogo.addEventListener('click', function (event) {
 });
 
 btnClose.addEventListener('click', function (event) {
-    console.log('Submit Clicked!')
     submitPopUp.style.display = "none";
 });
 
 btnSubmitArtist.addEventListener('click', function (event) {
-    var submitArtistForm = displayArtistForm();
-    mainDiv.innerHTML = submitArtistForm;
-
+    displayArtistForm();
 });
 
 function displayArtistsOnSongForm(artistsData) {
     btnSubmitSong.addEventListener('click', function (event) {
-        console.log('Submit SONG Clicked!')
-        displaySongForm(artistsData);
-
+    displaySongForm(artistsData);
     });
 }
 
 function displayArtistsOnAlbumForm(artistsData) {
     btnSubmitAlbum.addEventListener('click', function (event) {
-        console.log('Submit Album Clicked!')
-        displayAlbumForm(artistsData);
+    displayAlbumForm(artistsData);
     });
 }
 
 btnSubmitPlaylist.addEventListener('click', function (event) {
-    console.log('Submit Playlist Clicked!')
     displayPlaylistForm();
 });
 
-function displaySongsOnPlaylistForm(tracksData) {
-btnSubmitSongsToPlaylist.addEventListener('click', function (event) {
-    console.log('Submit Song to Playlist Clicked!')
-displayAddSongToPlaylist(tracksData);
-});
-    }
 
 
 var factText = document.querySelector('#factText');

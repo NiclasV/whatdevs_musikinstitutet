@@ -289,8 +289,10 @@ function displaySpecificPlaylist(data, id) {
 
     mainDiv.innerHTML = content;
     
-    getPlaylistComments(playlistId);
-    displayCommentsForm(playlistId);
+        getPlaylistComments(playlistId);
+    displayAddSongToPlaylist(playlistId);
+        displayCommentsForm(playlistId);
+
 }
 
 function displayComments(comments) {
@@ -304,6 +306,38 @@ function displayComments(comments) {
         `;
     }
     mainDiv.insertAdjacentHTML('beforeend', content)
+}
+
+
+function displayAddSongToPlaylist(playlistId) {
+    
+  /*Submit Song Form*/
+  /*For Loop that loops out all Songs */
+    
+//      var songs = tracksData;
+//  var songsOption = "";
+//  //console.log(artists[0].name);
+//  for (let i = 0; i < songs.length; i++) {
+//      songsOption += `
+//      <option value="songs[i]._id">${songs[i].title}</option>
+//      `
+//  }
+//console.log(tracksData);
+    
+    var commentPlaylistIdInput = playlistId;
+    var content = "<h2>Add a Song:</h2>";
+    
+    content += `
+      <div class="col-md-8">
+          <select name="tracks" id="songToPlaylistInput" class="form-control">
+          </select> <br />
+            <input type="hidden" id="commentPlaylistIdInput" value="${commentPlaylistIdInput}"></input>
+      <button class="btn-block btn-success" onclick="submitSongToPlaylist()">Submit</button>
+      <br /><br />
+<div id="successSongSubmited"></div>
+    `
+    document.getElementById('main').insertAdjacentHTML('beforeend', content)
+       
 }
 
 function displayCommentsForm(playlistId) {
@@ -329,6 +363,7 @@ function displayCommentsForm(playlistId) {
     document.getElementById('main').insertAdjacentHTML('beforeend', content)
        
 }
+
 
 /*************************
 ---- DISPLAYS FORMS  -----
@@ -366,7 +401,7 @@ function displayArtistForm() {
         </div>
     </center>
     `;
-    return submitArtistForm;
+    mainDiv.innerHTML = submitArtistForm;
 }
 
 function displaySongForm(artistsData) {
@@ -460,9 +495,6 @@ var submitPlaylistForm = `
       <br />  <input type="text" id="playlistCreatorInput" class="form-control"> <br />  
       <span class="form-label">Coverimage URL: </span> 
       <br /> <input type="text" id="playlistCoverImageInput" class="form-control"> <br />
-<div id="DisplayAddedSongsHeadText"></div>
-<div id="DisplayAddedSongsToPlaylist"></div>
-<div id="test"></div>
       <br> <br>
       <button class="btn-block btn-success" onclick="submitPlaylist()">Submit</button>
       <br /><br />
@@ -473,46 +505,6 @@ var submitPlaylistForm = `
       mainDiv.innerHTML = submitPlaylistForm;
 
 }
-
-function displayAddSongToPlaylist(tracksData) {
-  /*Submit Song Form*/
-  /*For Loop that loops out all Songs */
-
-  var songs = tracksData;
-  var songsOption = "";
-  //console.log(artists[0].name);
-  for (let i = 0; i < songs.length; i++) {
-      songsOption += `
-      <option value="songs[i]._id">${songs[i].title}</option>
-      `
-  }
-  var submitSongsPlaylistForm = '';
-  submitSongsPlaylistForm += `
-  <center>
-      <h1>Add Song to Playlist: </h1>
-      <div class="col-md-8">
-          <span class="form-label">Song To Add: </span> 
-          <select name="tracks" id="playlistTracksInput" class="form-control">
-          ${songsOption}
-          </select> <br />
-  </center>
-  `;
-      mainDiv.innerHTML = submitSongsPlaylistForm;
-
-}
-
-//function playlistOptions(playlistsData) {
-//    var playlist = playlistsData;
-//    var playlistOption = "";
-//    //console.log(artists[0].name);
-//    for (let i = 0; i < playlistsData.length; i++) {
-//        playlistOption += `
-//        <option value="playlist[i]._id">${playlist[i].title}</option>
-//        `
-//    }
-//    return playlistOption;
-//}
-
 
 
     

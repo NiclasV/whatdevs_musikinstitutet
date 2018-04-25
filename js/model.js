@@ -44,7 +44,6 @@ function getPlaylistData(what, many){
         .then(function (playlistsData) {
             displayPlaylists(playlistsData);
 
-
         })
         .catch(function (error) {
             console.log(error);
@@ -308,13 +307,38 @@ function isEmptyOrSpaces(str){
                   })
                   .then((response) => response.json())
                   .then((playlist) => {
-            
+                                console.log(playlist);
+
                     
                   });
-                        document.getElementById("successPlaylistSubmited").innerHTML = "The Playlist has been Submited!";
+                        document.getElementById("successPlaylistSubmited").innerHTML = "Playlist Submited! Search for it to add songs!";
                      }
         
              }
+
+
+/*Function that post Songs To Playlists */
+
+    function submitSongToPlaylist() {
+        
+        let songToPlaylistInput = document.getElementById("songToPlaylistInput").value;
+        let commentPlaylistIdInput = document.getElementById("commentPlaylistIdInput").value;
+
+        
+fetch('https://folksa.ga/api/playlists/${commentPlaylistIdInput}/tracks?key=flat_eric',{
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+        body: JSON.stringify({ tracks: songToPlaylistInput })
+  })
+  .then((response) => response.json())
+  .then((playlist) => {
+    console.log(playlist);
+  });
+            document.getElementById("successSongSubmited").innerHTML = "The Song has been Submited!";
+    }
 
 
 /*Function that Submits Comments To Playlists */
