@@ -137,6 +137,9 @@ function countRating(rating) {
   }
 }
 
+
+
+
 //Function for showing standard-image
   function handleImage(theImage) {
     if (theImage == "") {

@@ -187,6 +187,49 @@ function isEmptyOrSpaces(str){
 
 
     }
+    // ratings playlists / albums / tracks
+    function ratePlaylists() {
+        let rateNameInput = document.getElementById('rateNameInput').value;
+        let playlistId = document.getElementById("playlistId").value;
+    
+
+        fetch(`https://folksa.ga/api/playlists/${playlistId}/vote?key=flat_eric`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ rating: rateNameInput })
+    })
+    .then((response) => response.json())
+    .then((playlist) => {
+        console.log(playlist);
+    });
+
+
+
+    }
+    function rateAlbums() {
+        let rateNameInput = document.getElementById('rateNameInput').value;
+        let albumId = document.getElementById("albumId").value;
+    
+
+        fetch(`https://folksa.ga/api/albums/${albumId}/vote?key=flat_eric`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ rating: rateNameInput })
+    })
+    .then((response) => response.json())
+    .then((album) => {
+        console.log(album);
+    });
+
+
+
+    }
 
 /*Function that Submits Songs from Form */
 

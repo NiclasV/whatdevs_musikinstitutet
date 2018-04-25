@@ -115,7 +115,8 @@ function displayPlaylists(playlistsData) {
 
     let displayPlaylistsHTML = '';
     let playlistsNameArray = playlistsData;
-    for (let playlist of playlistsNameArray) {
+        // sort the array by rating and displays them
+    for (let playlist of  playlistsNameArray.sort(function(a, b){ return checkIfRated(countRating(b.ratings)) - checkIfRated(countRating(a.ratings))})) {
         let playlistRating = playlist.ratings
 
         displayPlaylistsHTML = displayPlaylistsHTML + `
@@ -130,6 +131,20 @@ function displayPlaylists(playlistsData) {
                 
     }
     playlistsList.innerHTML = displayPlaylistsHTML;
+}
+// help method to compare unrated playlists
+function checkIfRated(rating){
+    if(rating === "Not Rated Yet!" || rating == null ) {
+        return 0;
+
+    }
+    else{
+        return rating
+
+    }
+
+    
+    
 }
 
 
@@ -262,6 +277,12 @@ function displaySpecificAlbum(data, id) {
             <h2>Tracklist</h2>
             ${albumTracks}
     </div>
+    <span class "form-label">Rate Albums: </span>
+        <input id="rateNameInput" type="number" name="voteRating"
+        min="0" max="10" step="1" value="5">
+        <input type="hidden" id="albumId" value="${albumId}"></input>
+        <input onclick="rateAlbums()" type="submit">
+    
     `
 
     
@@ -284,6 +305,14 @@ function displaySpecificPlaylist(data, id) {
     <p><strong>Rating:</strong> ${countRating(playlist.ratings)}</p>
     <p><strong>Genre: </strong>${playlist.genres}</p>
     <p><strong>Created by: </strong>${playlist.createdBy}</p>
+    <br />
+        <span class "form-label">Rate playlist: </span>
+        <input id="rateNameInput" type="number" name="voteRating"
+        min="0" max="10" step="1" value="5">
+        <input type="hidden" id="playlistId" value="${playlistId}"></input>
+        <input onclick="ratePlaylists()" type="submit">
+        
+        
     </div>
     `
 
@@ -445,7 +474,7 @@ var submitPlaylistForm = `
       <br /> <input type="text" id="playlistNameInput" class="form-control"> <br /> 
       <span class="form-label">Genres: </span> 
       <br /> <input type="text" id="playlistGenresInput" class="form-control"> <br /> 
-      <span class="form-label">Created By: </span> 
+      <span class="form-label">Created By: </span>
       <br />  <input type="text" id="playlistCreatorInput" class="form-control"> <br />  
       <span class="form-label">Coverimage URL: </span> 
       <br /> <input type="text" id="playlistCoverImageInput" class="form-control"> <br />
