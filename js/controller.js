@@ -155,6 +155,11 @@ function countRating(rating) {
     getSpecificPlaylist(id);
   }
 
+  function moreTrackInfo(id) {
+    toggleHeader();
+    getSpecificTrack(id);
+  }
+
   function toggleHeader() {
     header.classList.toggle('header-img-animate');
     nav.classList.toggle('hide');

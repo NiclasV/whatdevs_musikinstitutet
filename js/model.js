@@ -117,6 +117,22 @@ function getSpecificPlaylist(id) {
 }
 
 /* Fetch Specific Playlist ID Trough API */
+function getSpecificTrack(id) {
+    var url = 'https://folksa.ga/api/tracks/' + id + '?key=flat_eric';
+    fetch(url)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            displaySpecificTrack(data, id);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+}
+
+
+/* Fetch Specific Playlist ID Trough API */
 
 function getPlaylistComments(id) {
     let url = 'https://folksa.ga/api/playlists/' + id + '/comments?key=flat_eric';
