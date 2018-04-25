@@ -288,6 +288,7 @@ function displaySpecificAlbum(data, id) {
         min="0" max="10" step="1" value="5">
         <input type="hidden" id="albumId" value="${albumId}"></input>
         <input onclick="rateAlbums()" type="submit">
+        <div id="SuccessvoteSubmitted"></div>
     
     `
 
@@ -317,6 +318,7 @@ function displaySpecificPlaylist(data, id) {
         min="0" max="10" step="1" value="5">
         <input type="hidden" id="playlistId" value="${playlistId}"></input>
         <input onclick="ratePlaylists()" type="submit">
+        <div id="SuccessvoteSubmitted"></div>
         
         
     </div>
@@ -451,12 +453,17 @@ function displaySpecificTrack(data, id) {
                     0 1.89-0.579 1.89-1.514 0-0.984-0.71-1.511-1.89-1.511z"/>
                 </svg>
             </a>
-        </div>
-
         <button href="javascript://delete" id="${trackId}" onClick='deleteFrom("tracks", this.id)' class="btn btn-danger">Delete Track</button>
-
-    </div>
+    </div>  
+    <span class "form-label">Rate Tracks: </span>
+        <input id="rateNameInput" type="number" name="voteRating"
+        min="0" max="10" step="1" value="5">
+        <input type="hidden" id="trackId" value="${trackId}"></input>
+        <input onclick="rateTracks()" type="submit">
+        <div id="SuccessvoteSubmitted"></div>
+        </div>
     `
+    
     console.log(trackId)
     mainDiv.innerHTML = content;
     
