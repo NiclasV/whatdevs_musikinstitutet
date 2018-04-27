@@ -205,6 +205,23 @@ getArtist.Specific(id)
     console.log(error);
 })
 
+getPlaylists.Specific(id)
+.then((playlist) => {
+    displayModule.specificPlaylist(playlist, id)
+
+})
+.catch((error) => {
+    console.log(error);
+})
+
+getTracks.Specific(id)
+.then((track) => {
+    displayModule.specificTrack(track, id)
+
+})
+.catch((error) => {
+    console.log(error);
+})
 
 /**************
 ---- VIEW ----
@@ -468,8 +485,8 @@ const displayModule = {
         mainDiv.innerHTML = content;    
     },
     
-    specificPlaylist: function(data, id) {
-                 var playlist = data;
+    specificPlaylist: function(playlist, id) {
+
     var playlistId = id;
     var content = ``; 
 
@@ -543,7 +560,6 @@ const displayModule = {
     
     specificTrack: function(data, id) {
         
-    var track = data;
     var trackId = id;
     var trackAlbum = track.album;
     var content = ``; 
