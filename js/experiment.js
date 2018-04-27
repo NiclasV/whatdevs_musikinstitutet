@@ -34,23 +34,22 @@ class artist {
         this.coverImage = coverImage;
     }
     createNew() {
-        return fetch('https://folksa.ga/api/artists?key=flat_eric',
-        {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this)
-        })
+        return fetch('https://folksa.ga/api/artists?key=flat_eric', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this)
+            })
             .then((response) => response.json())
             .then((artist) => {
-            console.log(artist);
-        });	
+                console.log(artist);
+            });
 
-        document.getElementById("successArtistSubmited").innerHTML = "The Artist has been Submited!";
+    document.getElementById("successArtistSubmited").innerHTML = "The Artist has been Submited!";
     }
-}
+    }
 
 class album {
     constructor(title, artists, releaseDate, genres, spotifyUrl, coverImage) {
@@ -62,9 +61,21 @@ class album {
         this.coverImage = coverImage;
     }
     createNew() {
-        
+        return fetch('https://folksa.ga/api/albums?key=flat_eric', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(album)
+            })
+            .then((response) => response.json())
+            .then((album) => {
+                console.log(album);
+            });
+    document.getElementById("successAlbumSubmited").innerHTML = "The Album has been Submited!";
     }
-}
+    }
 
 class track {
     constructor(title, artists, album, genres) {
@@ -74,9 +85,22 @@ class track {
         this.genres = genres;
     }
     createNew() {
-        
+            return fetch('https://folksa.ga/api/tracks?key=flat_eric', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(track)
+            })
+        .then((response) => response.json())
+        .then((track) => {
+            console.log(track);
+        });
+
+    document.getElementById("successSongSubmited").innerHTML = "The Song has been Submited!";
     }
-}
+    }
 
 class playlist {
     constructor(title, genres, createdBy, tracks, ratings, coverImage, coverImageColor) {
@@ -89,9 +113,23 @@ class playlist {
         this.CoverImageColor = coverImageColor;
     }
     createNew() {
-        
+                        return fetch('https://folksa.ga/api/playlists?key=flat_eric',{
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(playlist)
+                  })
+                  .then((response) => response.json())
+                  .then((playlist) => {
+                                console.log(playlist);
+
+                    
+                  });
+    document.getElementById("successPlaylistSubmited").innerHTML = "Playlist Submited! Search for it to add songs!";        
     }
-}
+    }
 
 /************** FETCHES ****************/
 
