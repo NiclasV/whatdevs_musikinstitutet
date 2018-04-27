@@ -101,6 +101,11 @@ const getPlaylists = new getData('playlists', 12);
 const getAlbums = new getData('albums', 12);
 const getTracks = new getData('tracks', 12);
 
+const allArtists = new getData('artists', 1000);
+const allPlaylists = new getData('playlists', 1000);
+const allAlbums = new getData('albums', 1000);
+const allTracks = new getData('tracks', 1000);
+
 const getAlbum = new getData('albums');
 const getArtist = new getData('artists');
 
@@ -171,6 +176,7 @@ getArtist.Specific("5accb0397e57bb56f1181cb8")
 /**************
 ---- VIEW ----
 /*************/
+
 const modifierModule = {
 
     countRating: function(rating) {
@@ -198,6 +204,7 @@ const modifierModule = {
             return rating
         }
     },
+
     handleImage: function(theImage) {
     if (theImage == null || theImage == undefined ) {
         console.log("gaga its null!a a a" + theImage)
@@ -247,7 +254,7 @@ const displayModule = {
             <div class="img-container">    
             <img src="${modifierModule.handleImage(playlist.coverImage)}" alt="${playlist.title}" class="img-fluid"/>
             </div>
-            <a id="${playlist._id}" href="javascript://artistInfo" onClick="morePlaylistInfo(this.id)"><h4>${playlist.title}</h2></a>
+            <a id="${playlist._id}" href="javascript://artistInfo" onClick="morePlaylistInfo(this.id)"><h2>${playlist.title}</h2></a>
             <p><strong>Rating:</strong> ${modifierModule.countRating(playlistRating)}</p>
             </div>
             `;          
@@ -281,7 +288,7 @@ const displayModule = {
             displayAlbumsHTML = displayAlbumsHTML + `
                 <div class="infoCard">
                     <div class="img-container">    
-                        <img src="${album.coverImage}" alt="${album.title}" class="img-fluid"/>
+                        <img src="${modifierModule.handleImage(album.coverImage)}" alt="${album.title}" class="img-fluid"/>
                     </div>
                     <a id="${album._id}" href="javascript://albumInfo" onClick='moreAlbumInfo(this.id)'><h2>${album.title}</h2></a>
                 </div>
@@ -291,7 +298,53 @@ const displayModule = {
 
     },
 
-
+    searchField: function(allAlbums, allArtists, allPlaylists, allTracks) {
+        var name = nameInput.value;     
+        if(name != '') { 
+        allArtists.General()
+        .then( artists => {
+            // vi får en rad data tillbaka, så nu måste vi filtrera
+            // för att bara skicka in uppgifterna om artisten vi letar efter
+            artists = artists.filter( ( element ) => {
+            // Begränsa arrayen till att bara innehålla den artist vi letar efter
+            return new RegExp( name, 'ig' ).test( element.genres) ||
+            new RegExp( name, 'ig' ).test( element.name)
+        });
+        displayModule.showArtists(artists);
+        })
+        .catch(err => console.log(err)); 
+        }
+        if (name != '') { //2
+        allAlbums.General()
+        .then( albums => {
+            albums = albums.filter( ( element ) => {
+            return new RegExp( name, 'ig' ).test( element.title)
+        });
+        displayModule.showAlbums(albums);
+        })
+        .catch(err => console.log(err)); 
+        }
+        if(name != '') { 
+        allTracks.General()
+        .then( tracks => {
+            tracks = tracks.filter( ( element ) => {
+            return new RegExp( name, 'ig' ).test( element.title)
+        });
+        displayModule.showTracks(tracks);
+        })
+        .catch(err => console.log(err)); 
+        }
+        if(name != '') {
+        allPlaylists.General()
+        .then( playlists => {
+            playlists = playlists.filter( ( element ) => {
+            return new RegExp( name, 'ig' ).test( element.title)
+        });
+        displayModule.showPlaylists(playlists);
+        })
+        .catch(err => console.log(err)); 
+        }
+    },
 
 }
 
@@ -299,3 +352,9 @@ const displayModule = {
 /**************
 -- CONTROLLA --
 /*************/
+
+var nameInput = document.querySelector('#name');
+
+nameInput.addEventListener('input', function (event) { 
+    displayModule.searchField(allAlbums, allArtists, allPlaylists, allTracks);
+});
