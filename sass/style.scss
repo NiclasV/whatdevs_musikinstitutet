@@ -1,6 +1,6 @@
 body {
     margin: 0 auto;
-    background: #ebebeb;
+    background: #dae3ff;
 }
 
 /****************
@@ -39,11 +39,12 @@ p {
 .logotext {
     font-family: 'Euphoria Script', cursive;
     font-weight: 900;
-    font-size: 2.6em;
-    color: #ebebeb;
+    font-size: 3em;
+    color: #dae3ff;
     text-align: center;
     margin-bottom: 0px;
-    padding-top: 10px;
+    padding-top: 2%;
+    line-height: 0.9em;
 }
 
 #text-or {
@@ -135,6 +136,7 @@ nav {
     display: flex;
     justify-content: space-between;
     padding-top: 20px;
+    margin-top: 35px;
 }
 
 main {
@@ -344,4 +346,3 @@ footer {
     width: 25%;
     margin-left: 5px;
 }
- }

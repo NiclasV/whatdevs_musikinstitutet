@@ -289,7 +289,7 @@ function isEmptyOrSpaces(str){
                 genres: songGenresInput.value
             }
             
-                    console.log(track);
+                console.log(track);
                 fetch('https://folksa.ga/api/tracks?key=flat_eric',{
                     method: 'POST',
                     headers: {
