@@ -100,9 +100,9 @@ const getArtists = new getData('artists', 12);
 const getPlaylists = new getData('playlists', 12);
 const getAlbums = new getData('albums', 12);
 const getTracks = new getData('tracks', 12);
+
 const getAlbum = new getData('albums');
 const getArtist = new getData('artists');
-
 
 
 //fetch and console.log artists
@@ -167,9 +167,47 @@ getArtist.Specific("5accb0397e57bb56f1181cb8")
     console.log(error);
 })
 
+
 /**************
 ---- VIEW ----
 /*************/
+const modifierModule = {
+
+    countRating: function(rating) {
+        var quantity = rating.length; 
+        var ratingTotal = 0; 
+        
+        for (var i = 0; i < quantity; i++) {
+            ratingTotal += rating[i];
+        }
+        theRating = ratingTotal / quantity;
+
+        if (isNaN(theRating)) {
+            return "Not Rated Yet!"
+        } else {
+            var theRatingRounded = Math.round( theRating * 10) / 10;
+            return theRatingRounded; 
+        }
+    },
+
+    checkIfRated: function(rating) {
+        if(rating === "Not Rated Yet!" || rating == null ) {
+            return 0;
+        }
+        else {
+            return rating
+        }
+    },
+    handleImage: function(theImage) {
+    if (theImage == null || theImage == undefined ) {
+        console.log("gaga its null!a a a" + theImage)
+        return "images/male.png"
+        } else {
+        return theImage;
+      }
+    }
+}
+
 
 const displayModule = {
 
@@ -182,7 +220,7 @@ const displayModule = {
             displayArtistsHTML = displayArtistsHTML + `
             <div class="infoCard">
                 <div class="img-container">    
-                 <img src= "${artist.coverImage}" alt="${artist.name}" class="img-fluid"/>
+                 <img src="${modifierModule.handleImage(artist.coverImage)}" alt="${artist.name}" class="img-fluid"/>
                 </div>
                 <a id="${artist._id}" href="javascript://artistInfo" onClick="moreArtistInfo(this.id)"><h2>${artist.name}</h2></a>
                       
@@ -199,16 +237,18 @@ const displayModule = {
         let displayPlaylistsHTML = '';
 
          // sort the array by rating and displays them
-        for (let playlist of  playlists) {
+        for (let playlist of playlists.sort(function(a, b) { 
+                return modifierModule.checkIfRated(modifierModule.countRating(b.ratings)) - modifierModule.checkIfRated(modifierModule.countRating(a.ratings))})) 
+            {
             let playlistRating = playlist.ratings
     
             displayPlaylistsHTML = displayPlaylistsHTML + `
             <div class="infoCard">
             <div class="img-container">    
-            <img src= "${playlist.coverImage}" alt="${playlist.title}" class="img-fluid"/>
+            <img src="${modifierModule.handleImage(playlist.coverImage)}" alt="${playlist.title}" class="img-fluid"/>
             </div>
             <a id="${playlist._id}" href="javascript://artistInfo" onClick="morePlaylistInfo(this.id)"><h4>${playlist.title}</h2></a>
-            <p><strong>Rating:</strong> ${playlistRating}</p>
+            <p><strong>Rating:</strong> ${modifierModule.countRating(playlistRating)}</p>
             </div>
             `;          
         }
@@ -241,7 +281,7 @@ const displayModule = {
             displayAlbumsHTML = displayAlbumsHTML + `
                 <div class="infoCard">
                     <div class="img-container">    
-                        <img src= "${album.coverImage}" alt="${album.title}" class="img-fluid"/>
+                        <img src="${album.coverImage}" alt="${album.title}" class="img-fluid"/>
                     </div>
                     <a id="${album._id}" href="javascript://albumInfo" onClick='moreAlbumInfo(this.id)'><h2>${album.title}</h2></a>
                 </div>
@@ -251,18 +291,9 @@ const displayModule = {
 
     },
 
-    checkIfRated: function(rating) {
-        if(rating === "Not Rated Yet!" || rating == null ) {
-            return 0;
-        }
-        else {
-            return rating
-        }
-    },
+
 
 }
-
-
 
 
 /**************
