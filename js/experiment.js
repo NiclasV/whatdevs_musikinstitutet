@@ -251,6 +251,15 @@ const displayModule = {
 
     },
 
+    checkIfRated: function(rating) {
+        if(rating === "Not Rated Yet!" || rating == null ) {
+            return 0;
+        }
+        else {
+            return rating
+        }
+    },
+
 }
 
 
