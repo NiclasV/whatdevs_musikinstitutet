@@ -1,7 +1,6 @@
 /**************
 ---- MODEL ----
 /*************/
-
 //Class & constructor for our fetches with methods for specific or general requests
 class getData {
     constructor(type, limit){
@@ -106,6 +105,7 @@ getArtists.General()
     console.group("This is the artists fetch");
     console.log(artists);
     console.groupEnd();
+    //display.latestArtists(artists);
 })
 .catch((error) => {
     console.log(error);
@@ -151,10 +151,6 @@ getAlbum.Specific("5ad5a0120100d075776b939d")
 /**************
 ---- VIEW ----
 /*************/
-
-class display {
-
-}
 
 /**************
 -- CONTROLLA --
