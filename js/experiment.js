@@ -1,6 +1,7 @@
 /**************
 ---- MODEL ----
 /*************/
+
 //Class & constructor for our fetches with methods for specific or general requests
 class getData {
     constructor(type, limit){
@@ -92,11 +93,17 @@ class playlist {
     }
 }
 
-//Try to do a fetch based on a new getData class called getArtists with the limit of 1000 results
-const getArtists = new getData('artists', 1000);
-const getArtist = new getData('artists');
-const getAlbums = new getData('albums', 1000);
+/************** FETCHES ****************/
+
+//Do fetchs with new getData class with the limit of 12 results for the startpage
+const getArtists = new getData('artists', 12);
+const getPlaylists = new getData('playlists', 12);
+const getAlbums = new getData('albums', 12);
+const getTracks = new getData('tracks', 12);
 const getAlbum = new getData('albums');
+const getArtist = new getData('artists');
+
+
 
 //fetch and console.log artists
 getArtists.General()
@@ -105,19 +112,7 @@ getArtists.General()
     console.group("This is the artists fetch");
     console.log(artists);
     console.groupEnd();
-    //display.latestArtists(artists);
-})
-.catch((error) => {
-    console.log(error);
-})
-
-//fetch and console.log specific artist based on id-input
-getArtist.Specific("5accb0397e57bb56f1181cb8")
-.then((artist) => {
-    //console logging the result
-    console.group("This is a artist fetch");
-    console.log(artist);
-    console.groupEnd();
+    displayModule.showArtists(artists);
 })
 .catch((error) => {
     console.log(error);
@@ -126,10 +121,23 @@ getArtist.Specific("5accb0397e57bb56f1181cb8")
 //fetch and console.log artists
 getAlbums.General()
 .then((albums) => {
-    //console logging the result
-    console.group("This is the albums fetch")
-    console.log(albums);
-    console.groupEnd();
+    displayModule.showAlbums(albums);
+})
+.catch((error) => {
+    console.log(error);
+})
+
+getPlaylists.General()
+.then((playlists) => {
+    displayModule.showPlaylists(playlists)
+})
+.catch((error) => {
+    console.log(error);
+})
+
+getTracks.General()
+.then((tracks) => {
+    displayModule.showTracks(tracks)
 })
 .catch((error) => {
     console.log(error);
@@ -147,10 +155,115 @@ getAlbum.Specific("5ad5a0120100d075776b939d")
     console.log(error);
 })
 
+//fetch and console.log specific artist based on id-input
+getArtist.Specific("5accb0397e57bb56f1181cb8")
+.then((artist) => {
+    //console logging the result
+    console.group("This is a artist fetch");
+    console.log(artist);
+    console.groupEnd();
+})
+.catch((error) => {
+    console.log(error);
+})
 
 /**************
 ---- VIEW ----
 /*************/
+
+const displayModule = {
+
+    showArtists: function(artists) {
+        let artistsList = document.getElementById('displayAllArtists');
+        let displayArtistsHTML = '';
+        
+        for (let artist of artists) {
+    
+            displayArtistsHTML = displayArtistsHTML + `
+            <div class="infoCard">
+                <div class="img-container">    
+                 <img src= "${artist.coverImage}" alt="${artist.name}" class="img-fluid"/>
+                </div>
+                <a id="${artist._id}" href="javascript://artistInfo" onClick="moreArtistInfo(this.id)"><h2>${artist.name}</h2></a>
+                      
+                <p>${ artist.genres }</p>
+                ${artist.spotifyURL}
+                </div>
+            </div>`;
+        }    
+        artistsList.innerHTML = displayArtistsHTML;
+    },
+
+    showPlaylists: function(playlists) {
+        let playlistsList = document.getElementById('displayAllPlaylists')
+        let displayPlaylistsHTML = '';
+
+         // sort the array by rating and displays them
+        for (let playlist of  playlists) {
+            let playlistRating = playlist.ratings
+    
+            displayPlaylistsHTML = displayPlaylistsHTML + `
+            <div class="infoCard">
+            <div class="img-container">    
+            <img src= "${playlist.coverImage}" alt="${playlist.title}" class="img-fluid"/>
+            </div>
+            <a id="${playlist._id}" href="javascript://artistInfo" onClick="morePlaylistInfo(this.id)"><h4>${playlist.title}</h2></a>
+            <p><strong>Rating:</strong> ${playlistRating}</p>
+            </div>
+            `;          
+        }
+        playlistsList.innerHTML = displayPlaylistsHTML;
+    },
+
+    showTracks: function(tracks) {
+        let tracksList = document.getElementById('displayAllTracks');
+        let displayTracksHTML = '';
+        let i = 1;
+        for (let track of tracks) {
+
+            displayTracksHTML = displayTracksHTML + `
+            <h2>${i++}. <a id="${track._id}" href="javascript://trackinfo" onClick='moreTrackInfo(this.id)'>${track.title}</a></h2>
+            <p>${track.genres}</p>
+            <p><strong>From the album: </strong>${track.album.title}</p><br>
+
+            `;
+        }
+        tracksList.innerHTML = displayTracksHTML;
+
+    },
+
+    showAlbums: function(albums) {
+        let albumsList = document.getElementById('displayAllAlbums');
+        let displayAlbumsHTML = '';
+    
+        for (let album of albums) {
+    
+            displayAlbumsHTML = displayAlbumsHTML + `
+                <div class="infoCard">
+                    <div class="img-container">    
+                        <img src= "${album.coverImage}" alt="${album.title}" class="img-fluid"/>
+                    </div>
+                    <a id="${album._id}" href="javascript://albumInfo" onClick='moreAlbumInfo(this.id)'><h2>${album.title}</h2></a>
+                </div>
+            `;
+        }
+        albumsList.innerHTML = displayAlbumsHTML;
+
+    },
+
+    checkIfRated: function(rating) {
+        if(rating === "Not Rated Yet!" || rating == null ) {
+            return 0;
+        }
+        else {
+            return rating
+        }
+    },
+
+}
+
+
+
 
 /**************
 -- CONTROLLA --
