@@ -146,6 +146,10 @@ const allTracks = new getData('tracks', 1000);
 
 const getAlbum = new getData('albums');
 const getArtist = new getData('artists');
+const getPlaylist = new getData('playlists');
+const getTrack = new getData('tracks');
+const getComments = new getData('comments');
+
 
 
 //fetch and console.log artists
@@ -187,7 +191,7 @@ getTracks.General()
 })
 
 //fetch and console.log specific artist based on id-input
-getAlbum.Specific(id)
+getAlbum.Specific(album, id)
 .then((album) => {
     displayModule.specificAlbum(album, id)
 })
@@ -195,7 +199,6 @@ getAlbum.Specific(id)
     console.log(error);
 })
 
-//fetch and console.log specific artist based on id-input
 getArtist.Specific(id)
 .then((artist) => {
     displayModule.specificArtist(artist, id)
@@ -205,7 +208,7 @@ getArtist.Specific(id)
     console.log(error);
 })
 
-getPlaylists.Specific(id)
+getPlaylist.Specific(playlist, id)
 .then((playlist) => {
     displayModule.specificPlaylist(playlist, id)
 
@@ -214,9 +217,18 @@ getPlaylists.Specific(id)
     console.log(error);
 })
 
-getTracks.Specific(id)
+getTrack.Specific(track, id)
 .then((track) => {
     displayModule.specificTrack(track, id)
+
+})
+.catch((error) => {
+    console.log(error);
+})
+
+getComments.Specific(comments, id)
+.then((track) => {
+    displayModule.playlistComments(comments, id)
 
 })
 .catch((error) => {
