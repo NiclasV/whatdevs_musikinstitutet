@@ -111,16 +111,14 @@ header {
 }
 
 .header-img {
-    height: 45vh;
+    height: 50vh;
     width: 100%;
     background-image: url('../images/bg-mixer.png');
     opacity: 0.8;
+    background-size: contain;
     background-position: top center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    transition: height 0.5s ease-out;
+    background-attachment: fixed;
+    transition: height 0.7s ease-out;
 }
 
 .header-img-animate {
@@ -212,7 +210,7 @@ footer {
 ****************/
 
 .infoCard {
-    border: 1px solid black;
+    border: 1.2px solid black;
     width: calc((100% / 4) - 18px);
     margin: 8px;
     text-align: center;
