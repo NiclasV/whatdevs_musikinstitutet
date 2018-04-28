@@ -249,6 +249,7 @@ function displaySpecificAlbum(data, id) {
         min="0" max="10" step="1" value="5">
         <input type="hidden" id="albumId" value="${albumId}"></input>
         <input onclick="rateAlbums()" type="submit">
+        <div id="SuccessvoteSubmitted"></div>
     
     `
 
@@ -278,6 +279,7 @@ function displaySpecificPlaylist(data, id) {
         min="0" max="10" step="1" value="5">
         <input type="hidden" id="playlistId" value="${playlistId}"></input>
         <input onclick="ratePlaylists()" type="submit">
+        <div id="SuccessvoteSubmitted"></div>
         
         
     </div>
@@ -286,7 +288,6 @@ function displaySpecificPlaylist(data, id) {
     mainDiv.innerHTML = content;
     
         getPlaylistComments(playlistId);
-    displayAddSongToPlaylist(playlistId);
         displayCommentsForm(playlistId);
 
 }
@@ -305,36 +306,6 @@ function displayComments(comments) {
 }
 
 
-function displayAddSongToPlaylist(playlistId) {
-    
-  /*Submit Song Form*/
-  /*For Loop that loops out all Songs */
-    
-//      var songs = tracksData;
-//  var songsOption = "";
-//  //console.log(artists[0].name);
-//  for (let i = 0; i < songs.length; i++) {
-//      songsOption += `
-//      <option value="songs[i]._id">${songs[i].title}</option>
-//      `
-//  }
-//console.log(tracksData);
-    
-    var commentPlaylistIdInput = playlistId;
-    var content = "<h2>Add a Song:</h2>";
-    
-    content += `
-      <div class="col-md-8">
-          <select name="tracks" id="songToPlaylistInput" class="form-control">
-          </select> <br />
-            <input type="hidden" id="commentPlaylistIdInput" value="${commentPlaylistIdInput}"></input>
-      <button class="btn-block btn-success" onclick="submitSongToPlaylist()">Submit</button>
-      <br /><br />
-<div id="successSongSubmited"></div>
-    `
-    document.getElementById('main').insertAdjacentHTML('beforeend', content)
-       
-}
 
 function displayCommentsForm(playlistId) {
     
@@ -412,12 +383,17 @@ function displaySpecificTrack(data, id) {
                     0 1.89-0.579 1.89-1.514 0-0.984-0.71-1.511-1.89-1.511z"/>
                 </svg>
             </a>
-        </div>
-
         <button href="javascript://delete" id="${trackId}" onClick='deleteFrom("tracks", this.id)' class="btn btn-danger">Delete Track</button>
-
-    </div>
+    </div>  
+    <span class "form-label">Rate Tracks: </span>
+        <input id="rateNameInput" type="number" name="voteRating"
+        min="0" max="10" step="1" value="5">
+        <input type="hidden" id="trackId" value="${trackId}"></input>
+        <input onclick="rateTracks()" type="submit">
+        <div id="SuccessvoteSubmitted"></div>
+        </div>
     `
+    
     console.log(trackId)
     mainDiv.innerHTML = content;
     
