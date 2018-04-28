@@ -1,7 +1,6 @@
 /**************
 ---- MODEL ----
 /*************/
-
 //Class & constructor for our fetches with methods for specific or general requests
 class getData {
     constructor(type, limit){
@@ -18,6 +17,7 @@ class getData {
         return fetch(this.baseUrl + this.type + "/" + id + "?" + this.key)
         .then((response) => response.json())
     }
+
 }
 
 
@@ -150,22 +150,14 @@ const getPlaylist = new getData('playlists');
 const getTrack = new getData('tracks');
 const getComments = new getData('comments');
 
-
-
-//fetch and console.log artists
 getArtists.General()
 .then((artists) => {
-    //console logging the result
-    console.group("This is the artists fetch");
-    console.log(artists);
-    console.groupEnd();
-    displayModule.showArtists(artists);
+    displayModule.showArtists(artists); 
 })
 .catch((error) => {
     console.log(error);
 })
 
-//fetch and console.log artists
 getAlbums.General()
 .then((albums) => {
     displayModule.showAlbums(albums);
@@ -193,6 +185,7 @@ getTracks.General()
 //fetch and console.log specific artist based on id-input
 getAlbum.Specific(album, id)
 .then((album) => {
+
     displayModule.specificAlbum(album, id)
 })
 .catch((error) => {
@@ -202,7 +195,6 @@ getAlbum.Specific(album, id)
 getArtist.Specific(id)
 .then((artist) => {
     displayModule.specificArtist(artist, id)
-
 })
 .catch((error) => {
     console.log(error);
@@ -211,7 +203,6 @@ getArtist.Specific(id)
 getPlaylist.Specific(playlist, id)
 .then((playlist) => {
     displayModule.specificPlaylist(playlist, id)
-
 })
 .catch((error) => {
     console.log(error);
@@ -238,45 +229,6 @@ getComments.Specific(comments, id)
 /**************
 ---- VIEW ----
 /*************/
-
-const modifierModule = {
-
-    countRating: function(rating) {
-        var quantity = rating.length; 
-        var ratingTotal = 0; 
-        
-        for (var i = 0; i < quantity; i++) {
-            ratingTotal += rating[i];
-        }
-        theRating = ratingTotal / quantity;
-
-        if (isNaN(theRating)) {
-            return "Not Rated Yet!"
-        } else {
-            var theRatingRounded = Math.round( theRating * 10) / 10;
-            return theRatingRounded; 
-        }
-    },
-
-    checkIfRated: function(rating) {
-        if(rating === "Not Rated Yet!" || rating == null ) {
-            return 0;
-        }
-        else {
-            return rating
-        }
-    },
-
-    handleImage: function(theImage) {
-    if (theImage == null || theImage == undefined ) {
-        console.log("gaga its null!a a a" + theImage)
-        return "images/male.png"
-        } else {
-        return theImage;
-      }
-    }
-}
-
 
 const displayModule = {
 
@@ -692,8 +644,57 @@ const displayModule = {
 -- CONTROLLA --
 /*************/
 
+const modifierModule = {
+
+    countRating: function(rating) {
+        var quantity = rating.length; 
+        var ratingTotal = 0; 
+        
+        for (var i = 0; i < quantity; i++) {
+            ratingTotal += rating[i];
+        }
+        theRating = ratingTotal / quantity;
+
+        if (isNaN(theRating)) {
+            return "Not Rated Yet!"
+        } else {
+            var theRatingRounded = Math.round( theRating * 10) / 10;
+            return theRatingRounded; 
+        }
+    },
+
+    checkIfRated: function(rating) {
+        if(rating === "Not Rated Yet!" || rating == null ) {
+            return 0;
+        } else {
+            return rating
+        }
+    },
+
+    handleImage: function(theImage) {
+    if (theImage == null || theImage == undefined ) {
+            return "images/male.png"
+        } else {
+            return theImage;
+        }
+    },
+
+    headerSwitch: function() {
+        headerArtists = document.getElementById('headerArtists');
+        headerPlaylists = document.getElementById('headerPlaylists');
+        headerAlbums = document.getElementById('headerAlbums');
+        headerTracks = document.getElementById('headerTracks');
+
+        headerArtists.innerHTML = "Artists searchresults";
+        headerPlaylists.innerHTML = "Playlists searchresults";
+        headerAlbums.innerHTML = "Albums searchresults";
+        headerTracks.innerHTML = "Tracks searchresults";
+    }
+}
+
 var nameInput = document.querySelector('#name');
 
 nameInput.addEventListener('input', function (event) { 
     displayModule.searchField(allAlbums, allArtists, allPlaylists, allTracks);
+   
 });
