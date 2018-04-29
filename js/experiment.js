@@ -381,7 +381,8 @@ const displayModule = {
         searchField: function(allAlbums, allArtists, allPlaylists, allTracks) {
         var name = nameInput.value;     
         if(name != '') { 
-        allArtists.General()
+        //allArtists.General()
+        doFetch.getAllArtists()
         .then( artists => {
             // vi får en rad data tillbaka, så nu måste vi filtrera
             // för att bara skicka in uppgifterna om artisten vi letar efter
@@ -394,6 +395,7 @@ const displayModule = {
         }
         if (name != '') { //2
         allAlbums.General()
+        doFetch.getAllAlbums()
         .then( albums => {
             albums = albums.filter( ( element ) => { return new RegExp( name, 'ig' ).test( element.title) });
         displayModule.showAlbums(albums);
@@ -428,6 +430,7 @@ const displayModule = {
 var nameInput = document.querySelector('#name');
 
 nameInput.addEventListener('input', function (event) { 
+    const allAlbums = getData.General("albums", 1000)
     displayModule.searchField(allAlbums, allArtists, allPlaylists, allTracks);
 });
 
@@ -467,107 +470,156 @@ const modifierModule = {
         } else {
         return theImage;
       }
+    },
+}
+
+const doFetch = {
+
+    getArtists: function() {
+        const getArtists = new getData('artists', 12);
+
+        getArtists.General()
+        .then((artists) => {
+            displayModule.showArtists(artists);
+        })
+        .catch((error) => {
+            console.log(error);
+        })        
+    },
+
+    getAlbums: function() {
+        const getAlbums = new getData('albums', 12);
+        getAlbums.General()
+        .then((albums) => {
+            displayModule.showAlbums(albums);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    },
+
+    getTracks: function() {
+        const getTracks = new getData('tracks', 12);
+        getTracks.General()
+        .then((tracks) => {
+            displayModule.showTracks(tracks)
+        })
+        .catch((error) => {
+            console.log(error);
+        })        
+    },
+
+    getPlaylists: function() {
+        const getPlaylists = new getData('playlists', 12);
+        getPlaylists.General()
+        .then((playlists) => {
+            displayModule.showPlaylists(playlists)
+        })
+        .catch((error) => {
+            console.log(error);
+        })        
+    },
+
+    getSpecificArtist: function () {
+        const getArtist = new getData('artists');
+
+        getArtist.Specific(id)
+        .then((artist) => {
+            displayModule.specificArtist(artist, id)
+        
+        })
+        .catch((error) => {
+            console.log(error);
+        })        
+    },
+
+    getSpecificPlaylist: function () {
+        const getPlaylist = new getData('playlists');
+
+        getPlaylist.Specific(playlist, id)
+        .then((playlist) => {
+            displayModule.specificPlaylist(playlist, id)
+        
+        })
+        .catch((error) => {
+            console.log(error);
+        })       
+    },
+
+    getSpecificAlbum: function () {
+        const getAlbum = new getData('albums');
+
+        getAlbum.Specific(album, id)
+        .then((album) => {
+            displayModule.specificAlbum(album, id)
+        })
+        .catch((error) => {
+            console.log(error);
+        })        
+    },
+
+    getSpecificTrack: function () {
+        const getTrack = new getData('tracks');
+
+        getTrack.Specific(track, id)
+        .then((track) => {
+            displayModule.specificTrack(track, id)
+        
+        })
+        .catch((error) => {
+            console.log(error);
+        })       
+    },
+
+    getAllArtists: function () {
+        const allArtists = new getData('artists', 1000);
+    },
+
+    getAllPlaylists: function () {
+        const allPlaylists = new getData('playlists', 1000);
+    },
+
+    getAllAlbums: function () {
+        const allAlbums = new getData('albums', 1000);
+    },
+
+    getAllTracks: function () {
+        const allTracks = new getData('tracks', 1000);
+
+    },
+
+    getComments: function() {
+        const getComments = new getData('comments');
+
+        getComments.Specific(comments, id)
+        .then((track) => {
+            displayModule.playlistComments(comments, id)
+        
+        })
+        .catch((error) => {
+            console.log(error);
+        })        
     }
 }
 
-
-
-/************** FETCHES ****************/
-
-//Do fetchs with new getData class with the limit of 12 results for the startpage
-const getArtists = new getData('artists', 12);
-const getPlaylists = new getData('playlists', 12);
-const getAlbums = new getData('albums', 12);
-const getTracks = new getData('tracks', 12);
-
-const allArtists = new getData('artists', 1000);
-const allPlaylists = new getData('playlists', 1000);
-const allAlbums = new getData('albums', 1000);
-const allTracks = new getData('tracks', 1000);
-
-const getAlbum = new getData('albums');
-const getArtist = new getData('artists');
-const getPlaylist = new getData('playlists');
-const getTrack = new getData('tracks');
-const getComments = new getData('comments');
-
-
+doFetch.getArtists();
+doFetch.getAlbums();
+doFetch.getPlaylists();
+doFetch.getTracks();
 
 //fetch and console.log artists
-getArtists.General()
-.then((artists) => {
-    displayModule.showArtists(artists);
-})
-.catch((error) => {
-    console.log(error);
-})
 
-//fetch and console.log artists
-getAlbums.General()
-.then((albums) => {
-    displayModule.showAlbums(albums);
-})
-.catch((error) => {
-    console.log(error);
-})
 
-getPlaylists.General()
-.then((playlists) => {
-    displayModule.showPlaylists(playlists)
-})
-.catch((error) => {
-    console.log(error);
-})
 
-getTracks.General()
-.then((tracks) => {
-    displayModule.showTracks(tracks)
-})
-.catch((error) => {
-    console.log(error);
-})
+
 
 //fetch and console.log specific artist based on id-input
-getAlbum.Specific(album, id)
-.then((album) => {
-    displayModule.specificAlbum(album, id)
-})
-.catch((error) => {
-    console.log(error);
-})
 
-getArtist.Specific(id)
-.then((artist) => {
-    displayModule.specificArtist(artist, id)
 
-})
-.catch((error) => {
-    console.log(error);
-})
 
-getPlaylist.Specific(playlist, id)
-.then((playlist) => {
-    displayModule.specificPlaylist(playlist, id)
 
-})
-.catch((error) => {
-    console.log(error);
-})
 
-getTrack.Specific(track, id)
-.then((track) => {
-    displayModule.specificTrack(track, id)
 
-})
-.catch((error) => {
-    console.log(error);
-})
 
-getComments.Specific(comments, id)
-.then((track) => {
-    displayModule.playlistComments(comments, id)
 
-})
-.catch((error) => {
-    console.log(error);
-})
+
