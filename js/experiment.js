@@ -565,8 +565,75 @@ nameInput.addEventListener('input', function (event) {
     displayModule.searchField();
 });
 
+    //CLICK EVENTS FOR VARIOUS BUTTONS:
+
+
+
+const buttonsModule = (function()  {
+    
+const btnSubmit = document.getElementById('btnSubmit');
+const btnSubmitArtist = document.getElementById('btnSubmitArtist');
+const btnSubmitPlaylist = document.getElementById('btnSubmitPlaylist');
+const btnSubmitSong = document.getElementById('btnSubmitSong');
+const btnSubmitAlbum = document.getElementById('btnSubmitAlbum');
+const submitPopUp = document.getElementById('myModal');
+const btnClose = document.getElementsByClassName("btnClose")[0];
+const mainDiv = document.getElementById('main');
+const artistDropdown = document.getElementById('artistDropdown');
+const siteLogo = document.getElementById('siteLogo')
+const header = document.getElementById('theHeader');
+const nav = document.getElementById('nav');
+
+return {
+    
+    bindHomePageEventListeners: function(){
+        
+btnSubmit.addEventListener('click', function (event) {
+    console.log('Submit Clicked!')
+    submitPopUp.style.display = "block";
+
+}); 
+
+siteLogo.addEventListener('click', function (event) {
+    //event.preventDefault();
+    //toggleHeader();
+});
+
+btnClose.addEventListener('click', function (event) {
+    submitPopUp.style.display = "none";
+});
+
+btnSubmitArtist.addEventListener('click', function (event) {
+    displayArtistForm();
+});
+
+function displayArtistsOnSongForm(artistsData) {
+    btnSubmitSong.addEventListener('click', function (event) {
+    displaySongForm(artistsData);
+    });
+}
+
+function displayArtistsOnAlbumForm(artistsData) {
+    btnSubmitAlbum.addEventListener('click', function (event) {
+    displayAlbumForm(artistsData);
+    });
+}
+
+btnSubmitPlaylist.addEventListener('click', function (event) {
+    displayPlaylistForm();
+});
+    
+    }
+
+};
+
+    
+    
+    
+}());
 
 const modifierModule = {
+
 
     countRating: function(rating) {
         var quantity = rating.length; 
@@ -608,6 +675,8 @@ fetchModule.getArtists();
 fetchModule.getAlbums();
 fetchModule.getPlaylists();
 fetchModule.getTracks();
+
+buttonsModule.bindHomePageEventListeners();
 
 //fetch and console.log artists
 
