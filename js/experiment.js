@@ -41,7 +41,7 @@ class artist {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(this)
+                body: JSON.stringify(artist)
             })
             .then((response) => response.json())
             .then((artist) => {
@@ -135,7 +135,8 @@ const fetchModule = {
 
         getArtists.General()
         .then((artists) => {
-            displayModule.showArtists(artists);
+            displayModule.showArtists(artists);  
+            buttonsModule.EventListeners(artists);
         })
         .catch((error) => {
             console.log(error);
@@ -256,6 +257,254 @@ const fetchModule = {
         })        
     }
 }
+
+/**************
+SUBMITS TO API 
+**************/
+
+function isEmptyOrSpaces(str){
+    return str === null || str.match(/^ *$/) !== null;
+  }
+
+const submitsToApiModule = {
+
+        submitArtist: function () {
+        
+        let artistnNameInput = document.getElementById("artistNameInput");
+        let artistBirthYearInput = document.getElementById("artistBirthYearInput");
+        let artistBirthplaceInput = document.getElementById("artistBirthplaceInput");
+        let artistGenderInput = document.getElementById("artistGenderInput");
+        let artistGenresInput = document.getElementById("artistGenresInput");
+        let artistSpotifyURLInput = document.getElementById("artistSpotifyURLInput");
+        let artistCoverImageInput = document.getElementById("artistCoverImageInput");
+
+        if( isEmptyOrSpaces(artistBirthYearInput.value) || isEmptyOrSpaces(artistnNameInput.value) || isEmptyOrSpaces(artistGenresInput.value))
+        {
+            alert("Failed to submit data");
+
+
+        }
+
+        else
+        {
+            let artist = {
+                name: artistnNameInput.value,
+                born: artistBirthYearInput.value,
+                gender: artistGenderInput.value,
+                genres: artistGenresInput.value,
+                countryBorn: artistBirthplaceInput.value,
+                spotifyURL: artistSpotifyURLInput.value,
+                coverImage: artistCoverImageInput.value
+            }
+            
+                    fetch('https://folksa.ga/api/artists?key=flat_eric',
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(artist)
+                      })
+                      .then((response) => response.json())
+                      .then((artist) => {
+                        console.log(artist);
+                      });	
+    
+                document.getElementById("successArtistSubmited").innerHTML = "The Artist has been Submited!";
+
+         }
+         
+
+
+    },
+    
+        submitSong: function () {
+        
+        let songTitleInput = document.getElementById("songTitleInput");
+        let songArtistInput = document.getElementById("songArtistInput");
+        let songAlbumInput = document.getElementById("songAlbumInput");
+        let songGenresInput = document.getElementById("songGenresInput");
+
+        if( isEmptyOrSpaces(songTitleInput.value) || isEmptyOrSpaces(songArtistInput.value) || isEmptyOrSpaces(songAlbumInput.value) || isEmptyOrSpaces(songGenresInput.value))
+        {
+            alert("Failed to submit data");
+        }
+        else
+        {
+            let track = {
+                title: songTitleInput.value,
+                artists: songArtistInput.value,
+                album: songAlbumInput.value,
+                genres: songGenresInput.value
+            }
+            
+                fetch('https://folksa.ga/api/tracks?key=flat_eric',{
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(track)
+                  })
+                  .then((response) => response.json())
+                  .then((track) => {
+                    console.log(track);
+                  });
+            
+                    document.getElementById("successSongSubmited").innerHTML = "The Song has been Submited!";
+                }
+         
+
+
+    },
+        submitAlbum: function () {
+        
+        let albumNameInput = document.getElementById("albumNameInput");
+        let albumArtistInput = document.getElementById("albumArtistInput");
+        let albumReleaseDateInput = document.getElementById("albumReleaseDateInput");
+        let albumGenresInput = document.getElementById("albumGenresInput");
+        let albumSpotifyURLInput = document.getElementById("albumSpotifyURLInput");
+        let albumCoverImageInput = document.getElementById("albumCoverImageInput");
+
+        if( isEmptyOrSpaces(albumNameInput.value) || isEmptyOrSpaces(albumArtistInput.value) || isEmptyOrSpaces(albumReleaseDateInput.value) || isEmptyOrSpaces(albumGenresInput.value))
+        {
+            alert("Failed to submit data");
+        }
+
+        else
+        {
+            let album = {
+                title: albumNameInput.value,
+                artists: albumArtistInput.value,
+                releaseDate: albumReleaseDateInput.value,
+                genres: albumGenresInput.value,
+                spotifyURL: albumSpotifyURLInput.value,
+                coverImage: albumCoverImageInput.value
+         }
+            fetch('https://folksa.ga/api/albums?key=flat_eric', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(album)
+                })
+                .then((response) => response.json())
+                .then((album) => {
+                    console.log(album);
+                });
+        document.getElementById("successAlbumSubmited").innerHTML = "The Album has been Submited!";
+        }
+
+    },
+        submitPlaylist: function () {
+        
+        let playlistNameInput = document.getElementById("playlistNameInput");
+        let playlistGenresInput = document.getElementById("playlistGenresInput");
+        let playlistCreatorInput = document.getElementById("playlistCreatorInput");
+        let playlistCoverImageInput = document.getElementById("playlistCoverImageInput");
+
+        if( isEmptyOrSpaces(playlistNameInput.value) || isEmptyOrSpaces(playlistGenresInput.value) || isEmptyOrSpaces(playlistCreatorInput.value))
+        {
+            alert("Failed to submit data");
+        }
+
+        else{
+            let playlist = {
+                title: playlistNameInput.value,
+                genres: playlistGenresInput.value,
+                createdBy: playlistCreatorInput.value,
+                coverImage: playlistCoverImageInput.value
+            }
+            
+                fetch('https://folksa.ga/api/playlists?key=flat_eric',{
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(playlist)
+                  })
+                  .then((response) => response.json())
+                  .then((playlist) => {
+                                console.log(playlist);
+
+                    
+                  });
+                        document.getElementById("successPlaylistSubmited").innerHTML = "Playlist Submited! Search for it to add songs!";
+                     }
+
+    },
+        submitPlaylist: function () {
+        
+        let playlistNameInput = document.getElementById("playlistNameInput");
+        let playlistGenresInput = document.getElementById("playlistGenresInput");
+        let playlistCreatorInput = document.getElementById("playlistCreatorInput");
+        let playlistCoverImageInput = document.getElementById("playlistCoverImageInput");
+
+        if( isEmptyOrSpaces(playlistNameInput.value) || isEmptyOrSpaces(playlistGenresInput.value) || isEmptyOrSpaces(playlistCreatorInput.value))
+        {
+            alert("Failed to submit data");
+        }
+
+        else{
+            let playlist = {
+                title: playlistNameInput.value,
+                genres: playlistGenresInput.value,
+                createdBy: playlistCreatorInput.value,
+                coverImage: playlistCoverImageInput.value
+            }
+            
+                fetch('https://folksa.ga/api/playlists?key=flat_eric',{
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(playlist)
+                  })
+                  .then((response) => response.json())
+                  .then((playlist) => {
+                                console.log(playlist);
+
+                    
+                  });
+                        document.getElementById("successPlaylistSubmited").innerHTML = "Playlist Submited! Search for it to add songs!";
+                     }
+
+    },
+        submitCommentToPlaylist: function () {
+        
+        let commentPlaylistIdInput = document.getElementById("commentPlaylistIdInput").value;
+        let commentNameInput = document.getElementById("commentNameInput").value;
+        let commentInput = document.getElementById("commentInput").value;
+        
+
+
+        
+        let comment = {
+        playlist: commentPlaylistIdInput,
+        body: commentInput,
+        username: commentNameInput
+        }
+	   console.log(comment);
+
+            fetch(`https://folksa.ga/api/playlists/${commentPlaylistIdInput}/comments?key=flat_eric`, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(comment)
+                })
+                .then((response) => response.json())
+                .then((playlist) => {});
+            document.getElementById("successCommentSubmited").innerHTML = "The Comment has been Submited!";
+    }
+
+}
+
 
 /**************
 ---- VIEW ----
@@ -509,6 +758,145 @@ const displayModule = {
     
 
     
+    
+    
+    displayArtistForm: function () {
+        
+    /*Artist Form*/
+    var submitArtistForm = `
+    <center>
+        <h1>Enter Artist to submit: </h1>
+        <div class="col-md-8">
+            <span class="form-label"> Artist name: </span>
+            <br /> <input type="text" id="artistNameInput" class="form-control"> <br />
+            <span class="form-label">Birth year: </span> 
+            <br /> <input type="date" id="artistBirthYearInput" class="form-control"> <br />
+            <span class="form-label">Birthplace: </span> 
+            <br /> <input type="text" id="artistBirthplaceInput" class="form-control"> <br />
+            <span class="form-label">Gender: </span> <br />
+            <select name="gender" id="artistGenderInput" class="form-control">
+              <option value='male'>Male</option>
+              <option value='female'>Female</option>
+              <option value='other'>Other</option>
+                
+          </select><br /> 
+            <span class="form-label">Genres: </span> 
+            <br /> <input type="text" id="artistGenresInput" class="form-control"> <br /> 
+            <span class="form-label">Spotify URL: </span> 
+            <br /> <input type="text" id="artistSpotifyURLInput" class="form-control"> <br /> 
+            <span class="form-label">Coverimage URL: </span> 
+            <br /> <input type="text" id="artistCoverImageInput" class="form-control"> <br />
+            <br> <br>
+            <button class="btn-block btn-success" onclick="submitsToApiModule.submitArtist()">Submit</button>
+            <br /><br />
+    <div id="successArtistSubmited"></div>
+        </div>
+    </center>
+    `;
+    document.getElementById('main').innerHTML = submitArtistForm;
+},
+    
+    displaySongForm: function (artists) {
+
+    var artistOption = "";
+
+    for (let i = 0; i < artists.length; i++) {
+        artistOption += `
+        <option value="${artists[i]._id}">${artists[i].name}</option>
+        `
+    }
+
+    var submitSongForm = `   
+    <center>
+    <h1>Enter Song to submit: </h1>
+    <div class="col-md-8">
+        <span class="form-label">Song title:  </span> 
+        <br /> <input type="text" id="songTitleInput" class="form-control"> <br /> 
+        <span class="form-label"> Artist: </span> 
+    <br /> 
+    <select id="songArtistInput" class="form-control">
+    ${artistOption}
+    </select><br />
+        <span class="form-label">Album: </span> 
+        <br />  <input type="text" id="songAlbumInput" class="form-control"> <br /> 
+        <span class="form-label">Genres: </span> 
+        <br /> <input type="text" id="songGenresInput" class="form-control"> <br /> 
+        <br> <br>
+        <button class="btn-block btn-success" onclick="submitsToApiModule.submitSong()">Submit</button>
+        <br /><br />
+    <div id="successSongSubmited"></div>
+    </div>
+    </center>
+    `;
+  document.getElementById('main').innerHTML = submitSongForm;
+},
+
+        displayAlbumForm: function (artists) {
+
+    var artistOption = "";
+
+    for (let i = 0; i < artists.length; i++) {
+        artistOption += `
+        <option value="${artists[i]._id}">${artists[i].name}</option>
+        `
+    }
+    /*Album Form*/
+
+    var submitAlbumForm = `
+    <center>
+        <h1>Enter Album to submit: </h1>
+        <div class="col-md-8">
+            <span class="form-label">Album title: </span> 
+            <input type="text" id="albumNameInput" class="form-control"> 
+            <span class="form-label">Artist: </span> 
+            
+            <select id="albumArtistInput" class="form-control">
+            ${artistOption}
+            </select><br />
+            <span class="form-label">Release Year: </span> 
+            <input type="text" id="albumReleaseDateInput" class="form-control">
+            <span class="form-label">Genres: </span> 
+            <input type="text" id="albumGenresInput" class="form-control"> 
+            <span class="form-label">Spotify URL: </span> 
+            <input type="text" id="albumSpotifyURLInput" class="form-control"> 
+            <span class="form-label">Coverimage URL: </span> 
+            <input type="text" id="albumCoverImageInput" class="form-control"> 
+            <button class="btn-block btn-success" onclick="submitsToApiModule.submitAlbum()">Submit</button>
+            <div id="successAlbumSubmited"></div>
+        </div>
+    </center>
+    `;
+  document.getElementById('main').innerHTML = submitAlbumForm;
+},
+
+        displayPlaylistForm: function () {
+
+
+        /*Playlist Form*/
+        var submitPlaylistForm = `
+    <center>
+        <h1>Enter Playlist to submit: </h1>
+        <div class="col-md-8">
+        <span class="form-label">Playlist title: </span> 
+        <br /> <input type="text" id="playlistNameInput" class="form-control"> <br /> 
+        <span class="form-label">Genres: </span> 
+        <br /> <input type="text" id="playlistGenresInput" class="form-control"> <br /> 
+        <span class="form-label">Created By: </span>
+        <br />  <input type="text" id="playlistCreatorInput" class="form-control"> <br />  
+        <span class="form-label">Coverimage URL: </span> 
+        <br /> <input type="text" id="playlistCoverImageInput" class="form-control"> <br />
+        <br> <br>
+        <button class="btn-block btn-success" onclick="submitsToApiModule.submitPlaylist()">Submit</button>
+        <br /><br />
+            <div id="successPlaylistSubmited"></div>
+    </div>
+        </center>
+`;  
+  document.getElementById('main').innerHTML = submitPlaylistForm;
+},
+    
+    
+    
     searchField: function() {
         const allAlbums = new getData("albums", 1000);
         const allArtists = new getData("artists", 1000);
@@ -566,6 +954,67 @@ nameInput.addEventListener('input', function (event) {
     displayModule.searchField();
 });
 
+    //CLICK EVENTS FOR VARIOUS BUTTONS:
+
+const buttonsModule = (function()  {
+    
+const btnSubmit = document.getElementById('btnSubmit');
+const btnSubmitArtist = document.getElementById('btnSubmitArtist');
+const btnSubmitPlaylist = document.getElementById('btnSubmitPlaylist');
+const btnSubmitSong = document.getElementById('btnSubmitSong');
+const btnSubmitAlbum = document.getElementById('btnSubmitAlbum');
+const submitPopUp = document.getElementById('myModal');
+const btnClose = document.getElementsByClassName("btnClose")[0];
+const mainDiv = document.getElementById('main');
+const artistDropdown = document.getElementById('artistDropdown');
+const siteLogo = document.getElementById('siteLogo')
+const header = document.getElementById('theHeader');
+const nav = document.getElementById('nav');
+
+return {
+    
+    EventListeners: function(artists){
+        
+btnSubmit.addEventListener('click', function (event) {
+    console.log('Submit Clicked!')
+    submitPopUp.style.display = "block";
+
+}); 
+
+siteLogo.addEventListener('click', function (event) {
+    //event.preventDefault();
+    //toggleHeader();
+});
+
+btnClose.addEventListener('click', function (event) {
+    submitPopUp.style.display = "none";
+});
+
+btnSubmitArtist.addEventListener('click', function (event) {
+    displayModule.displayArtistForm();
+});
+
+    btnSubmitSong.addEventListener('click', function (event) {
+    displayModule.displaySongForm(artists);
+    });
+
+    btnSubmitAlbum.addEventListener('click', function (event) {
+    displayModule.displayAlbumForm(artists);
+
+    });
+
+btnSubmitPlaylist.addEventListener('click', function (event) {
+    displayModule.displayPlaylistForm();
+});
+    
+    }
+
+};
+
+    
+    
+    
+}());
 
 const modifierModule = {
 
@@ -645,7 +1094,15 @@ fetchModule.getAlbums();
 fetchModule.getPlaylists();
 fetchModule.getTracks();
 
+buttonsModule.EventListeners();
 
+//fetch and console.log artists
+
+
+
+
+
+//fetch and console.log specific artist based on id-input
 
 
 
