@@ -135,9 +135,8 @@ const fetchModule = {
 
         getArtists.General()
         .then((artists) => {
-            displayModule.showArtists(artists);
-            buttonsModule.bindHomePageEventListeners.displayArtistsOnSongForm(artists);
-            
+            displayModule.showArtists(artists);  
+            buttonsModule.bindHomePageEventListeners(artists);
         })
         .catch((error) => {
             console.log(error);
@@ -582,6 +581,70 @@ const displayModule = {
     `;
   document.getElementById('main').innerHTML = submitSongForm;
 },
+
+        displayAlbumForm: function (artists) {
+
+    var artistOption = "";
+
+    for (let i = 0; i < artists.length; i++) {
+        artistOption += `
+        <option value="${artists[i]._id}">${artists[i].name}</option>
+        `
+    }
+    /*Album Form*/
+
+    var submitAlbumForm = `
+    <center>
+        <h1>Enter Album to submit: </h1>
+        <div class="col-md-8">
+            <span class="form-label">Album title: </span> 
+            <input type="text" id="albumNameInput" class="form-control"> 
+            <span class="form-label">Artist: </span> 
+            
+            <select id="albumArtistInput" class="form-control">
+            ${artistOption}
+            </select><br />
+            <span class="form-label">Release Year: </span> 
+            <input type="text" id="albumReleaseDateInput" class="form-control">
+            <span class="form-label">Genres: </span> 
+            <input type="text" id="albumGenresInput" class="form-control"> 
+            <span class="form-label">Spotify URL: </span> 
+            <input type="text" id="albumSpotifyURLInput" class="form-control"> 
+            <span class="form-label">Coverimage URL: </span> 
+            <input type="text" id="albumCoverImageInput" class="form-control"> 
+            <button class="btn-block btn-success" onclick="submitAlbum()">Submit</button>
+            <div id="successAlbumSubmited"></div>
+        </div>
+    </center>
+    `;
+  document.getElementById('main').innerHTML = submitAlbumForm;
+},
+
+        displayPlaylistForm: function () {
+
+
+        /*Playlist Form*/
+        var submitPlaylistForm = `
+    <center>
+        <h1>Enter Playlist to submit: </h1>
+        <div class="col-md-8">
+        <span class="form-label">Playlist title: </span> 
+        <br /> <input type="text" id="playlistNameInput" class="form-control"> <br /> 
+        <span class="form-label">Genres: </span> 
+        <br /> <input type="text" id="playlistGenresInput" class="form-control"> <br /> 
+        <span class="form-label">Created By: </span>
+        <br />  <input type="text" id="playlistCreatorInput" class="form-control"> <br />  
+        <span class="form-label">Coverimage URL: </span> 
+        <br /> <input type="text" id="playlistCoverImageInput" class="form-control"> <br />
+        <br> <br>
+        <button class="btn-block btn-success" onclick="submitPlaylist()">Submit</button>
+        <br /><br />
+            <div id="successPlaylistSubmited"></div>
+    </div>
+        </center>
+`;  
+  document.getElementById('main').innerHTML = submitPlaylistForm;
+},
     
     
     
@@ -646,7 +709,7 @@ nameInput.addEventListener('input', function (event) {
 
 
 
-const buttonsModule = (function(artists)  {
+const buttonsModule = (function()  {
     
 const btnSubmit = document.getElementById('btnSubmit');
 const btnSubmitArtist = document.getElementById('btnSubmitArtist');
@@ -663,7 +726,7 @@ const nav = document.getElementById('nav');
 
 return {
     
-    bindHomePageEventListeners: function(){
+    bindHomePageEventListeners: function(artists){
         
 btnSubmit.addEventListener('click', function (event) {
     console.log('Submit Clicked!')
@@ -684,20 +747,17 @@ btnSubmitArtist.addEventListener('click', function (event) {
     displayModule.displayArtistForm();
 });
 
-function displayArtistsOnSongForm(artists) {
     btnSubmitSong.addEventListener('click', function (event) {
     displayModule.displaySongForm(artists);
     });
-}
 
-function displayArtistsOnAlbumForm(artistsData) {
     btnSubmitAlbum.addEventListener('click', function (event) {
-    displayAlbumForm(artistsData);
+    displayModule.displayAlbumForm(artists);
+
     });
-}
 
 btnSubmitPlaylist.addEventListener('click', function (event) {
-    displayPlaylistForm();
+    displayModule.displayPlaylistForm();
 });
     
     }
