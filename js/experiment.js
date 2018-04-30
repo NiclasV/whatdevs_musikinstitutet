@@ -450,7 +450,7 @@ const displayModule = {
         </div>
         <div id="info">
             <h1>${playlist.title}</h1>
-            <p><strong>Rating:</strong> ${playlist.ratings}</p>
+            <p><strong>Rating:</strong> ${modifierModule.countRating(playlist.ratings)}</p>
             <p><strong>Genre: </strong>${playlist.genres}</p>
             <p><strong>Created by: </strong>${playlist.createdBy}</p>
             <br />
