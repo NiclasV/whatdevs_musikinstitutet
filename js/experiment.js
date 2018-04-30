@@ -41,7 +41,7 @@ class artist {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(this)
+                body: JSON.stringify(artist)
             })
             .then((response) => response.json())
             .then((artist) => {
@@ -136,7 +136,7 @@ const fetchModule = {
         getArtists.General()
         .then((artists) => {
             displayModule.showArtists(artists);  
-            buttonsModule.bindHomePageEventListeners(artists);
+            buttonsModule.EventListeners(artists);
         })
         .catch((error) => {
             console.log(error);
@@ -257,6 +257,75 @@ const fetchModule = {
         })        
     }
 }
+
+/**************
+SUBMITS TO API 
+**************/
+
+/*Function that Submits Artists from Form */
+function isEmptyOrSpaces(str){
+    return str === null || str.match(/^ *$/) !== null;
+  }
+
+const submitedValuesModule = {
+
+    submitArtist: function () {
+        
+        let artistnNameInput = document.getElementById("artistNameInput");
+        let artistBirthYearInput = document.getElementById("artistBirthYearInput");
+        let artistBirthplaceInput = document.getElementById("artistBirthplaceInput");
+        let artistGenderInput = document.getElementById("artistGenderInput");
+        let artistGenresInput = document.getElementById("artistGenresInput");
+        let artistSpotifyURLInput = document.getElementById("artistSpotifyURLInput");
+        let artistCoverImageInput = document.getElementById("artistCoverImageInput");
+
+        if( isEmptyOrSpaces(artistBirthYearInput.value) || isEmptyOrSpaces(artistnNameInput.value) || isEmptyOrSpaces(artistGenresInput.value))
+        {
+            alert("Failed to submit data");
+
+
+        }
+
+        else
+        {
+            let artist = {
+                name: artistnNameInput.value,
+                born: artistBirthYearInput.value,
+                gender: artistGenderInput.value,
+                genres: artistGenresInput.value,
+                countryBorn: artistBirthplaceInput.value,
+                spotifyURL: artistSpotifyURLInput.value,
+                coverImage: artistCoverImageInput.value
+            }
+            console.log(artist);
+            
+            
+    
+                    fetch('https://folksa.ga/api/artists?key=flat_eric',
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(artist)
+                      })
+                      .then((response) => response.json())
+                      .then((artist) => {
+                        console.log(artist);
+                      });	
+    
+                document.getElementById("successArtistSubmited").innerHTML = "The Artist has been Submited!";
+
+         }
+         
+
+
+    }
+
+
+}
+
 
 /**************
 ---- VIEW ----
@@ -538,7 +607,7 @@ const displayModule = {
             <span class="form-label">Coverimage URL: </span> 
             <br /> <input type="text" id="artistCoverImageInput" class="form-control"> <br />
             <br> <br>
-            <button class="btn-block btn-success" onclick="submitArtist()">Submit</button>
+            <button class="btn-block btn-success" onclick="submitedValuesModule.submitArtist()">Submit</button>
             <br /><br />
     <div id="successArtistSubmited"></div>
         </div>
@@ -726,7 +795,7 @@ const nav = document.getElementById('nav');
 
 return {
     
-    bindHomePageEventListeners: function(artists){
+    EventListeners: function(artists){
         
 btnSubmit.addEventListener('click', function (event) {
     console.log('Submit Clicked!')
@@ -813,7 +882,7 @@ fetchModule.getAlbums();
 fetchModule.getPlaylists();
 fetchModule.getTracks();
 
-buttonsModule.bindHomePageEventListeners();
+buttonsModule.EventListeners();
 
 //fetch and console.log artists
 
