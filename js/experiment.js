@@ -406,7 +406,38 @@ const displayModule = {
         `
         mainDiv.innerHTML = content;    
     },
+
+    specificTrack: function(track, id) {
+        var mainDiv = document.getElementById('main')
+        var trackId = id;
+        var trackAlbum = track.album;
+        var content = ``; 
     
+        var content =  `
+        <section class="infosection">
+            <div class="img-container-specific">   
+                <img src="${trackAlbum.coverImage}" alt="" class="img-fluid"/>   
+            </div>
+            <div id="info">
+            <h1>${track.title}</h1>
+            <p><strong>Genre:</strong> ${track.genres}</p>
+            <p><strong>From album: </strong>${trackAlbum.title}</p>
+    
+            <div class="spotifyLogoContainer-specific" >
+                <a href=" ${track.spotifyURL}" target="_blank"> Spotify </a>
+            <button href="javascript://delete" id="${trackId}" onClick='deleteFrom("tracks", this.id)' class="btn btn-danger">Delete Track</button>
+        </div>  
+        <span class "form-label">Rate Tracks: </span>
+            <input id="rateNameInput" type="number" name="voteRating"
+            min="0" max="10" step="1" value="5">
+            <input type="hidden" id="trackId" value="${trackId}"></input>
+            <input onclick="rateTracks()" type="submit">
+            <div id="SuccessvoteSubmitted"></div>
+        </div>
+        `
+        mainDiv.innerHTML = content;
+        },
+
     specificPlaylist: function(playlist, id) {
         var mainDiv = document.getElementById('main');
         var playlistId = id;
@@ -476,36 +507,7 @@ const displayModule = {
    
     },
     
-    specificTrack: function(data, id) {
-        
-    var trackId = id;
-    var trackAlbum = track.album;
-    var content = ``; 
 
-    var content =  `
-    <section class="infosection">
-        <div class="img-container-specific">   
-            <img src="${trackAlbum.coverImage}" alt="" class="img-fluid"/>   
-        </div>
-        <div id="info">
-        <h1>${track.title}</h1>
-        <p><strong>Genre:</strong> ${track.genres}</p>
-        <p><strong>From album: </strong>${trackAlbum.title}</p>
-
-        <div class="spotifyLogoContainer-specific" >
-            <a href=" ${track.spotifyURL}" target="_blank"> Spotify </a>
-        <button href="javascript://delete" id="${trackId}" onClick='deleteFrom("tracks", this.id)' class="btn btn-danger">Delete Track</button>
-    </div>  
-    <span class "form-label">Rate Tracks: </span>
-        <input id="rateNameInput" type="number" name="voteRating"
-        min="0" max="10" step="1" value="5">
-        <input type="hidden" id="trackId" value="${trackId}"></input>
-        <input onclick="rateTracks()" type="submit">
-        <div id="SuccessvoteSubmitted"></div>
-    </div>
-    `
-    mainDiv.innerHTML = content;
-    },
     
     searchField: function() {
         const allAlbums = new getData("albums", 1000);
