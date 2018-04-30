@@ -175,7 +175,7 @@ const fetchModule = {
         })        
     },
 
-    getSpecificArtist: function () {
+    getSpecificArtist: function (id) {
         const getArtist = new getData('artists');
 
         getArtist.Specific(id)
@@ -188,10 +188,10 @@ const fetchModule = {
         })        
     },
 
-    getSpecificPlaylist: function () {
+    getSpecificPlaylist: function (id) {
         const getPlaylist = new getData('playlists');
 
-        getPlaylist.Specific(playlist, id)
+        getPlaylist.Specific(id)
         .then((playlist) => {
             displayModule.specificPlaylist(playlist, id)
         
@@ -201,10 +201,10 @@ const fetchModule = {
         })       
     },
 
-    getSpecificAlbum: function () {
+    getSpecificAlbum: function (id) {
         const getAlbum = new getData('albums');
 
-        getAlbum.Specific(album, id)
+        getAlbum.Specific(id)
         .then((album) => {
             displayModule.specificAlbum(album, id)
         })
@@ -213,10 +213,10 @@ const fetchModule = {
         })        
     },
 
-    getSpecificTrack: function () {
+    getSpecificTrack: function (id) {
         const getTrack = new getData('tracks');
 
-        getTrack.Specific(track, id)
+        getTrack.Specific(id)
         .then((track) => {
             displayModule.specificTrack(track, id)
         
@@ -260,6 +260,7 @@ const fetchModule = {
 /**************
 ---- VIEW ----
 /*************/
+
 const displayModule = {
 
     showArtists: function(artists) {
@@ -273,10 +274,10 @@ const displayModule = {
                 <div class="img-container">    
                  <img src="${modifierModule.handleImage(artist.coverImage)}" alt="${artist.name}" class="img-fluid"/>
                 </div>
-                <a id="${artist._id}" href="javascript://artistInfo" onClick="moreArtistInfo(this.id)"><h2>${artist.name}</h2></a>
+                <a id="${artist._id}" href="javascript://artistInfo" onClick="modifierModule.moreArtistInfo(this.id)"><h2>${artist.name}</h2></a>
                       
                 <p>${ artist.genres }</p>
-                ${artist.spotifyURL}
+                ${modifierModule.handleSpotify(artist.spotifyURL)}
                 </div>
             </div>`;
         }    
@@ -298,7 +299,7 @@ const displayModule = {
             <div class="img-container">    
             <img src="${modifierModule.handleImage(playlist.coverImage)}" alt="${playlist.title}" class="img-fluid"/>
             </div>
-            <a id="${playlist._id}" href="javascript://artistInfo" onClick="morePlaylistInfo(this.id)"><h2>${playlist.title}</h2></a>
+            <a id="${playlist._id}" href="javascript://artistInfo" onClick="modifierModule.morePlaylistInfo(this.id)"><h2>${playlist.title}</h2></a>
             <p><strong>Rating:</strong> ${modifierModule.countRating(playlistRating)}</p>
             </div>
             `;          
@@ -313,7 +314,7 @@ const displayModule = {
         for (let track of tracks) {
 
             displayTracksHTML = displayTracksHTML + `
-            <h2>${i++}. <a id="${track._id}" href="javascript://trackinfo" onClick='moreTrackInfo(this.id)'>${track.title}</a></h2>
+            <h2>${i++}. <a id="${track._id}" href="javascript://trackinfo" onClick='modifierModule.moreTrackInfo(this.id)'>${track.title}</a></h2>
             <p>${track.genres}</p>
             <p><strong>From the album: </strong>${track.album.title}</p><br>
             `;
@@ -333,7 +334,7 @@ const displayModule = {
                     <div class="img-container">    
                         <img src="${modifierModule.handleImage(album.coverImage)}" alt="${album.title}" class="img-fluid"/>
                     </div>
-                    <a id="${album._id}" href="javascript://albumInfo" onClick='moreAlbumInfo(this.id)'><h2>${album.title}</h2></a>
+                    <a id="${album._id}" href="javascript://albumInfo" onClick='modifierModule.moreAlbumInfo(this.id)'><h2>${album.title}</h2></a>
                 </div>
             `;
         }
@@ -341,47 +342,47 @@ const displayModule = {
     },
     
     specificArtist: function(artist, id) {
-        
-    var artistId = id;
-    var content = ``; 
+        mainDiv = document.getElementById('main');
+        var artistId = id;
+        var content = ``; 
 
-    var content =  `
-    <section class="infosection">
-    <div class="img-container-specific">    
-        <img src= "${handleImage(artist.coverImage)}" alt="${artist.name}" class="img-fluid"/>    
-    </div>
-    <div id="info">
-    <h1>${artist.name}</h1>
-    <p><strong>Genre:</strong> ${artist.genres}</p>
-    <p><strong>Birthplace:</strong> ${artist.countryBorn}</p>
-    <p><strong>Birth year:</strong> ${artist.born}</p>
-    <div class="spotifyLogoContainer-specific" >
-        <a href="${ artist.spotifyURL }" target="_blank">Spotify</a>
-    </div>
-    <button href="javascript://delete" id="${artistId}"  onClick='deleteFrom("artists", this.id)' class="btn btn-danger">Delete Artist</button>
-    </div>
-    `
-    console.log(artistId)
-    mainDiv.innerHTML = content;
+        var content =  `
+        <section class="infosection">
+        <div class="img-container-specific">    
+            <img src= "${modifierModule.handleImage(artist.coverImage)}" alt="${artist.name}" class="img-fluid"/>    
+        </div>
+        <div id="info">
+        <h1>${artist.name}</h1>
+        <p><strong>Genre:</strong> ${artist.genres}</p>
+        <p><strong>Birthplace:</strong> ${artist.countryBorn}</p>
+        <p><strong>Birth year:</strong> ${artist.born}</p>
+        <div class="spotifyLogoContainer-specific" >
+            <a href="${ artist.spotifyURL }" target="_blank">Spotify</a>
+        </div>
+        <button href="javascript://delete" id="${artistId}"  onClick='deleteFrom("artists", this.id)' class="btn btn-danger">Delete Artist</button>
+        </div>
+        `
+        console.log(artistId)
+        mainDiv.innerHTML = content;
       
             
     },
     
     specificAlbum: function(album, id) {
-        
+        var mainDiv = document.getElementById('main');
         var albumId = id;
         var content = ``; 
         var albumTracks = '';
+        var tracks = album.tracks;
 
         for(let i = 0; i < tracks.length; i++) {
             albumTracks += `<p>${i + 1}. ${tracks[i].title}</p>`
-            console.log(tracks[i].title)
         }
 
         var content =  `
         <section class="infosection">
         <div class="img-container-specific">    
-            <img src= "${handleImage(album.coverImage)}" alt="${album.title}" class="img-fluid"/>
+            <img src= "${modifierModule.handleImage(album.coverImage)}" alt="${album.title}" class="img-fluid"/>
         </div>
         <div id="info">
             <h1>${album.title}</h1>
@@ -407,33 +408,31 @@ const displayModule = {
     },
     
     specificPlaylist: function(playlist, id) {
+        var mainDiv = document.getElementById('main');
+        var playlistId = id;
+        var content = ``; 
 
-    var playlistId = id;
-    var content = ``; 
+        var content =  `
+        <section class="infosection">
+        <div class="img-container-specific">    
+            <img src= "${modifierModule.handleImage(playlist.coverImage)}" alt="${playlist.title}" class="img-fluid"/>
+        </div>
+        <div id="info">
+            <h1>${playlist.title}</h1>
+            <p><strong>Rating:</strong> ${playlist.ratings}</p>
+            <p><strong>Genre: </strong>${playlist.genres}</p>
+            <p><strong>Created by: </strong>${playlist.createdBy}</p>
+            <br />
+            <span class "form-label">Rate playlist: </span>
+            <input id="rateNameInput" type="number" name="voteRating"
+            min="0" max="10" step="1" value="5">
+            <input type="hidden" id="playlistId" value="${playlistId}"></input>
+            <input onclick="ratePlaylists()" type="submit">
+            <div id="SuccessvoteSubmitted"></div>        
+        </div>
+        `
+        mainDiv.innerHTML = content;
 
-    var content =  `
-    <section class="infosection">
-    <div class="img-container-specific">    
-        <img src= "${handleImage(playlist.coverImage)}" alt="${playlist.title}" class="img-fluid"/>
-        
-    </div>
-    <div id="info">
-    <h1>${playlist.title}</h1>
-    <p><strong>Rating:</strong> ${countRating(playlist.ratings)}</p>
-    <p><strong>Genre: </strong>${playlist.genres}</p>
-    <p><strong>Created by: </strong>${playlist.createdBy}</p>
-    <br />
-        <span class "form-label">Rate playlist: </span>
-        <input id="rateNameInput" type="number" name="voteRating"
-        min="0" max="10" step="1" value="5">
-        <input type="hidden" id="playlistId" value="${playlistId}"></input>
-        <input onclick="ratePlaylists()" type="submit">
-        <div id="SuccessvoteSubmitted"></div>        
-    </div>
-    `
-
-    mainDiv.innerHTML = content;
-    
         getPlaylistComments(playlistId);
         displayCommentsForm(playlistId);   
  
@@ -568,6 +567,33 @@ nameInput.addEventListener('input', function (event) {
 
 const modifierModule = {
 
+    moreAlbumInfo: function(id) {
+        modifierModule.toggleHeader();
+        fetchModule.getSpecificAlbum(id);
+    },
+
+    moreArtistInfo: function(id) {
+        modifierModule.toggleHeader();
+        fetchModule.getSpecificArtist(id);
+    },
+
+    morePlaylistInfo: function(id) {
+        modifierModule.toggleHeader();
+        fetchModule.getSpecificPlaylist(id);
+    },
+
+    moreTrackInfo: function(id) {
+        modifierModule.toggleHeader();
+        fetchModule.getSpecificTrack(id);
+    },
+
+    toggleHeader: function() {
+        const header = document.getElementById('theHeader');
+        const nav = document.getElementById('nav');
+        header.classList.toggle('header-img-animate');
+        nav.classList.toggle('hide');
+    },
+
     countRating: function(rating) {
         var quantity = rating.length; 
         var ratingTotal = 0; 
@@ -596,26 +622,26 @@ const modifierModule = {
 
     handleImage: function(theImage) {
     if (theImage == null || theImage == undefined ) {
-        console.log("gaga its null!a a a" + theImage)
         return "images/male.png"
         } else {
         return theImage;
       }
     },
+
+    handleSpotify: function(spotifyLink) {
+        if (spotifyLink == null || spotifyLink == undefined) {
+            return ``;
+
+        } else {
+            return `we on spotify!`; 
+        }
+    }
 }
 
 fetchModule.getArtists();
 fetchModule.getAlbums();
 fetchModule.getPlaylists();
 fetchModule.getTracks();
-
-//fetch and console.log artists
-
-
-
-
-
-//fetch and console.log specific artist based on id-input
 
 
 
