@@ -142,8 +142,7 @@ const displayModule = {
         <div id="albumtracks">
                 <h2>Tracklist</h2>
                 ${albumTracks}
-        </div>
-        
+        </div>        
         `
         mainDiv.innerHTML = content;    
     },
@@ -210,9 +209,7 @@ const displayModule = {
         
         displayModule.playlistCommentsForm(id);   
         fetchModule.getComments(id);
-        displayModule.playlistComments(comments);
-        
- 
+        displayModule.playlistComments(comments); 
     },
     
     playlistComments: function(comments) {
@@ -228,8 +225,7 @@ const displayModule = {
         `;
     }
     mainDiv.insertAdjacentHTML('beforeend', content)
-    },
-    
+    },    
     playlistCommentsForm: function(id) {
     var mainDiv = document.getElementById('main');    
     var commentPlaylistIdInput = id;
@@ -250,8 +246,7 @@ const displayModule = {
         </div>
     </div>
     `
-    document.getElementById('main').insertAdjacentHTML('beforeend', content)
-   
+    document.getElementById('main').insertAdjacentHTML('beforeend', content)   
     },
     
     displayArtistForm: function () {
