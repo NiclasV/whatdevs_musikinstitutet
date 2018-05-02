@@ -140,7 +140,7 @@ const modifierModule = {
             return ``;
 
         } else {
-            return `we on spotify!`; 
+            return `<a href="${spotifyLink}" target="_blank">Lyssna på spotify</a><br><br>`; 
         }
     }
 }
@@ -153,21 +153,3 @@ fetchModule.getTracks();
 buttonsModule.EventListeners();
 
 
-function deleteFrom(what, id){
-    const confirmation = confirm("Are you sure you want to delete this?");
-    if (confirmation) {
-        fetch('https://folksa.ga/api/' + what + '/' + id + '?key=flat_eric', {
-        method: 'DELETE',
-        headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-            .then((response) => response.json())
-            .then((artist) => {
-            console.log(artist);
-            window.location.reload()
-        })
-    }
-    
-}
