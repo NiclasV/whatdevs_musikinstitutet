@@ -1,5 +1,3 @@
-
-
 /**************
 -- CONTROLLA --
 /*************/
@@ -27,8 +25,7 @@ const siteLogo = document.getElementById('siteLogo')
 const header = document.getElementById('theHeader');
 const nav = document.getElementById('nav');
 
-return {
-    
+return {    
     EventListeners: function(artists){
         
 btnSubmit.addEventListener('click', function (event) {
@@ -65,10 +62,6 @@ btnSubmitPlaylist.addEventListener('click', function (event) {
     }
 
 };
-
-    
-    
-    
 }());
 
 const modifierModule = {
