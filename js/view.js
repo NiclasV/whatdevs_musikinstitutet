@@ -279,7 +279,7 @@ const displayModule = {
             <span class="form-label">Coverimage URL: </span> 
             <br /> <input type="text" id="artistCoverImageInput" class="form-control"> <br />
             <br> <br>
-            <button class="btn-block btn-success" onclick="submitsToApiModule.submitArtist()">Submit</button>
+            <button class="btn-block btn-success" onclick="submit.createArtist()">Submit</button>
             <br /><br />
     <div id="successArtistSubmited"></div>
         </div>

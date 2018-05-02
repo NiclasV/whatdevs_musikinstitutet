@@ -39,12 +39,10 @@ class artist {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(artist)
+                body: JSON.stringify(this)
             })
-            .then((response) => response.json())
-            .then((artist) => {
-                console.log(artist);
-            });
+            .then((response) => response.json());
+
     document.getElementById("successArtistSubmited").innerHTML = "The Artist has been Submited!";
     }
 }
@@ -65,7 +63,7 @@ class album {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(album)
+                body: JSON.stringify(this)
             })
             .then((response) => response.json())
             .then((album) => {
@@ -89,7 +87,7 @@ class track {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(track)
+                body: JSON.stringify(this)
             })
         .then((response) => response.json())
         .then((track) => {
@@ -116,7 +114,7 @@ class playlist {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
         },
-        body: JSON.stringify(playlist)
+        body: JSON.stringify(this)
         })
         .then((response) => response.json())
         .then((playlist) => {
@@ -266,60 +264,36 @@ function isEmptyOrSpaces(str){
 
 const submit = {
 
-        createArtist: function () {
-        
-        let artistnNameInput = document.getElementById("artistNameInput");
-        let artistBirthYearInput = document.getElementById("artistBirthYearInput");
-        let artistBirthplaceInput = document.getElementById("artistBirthplaceInput");
-        let artistGenderInput = document.getElementById("artistGenderInput");
-        let artistGenresInput = document.getElementById("artistGenresInput");
-        let artistSpotifyURLInput = document.getElementById("artistSpotifyURLInput");
-        let artistCoverImageInput = document.getElementById("artistCoverImageInput");
+    createArtist: function () {
+         
+        let name = document.getElementById("artistNameInput").value;
+        let born = document.getElementById("artistBirthYearInput").value;
+        let birthPlace = document.getElementById("artistBirthplaceInput").value;
+        let gender = document.getElementById("artistGenderInput").value;
+        let genres = document.getElementById("artistGenresInput").value;
+        let spotifyUrl = document.getElementById("artistSpotifyURLInput").value;
+        let coverImage = document.getElementById("artistCoverImageInput").value;
 
-        if( isEmptyOrSpaces(artistBirthYearInput.value) || isEmptyOrSpaces(artistnNameInput.value) || isEmptyOrSpaces(artistGenresInput.value))
-        {
+        let addedArtist = new artist(name, born, gender, genres, spotifyUrl, coverImage);
+        
+        if (isEmptyOrSpaces(born) || isEmptyOrSpaces(name) || isEmptyOrSpaces(genres)) {
             alert("Failed to submit data");
+        } else {
+            addedArtist.createNew()
+            console.log(name + born + genres)     
         }
 
-        else
-        {
-            let artist = {
-                name: artistnNameInput.value,
-                born: artistBirthYearInput.value,
-                gender: artistGenderInput.value,
-                genres: artistGenresInput.value,
-                countryBorn: artistBirthplaceInput.value,
-                spotifyURL: artistSpotifyURLInput.value,
-                coverImage: artistCoverImageInput.value
-            }
-                    fetch('https://folksa.ga/api/artists?key=flat_eric',
-                    {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(artist)
-                    })
-                    .then((response) => response.json())
-                    .then((artist) => {
-
-                    });	
-            document.getElementById("successArtistSubmited").innerHTML = "The Artist has been Submited!";
-
-         }
-         
-
-
     },
+
+
         createSong: function () {
         
-        let songTitleInput = document.getElementById("songTitleInput");
+        let songTitleInput = document.getElementById("songTitleInput").value;
         let songArtistInput = document.getElementById("songArtistInput");
         let songAlbumInput = document.getElementById("songAlbumInput");
         let songGenresInput = document.getElementById("songGenresInput");
 
-        if( isEmptyOrSpaces(songTitleInput.value) || isEmptyOrSpaces(songArtistInput.value) || isEmptyOrSpaces(songAlbumInput.value) || isEmptyOrSpaces(songGenresInput.value))
+        if( isEmptyOrSpaces(songTitleInput) || isEmptyOrSpaces(songArtistInput.value) || isEmptyOrSpaces(songAlbumInput.value) || isEmptyOrSpaces(songGenresInput.value))
         {
             alert("Failed to submit data");
         }
