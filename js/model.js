@@ -219,7 +219,6 @@ const fetchModule = {
         });
     },
 
-
     getSpecificAlbum: function (id) {
         const getAlbum = new getData('albums');
 
@@ -273,6 +272,46 @@ const fetchModule = {
             console.log(error);
         })        
     },
+
+    ratePlaylist: function() {
+        let rateNameInput = document.getElementById('rateNameInput').value;
+        let playlistId = document.getElementById("playlistId").value;
+    
+
+        fetch('https://folksa.ga/api/playlists/' + playlistId + '/vote?key=flat_eric', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ rating: rateNameInput })
+        })
+        .then((response) => response.json())
+        .then((playlist) => {
+
+        });
+        document.getElementById("SuccessvoteSubmitted").innerHTML = "the vote has been Submited!";
+    },
+
+    rateAlbum: function() {
+        let rateNameInput = document.getElementById('rateNameInput').value;
+        let albumId = document.getElementById("albumId").value;
+    
+
+        fetch('https://folksa.ga/api/albums/' + albumId + '/vote?key=flat_eric', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ rating: rateNameInput })
+        })
+        .then((response) => response.json())
+        .then((albums) => {
+
+        });
+        document.getElementById("SuccessvoteSubmitted").innerHTML = "the vote has been Submited!";
+    },
 }
 
 /**************
@@ -306,7 +345,6 @@ const submit = {
         }
 
     },
-
 
         createSong: function () {
         
@@ -381,8 +419,6 @@ const submit = {
         body: commentInput,
         username: commentNameInput
         }
-	   
-
             fetch(`https://folksa.ga/api/playlists/${commentPlaylistIdInput}/comments?key=flat_eric`, {
                     method: 'POST',
                     headers: {
