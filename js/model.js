@@ -21,7 +21,27 @@ class getData {
     Comments(id) {
         return fetch(this.baseUrl + this.type + "/" + id + "/comments?" + this.key) 
         .then((response) => response.json())
-    }   
+    }
+    
+}
+
+function deleteFrom(what, id){
+    const confirmation = confirm("Are you sure you want to delete this?");
+    if (confirmation) {
+        fetch('https://folksa.ga/api/' + what + '/' + id + '?key=flat_eric', {
+        method: 'DELETE',
+        headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response) => response.json())
+            .then((artist) => {
+            console.log(artist);
+            window.location.reload()
+        })
+    }
+    
 }
 
 //Classes, constructors & createNew-methods for:
@@ -48,6 +68,7 @@ class artist {
             .then((response) => response.json());
 
     }
+    
 }
 
 class album {

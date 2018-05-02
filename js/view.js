@@ -99,7 +99,7 @@ const displayModule = {
         <p><strong>Birthplace:</strong> ${artist.countryBorn}</p>
         <p><strong>Birth year:</strong> ${artist.born}</p>
         <div class="spotifyLogoContainer-specific" >
-            <a href="${ artist.spotifyURL }" target="_blank">Spotify</a>
+            ${modifierModule.handleSpotify(artist.spotifyURL)}
         </div>
         <button href="javascript://delete" id="${artistId}"  onClick='deleteFrom("artists", this.id)' class="btn btn-danger">Delete Artist</button>
         </div>
@@ -130,20 +130,21 @@ const displayModule = {
             <p><strong>Genre:</strong> ${album.genres}</p>
             <p><strong>Releasedate:</strong> ${album.releaseDate}</p>
             <div class="spotifyLogoContainer-specific" >
-            <a href="${ album.spotifyURL }" target="_blank"> Spotify </a>
+            ${ modifierModule.handleSpotify(album.spotifyURL)}
         </div>
-            <button href="javascript://delete" id="${albumId}"  onClick='deleteFrom("albums", this.id)' class="btn btn-danger">Delete Album</button>
-        </div>
-        <div id="albumtracks">
-                <h2>Tracklist</h2>
-                ${albumTracks}
-        </div>
-        <span class "form-label">Rate Albums: </span>
+            <button href="javascript://delete" id="${albumId}"  onClick='deleteFrom("albums", this.id)' class="btn btn-danger">Delete Album</button><br>
+            <span class "form-label">Rate Albums: </span>
             <input id="rateNameInput" type="number" name="voteRating"
             min="0" max="10" step="1" value="5">
             <input type="hidden" id="albumId" value="${albumId}"></input>
             <input onclick="rateAlbums()" type="submit">
             <div id="SuccessvoteSubmitted"></div>
+        </div>
+        <div id="albumtracks">
+                <h2>Tracklist</h2>
+                ${albumTracks}
+        </div>
+        
         `
         mainDiv.innerHTML = content;    
     },
