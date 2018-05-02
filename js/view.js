@@ -104,7 +104,6 @@ const displayModule = {
         <button href="javascript://delete" id="${artistId}"  onClick='deleteFrom("artists", this.id)' class="btn btn-danger">Delete Artist</button>
         </div>
         `
-        console.log(artistId)
         mainDiv.innerHTML = content;
       
             
@@ -180,7 +179,7 @@ const displayModule = {
         mainDiv.innerHTML = content;
         },
 
-    specificPlaylist: function(playlist, id) {
+    specificPlaylist: function(playlist, id, Comments) {
         var mainDiv = document.getElementById('main');
         var playlistId = id;
         var content = ``; 
@@ -205,15 +204,19 @@ const displayModule = {
         </div>
         `
         mainDiv.innerHTML = content;
-
-        displayModule.playlistComments(playlistId);
-        displayModule.playlistCommentsForm(playlistId);   
+        
+        displayModule.playlistCommentsForm(id);   
+        fetchModule.getComments(id);
+        displayModule.playlistComments(comments);
+        
  
     },
     
     playlistComments: function(comments) {
-    var mainDiv = document.getElementById('main');        
+    var mainDiv = document.getElementById('main');    
     var content = '<h2>Comments</h2>';
+
+    console.log(comments)
 
     for (let i = 0; i < comments.length; i++) {
         content += `
@@ -224,9 +227,9 @@ const displayModule = {
     mainDiv.insertAdjacentHTML('beforeend', content)
     },
     
-    playlistCommentsForm: function(playlistId) {
-        
-    var commentPlaylistIdInput = playlistId;
+    playlistCommentsForm: function(id) {
+    var mainDiv = document.getElementById('main');    
+    var commentPlaylistIdInput = id;
     var content = "<h2>Write comment:</h2>";
     
     content += `
@@ -238,7 +241,7 @@ const displayModule = {
             <textarea class="form-control" rows="5" id="commentInput"></textarea>
             <input type="hidden" id="commentPlaylistIdInput" value="${commentPlaylistIdInput}"></input>
             <br> <br>
-            <button type="submit" class="btn-block btn-success" onclick="submitCommentToPlaylist()">Submit</button>
+            <button type="submit" class="btn-block btn-success" onclick="submit.createCommentToPlaylist()">Submit</button>
             <br /><br />
             <div id="successCommentSubmited"></div>
         </div>
@@ -247,10 +250,6 @@ const displayModule = {
     document.getElementById('main').insertAdjacentHTML('beforeend', content)
    
     },
-    
-
-    
-    
     
     displayArtistForm: function () {
         
