@@ -313,7 +313,7 @@ const displayModule = {
         <span class="form-label">Genres: </span> 
         <br /> <input type="text" id="songGenresInput" class="form-control"> <br /> 
         <br> <br>
-        <button class="btn-block btn-success" onclick="submit.song()">Submit</button>
+        <button class="btn-block btn-success" onclick="submit.createSong()">Submit</button>
         <br /><br />
     <div id="successSongSubmited"></div>
     </div>
@@ -352,7 +352,7 @@ const displayModule = {
             <input type="text" id="albumSpotifyURLInput" class="form-control"> 
             <span class="form-label">Coverimage URL: </span> 
             <input type="text" id="albumCoverImageInput" class="form-control"> 
-            <button class="btn-block btn-success" onclick="submitsToApiModule.submitAlbum()">Submit</button>
+            <button class="btn-block btn-success" onclick="submit.createAlbum()">Submit</button>
             <div id="successAlbumSubmited"></div>
         </div>
     </center>
@@ -378,7 +378,7 @@ const displayModule = {
         <span class="form-label">Coverimage URL: </span> 
         <br /> <input type="text" id="playlistCoverImageInput" class="form-control"> <br />
         <br> <br>
-        <button class="btn-block btn-success" onclick="submitsToApiModule.submitPlaylist()">Submit</button>
+        <button class="btn-block btn-success" onclick="submit.createPlaylist()">Submit</button>
         <br /><br />
             <div id="successPlaylistSubmited"></div>
         </div>
