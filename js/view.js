@@ -10,7 +10,6 @@ const displayModule = {
         let displayArtistsHTML = '';
         
         for (let artist of artists) {
-    
             displayArtistsHTML = displayArtistsHTML + `
             <div class="infoCard">
                 <div class="img-container">    
@@ -30,19 +29,20 @@ const displayModule = {
         let playlistsList = document.getElementById('displayAllPlaylists')
         let displayPlaylistsHTML = '';
 
-         // sort the array by rating and displays them
-        for (let playlist of playlists.sort(function(a, b) { 
+            // sort the array by rating and displays them
+            for (let playlist of playlists.sort(function(a, b) { 
                 return modifierModule.checkIfRated(modifierModule.countRating(b.ratings)) - modifierModule.checkIfRated(modifierModule.countRating(a.ratings))})) 
             {
-            let playlistRating = playlist.ratings
-    
+            let playlistRating = playlist.ratings;
+            let votes = playlistRating.length;
+
             displayPlaylistsHTML = displayPlaylistsHTML + `
             <div class="infoCard">
             <div class="img-container">    
             <img src="${modifierModule.handleImage(playlist.coverImage)}" alt="${playlist.title}" class="img-fluid"/>
             </div>
             <a id="${playlist._id}" href="javascript://artistInfo" onClick="modifierModule.morePlaylistInfo(this.id)"><h2>${playlist.title}</h2></a>
-            <p><strong>Rating:</strong> ${modifierModule.countRating(playlistRating)}</p>
+            <p><strong>Rating:</strong> ${modifierModule.countRating(playlistRating)} (${votes} votes)</p>
             </div>
             `;          
         }
@@ -127,17 +127,16 @@ const displayModule = {
         </div>
         <div id="info">
             <h1>${album.title}</h1>
+            <p><strong>Rating:</strong> ${modifierModule.countRating(album.ratings)}
             <p><strong>Genre:</strong> ${album.genres}</p>
             <p><strong>Releasedate:</strong> ${album.releaseDate}</p>
-            <div class="spotifyLogoContainer-specific" >
             ${ modifierModule.handleSpotify(album.spotifyURL)}
-        </div>
             <button href="javascript://delete" id="${albumId}"  onClick='deleteFrom("albums", this.id)' class="btn btn-danger">Delete Album</button><br>
             <span class "form-label">Rate Albums: </span>
             <input id="rateNameInput" type="number" name="voteRating"
             min="0" max="10" step="1" value="5">
             <input type="hidden" id="albumId" value="${albumId}"></input>
-            <input onclick="rateAlbums()" type="submit">
+            <input onclick="fetchModule.rateAlbum()" type="submit">
             <div id="SuccessvoteSubmitted"></div>
         </div>
         <div id="albumtracks">
@@ -166,7 +165,7 @@ const displayModule = {
             <p><strong>From album: </strong>${trackAlbum.title}</p>
     
             <div class="spotifyLogoContainer-specific" >
-                <a href=" ${track.spotifyURL}" target="_blank"> Spotify </a>
+            ${modifierModule.handleSpotify(track.spotifyURL)}
             <button href="javascript://delete" id="${trackId}" onClick='deleteFrom("tracks", this.id)' class="btn btn-danger">Delete Track</button>
         </div>  
         <span class "form-label">Rate Tracks: </span>
@@ -182,6 +181,8 @@ const displayModule = {
 
     specificPlaylist: function(playlist, id, Comments) {
         var mainDiv = document.getElementById('main');
+        var ratings = playlist.ratings;
+        var votes = ratings.length;
         var playlistId = id;
         var content = ``; 
 
@@ -192,15 +193,16 @@ const displayModule = {
         </div>
         <div id="info">
             <h1>${playlist.title}</h1>
-            <p><strong>Rating:</strong> ${playlist.ratings}</p>
+            <p><strong>Rating:</strong> ${modifierModule.countRating(playlist.ratings)} (${votes} votes)</p>
             <p><strong>Genre: </strong>${playlist.genres}</p>
             <p><strong>Created by: </strong>${playlist.createdBy}</p>
+            <button href="javascript://delete" id="${playlistId}" onClick='deleteFrom("playlists", this.id)' class="btn btn-danger">Delete Playlist</button>
             <br />
             <span class "form-label">Rate playlist: </span>
             <input id="rateNameInput" type="number" name="voteRating"
             min="0" max="10" step="1" value="5">
             <input type="hidden" id="playlistId" value="${playlistId}"></input>
-            <input onclick="ratePlaylists()" type="submit">
+            <input onclick="fetchModule.ratePlaylist()" type="submit">
             <div id="SuccessvoteSubmitted"></div>        
         </div>
         `

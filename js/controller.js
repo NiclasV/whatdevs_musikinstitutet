@@ -136,13 +136,14 @@ const modifierModule = {
     },
 
     handleSpotify: function(spotifyLink) {
-        if (spotifyLink == null || spotifyLink == undefined) {
+        if (spotifyLink === null || spotifyLink === undefined) {
             return ``;
 
         } else {
-            return `<a href="${spotifyLink}" target="_blank">Lyssna på spotify</a><br><br>`; 
+            return `<a href="${spotifyLink}" target="_blank">Listen on Spotify</a><br><br>`; 
         }
-    }
+    },
+
 }
 
 fetchModule.getArtists();
