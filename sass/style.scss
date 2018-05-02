@@ -346,3 +346,55 @@ footer {
     width: 25%;
     margin-left: 5px;
 }
+
+/** MOBIL MEDIA QUEERY **/
+@media screen and (max-width: 600px) {
+    
+    .logotext {
+        font-family: 'Euphoria Script', cursive;
+        font-weight: 900;
+        font-size: 1.9em;
+        padding-top: 5%;
+        line-height: 0.9em;
+    }
+    
+    .header-img {
+        height: 50vh;
+        background-image: url('../images/bg-mixer.png');
+    }
+
+    #search-field {
+        width: 100%
+    }
+    nav {
+        flex-wrap: wrap;
+    }
+
+    #text-or {
+        width: 100%;
+    }
+
+    #submit-new {
+        width: 100%;
+    }
+
+    .infoCard {
+        width: 100%;
+    }
+
+    .img-container { 
+        max-height: 200px;
+    }
+
+    .img-container-specific {
+        width: 90%;
+    }
+}
+
+/** TABLET MEDIA QUEERY **/
+@media screen
+and (min-width: 600px)
+and (max-width: 992px) {
+
+
+}
