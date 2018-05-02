@@ -18,6 +18,10 @@ class getData {
         return fetch(this.baseUrl + this.type + "/" + id + "?" + this.key)
         .then((response) => response.json())
     }
+    Comments(id) {
+        return fetch(this.baseUrl + this.type + "/" + id + "/comments?" + this.key) 
+        .then((response) => response.json())
+    }   
 }
 
 //Classes, constructors & createNew-methods for:
@@ -66,7 +70,7 @@ class album {
             })
             .then((response) => response.json())
             .then((album) => {
-                console.log(album);
+                
     });
     }
 }
@@ -89,7 +93,7 @@ class track {
             })
         .then((response) => response.json())
         .then((track) => {
-            console.log(track);
+            
         });
     }
 }
@@ -112,7 +116,7 @@ class playlist {
         })
         .then((response) => response.json())
         .then((playlist) => {
-        console.log(playlist);
+        
     });
     }
 }
@@ -180,16 +184,20 @@ const fetchModule = {
 
     getSpecificPlaylist: function (id) {
         const getPlaylist = new getData('playlists');
+        const getComments = new getData('playlists');
 
         getPlaylist.Specific(id)
         .then((playlist) => {
-            displayModule.specificPlaylist(playlist, id)
-        
+            getComments.Comments(id)
+                .then((comments) => {
+                    displayModule.specificPlaylist(playlist, id, comments)
+                });
         })
         .catch((error) => {
             console.log(error);
-        })       
+        });
     },
+
 
     getSpecificAlbum: function (id) {
         const getAlbum = new getData('albums');
@@ -233,18 +241,17 @@ const fetchModule = {
 
     },
 
-    getComments: function(playlistId) {
-        const getComments = new getData('comments');
+    getComments: function(id) {
+        const getComments = new getData('playlists');
 
-        getComments.Specific(comments, id)
-        .then((track) => {
-            displayModule.playlistComments(comments, id)
-        
+        getComments.Comments(id)
+        .then((comments) => {
+            displayModule.playlistComments(comments);
         })
         .catch((error) => {
             console.log(error);
         })        
-    }
+    },
 }
 
 /**************
@@ -273,9 +280,8 @@ const submit = {
             alert("Failed to submit data");
         } else {
             addedArtist.createNew()
-            console.log(name + born + genres)
-            document.getElementById("successArtistSubmited").innerHTML = "The Artist has been Submited!";
 
+            document.getElementById("successArtistSubmited").innerHTML = "The Artist has been Submited!";
         }
 
     },
@@ -354,7 +360,7 @@ const submit = {
         body: commentInput,
         username: commentNameInput
         }
-	   console.log(comment);
+	   
 
             fetch(`https://folksa.ga/api/playlists/${commentPlaylistIdInput}/comments?key=flat_eric`, {
                     method: 'POST',

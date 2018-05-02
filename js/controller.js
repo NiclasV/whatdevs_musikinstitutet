@@ -86,6 +86,7 @@ const modifierModule = {
     morePlaylistInfo: function(id) {
         modifierModule.toggleHeader();
         fetchModule.getSpecificPlaylist(id);
+
     },
 
     moreTrackInfo: function(id) {
